@@ -1,5 +1,6 @@
 <?php
 include('conexion.php');//CONEXION A LA BD
+///adasdads
 
 $fecha1=$_POST['fecha1'];
 $fecha2=$_POST['fecha2'];
