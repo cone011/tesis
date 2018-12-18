@@ -223,6 +223,7 @@ while ($r=$query->fetch_array()){
 									<option value="2">Tarjeta</option>
 									<option value="3">Cheque</option>
 									<option value="4">Transferencia bancaria</option>
+									<option value="5">Pago Combinado</option>
 								</select>
 							</div>
 							

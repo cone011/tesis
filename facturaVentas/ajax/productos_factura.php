@@ -51,8 +51,9 @@
 				<tr  class="warning">
 					<th>Código</th>
 					<th>Producto</th>
+					<th><span class="pull-right">Descuento</span></th>
 					<th><span class="pull-right">Cant.</span></th>
-					<th><span class="pull-right">Precio</span></th>
+					<th><span class="pull-right">Importe</span></th>
 					<th class='text-center' style="width: 36px;">Agregar</th>
 				</tr>
 				<?php
@@ -70,10 +71,13 @@
 					<?php if($status==1){  ?>	
 						<td><?php echo $codigo_producto; ?></td>
 						<td><?php echo $nombre_producto; ?></td>
+						<td class='col-xs-1'><div class="pull-right">
+						<input type="text" class="form-control" style="text-align:right" id="descuento_<?php echo $id_producto; ?>"  value="0" readonly>
+						</div></td>
 						<td class='col-xs-1'>
 					<?php if($tipo==1){ ?>			
 						<div class="pull-right">
-						<input type="text" class="form-control" style="text-align:right" id="cantidad_<?php echo $id_producto; ?>"  value="1" readonly>
+						<input type="text" class="form-control" style="text-align:right" id="cantidad_<?php echo $id_producto; ?>"  value="1" >
 						</div></td>
 					<?php }else{ ?>
                         <div class="pull-right">
@@ -81,7 +85,7 @@
 						</div></td>
 					<?php } ?>	
 						<td class='col-xs-2'><div class="pull-right">
-						<input type="text" class="form-control" style="text-align:right" id="precio_venta_<?php echo $id_producto; ?>"  value="<?php echo $precio_venta;?>" >
+						<input type="text" class="form-control" style="text-align:right" id="precio_venta_<?php echo $id_producto; ?>"  value="<?php echo $precio_venta;?>" readonly>
 						</div></td>
 					<?php if($cantidad>0){ ?>	
 						<td class='text-center'><a class='btn btn-info'href="#" onclick="agregar('<?php echo $id_producto ?>')"><i class="glyphicon glyphicon-plus"></i></a></td>

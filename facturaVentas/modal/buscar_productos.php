@@ -18,9 +18,26 @@
 						</div>
 						<button type="button" class="btn btn-default" onclick="load(1)"><span class='glyphicon glyphicon-search'></span> Buscar</button>
 					  </div>
+					      <ul class="nav nav-tabs">
+                          <li class="active"><a data-toggle="tab" href="#shop">Shop</a></li>
+                          <li><a data-toggle="tab" href="#lavadero">Lavadero</a></li>
+                           <li><a data-toggle="tab" href="#playa">Playa</a></li>
+                         </ul>
 					</form>
+
+					<div class="tab-content">
+                    <div id="shop" class="tab-pane fade in active">
+                             <div class="outer_div" ></div>
+                    </div>
+                    <div id="lavadero" class="tab-pane fade">
+                    <div class="outer_div" ></div>
+                   </div>
+                   <div id="playa" class="tab-pane fade">
+                        <div class="outer_div" ></div>
+                    </div>
+                   </div>
 					<div id="loader" style="position: absolute;	text-align: center;	top: 55px;	width: 100%;display:none;"></div><!-- Carga gif animado -->
-					<div class="outer_div" ></div><!-- Datos ajax Final -->
+					
 				  </div>
 				  <div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>

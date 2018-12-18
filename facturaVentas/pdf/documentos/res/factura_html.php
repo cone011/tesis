@@ -282,6 +282,7 @@ table.page_footer {width: 100%; border: none; background-color: white; padding: 
                 elseif ($pago==2){echo "Tarjeta";}
                 elseif ($pago==3){echo "Cheque";}
                 elseif ($pago==4){echo "Transferencia bancaria";}
+                elseif ($pago==5){echo "Pago Combinado";}
                 ?>      
            </td>
 
@@ -477,7 +478,29 @@ while ($row=mysqli_fetch_array($sql))
 
 	
 ?>
-	  
+	    <?php if($pago==5){  //falta las variables de los pagos combinados hacer?>
+
+           <tr>
+            <td colspan="3" style="widtd: 85%; text-align: left;">Pago Efectivo <?php echo $simbolo_moneda;?> </td>
+            <td style="widtd: 15%; text-align: left;"> <?php echo number_format($subtotal,0);?></td>
+          </tr>
+
+          <tr>
+            <td colspan="3" style="widtd: 85%; text-align: left;">Pago Tarjeta <?php echo $simbolo_moneda;?> </td>
+            <td style="widtd: 15%; text-align: left;"> <?php echo number_format($subtotal,0);?></td>
+          </tr>
+
+           <tr>
+            <td colspan="3" style="widtd: 85%; text-align: left;">Pago Cheque <?php echo $simbolo_moneda;?> </td>
+            <td style="widtd: 15%; text-align: left;"> <?php echo number_format($subtotal,0);?></td>
+          </tr>
+
+          <td colspan="3" style="widtd: 85%; text-align: left;">Pago Transferencia <?php echo $simbolo_moneda;?> </td>
+            <td style="widtd: 15%; text-align: left;"> <?php echo number_format($subtotal,0);?></td>
+          </tr>
+
+
+        <?php ?>    
         <tr>
             <td colspan="3" style="widtd: 85%; text-align: right;">SUBTOTAL <?php echo $simbolo_moneda;?> </td>
             <td style="widtd: 15%; text-align: right;"> <?php echo number_format($subtotal,0);?></td>

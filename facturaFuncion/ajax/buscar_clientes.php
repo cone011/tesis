@@ -106,6 +106,8 @@
 						  $leyenda="Administrador";
 						}elseif($direccion_cliente==3){
 						  $leyenda="Empleado";
+						}elseif($direccion_cliente==4){
+						  $leyenda="Capitan";
 						}
 						$ruc_cliente=$row['bk'];
 						$status_cliente=$row['estado'];
