@@ -135,6 +135,37 @@ while ($r=$query->fetch_array()){
 <html lang="en">
   <head>
     <?php include("head.php");?>
+
+    <script>
+
+
+		function habilitar_pago(value)
+		{
+			if(value==true)
+			{
+				// habilitamos
+				//document.getElementById("segundo").disabled=false;
+				document.getElementById("efectivo").disabled=false;
+				document.getElementById("tarjeta").disabled=false;
+				document.getElementById("transferencia").disabled=false;
+				document.getElementById("cheque").disabled=false;
+			}else if(value==false){
+				// deshabilitamos
+				document.getElementById("efectivo").disabled=true;
+				document.getElementById("tarjeta").disabled=true;
+				document.getElementById("transferencia").disabled=true;
+				document.getElementById("cheque").disabled=true;
+			}
+		}
+
+
+function myFunction() {
+    document.getElementById("cuota").disabled = document.getElementById("validacion").checked;
+}
+	
+
+	</script>
+
   </head>
   <body>
 	<?php
@@ -211,8 +242,9 @@ while ($r=$query->fetch_array()){
 									<option value="1">Contado</option>
 									<option value="2">Credito</option>
 								</select>
+									<input type="checkbox" id="validacion" onclick="myFunction()" >Sin Cuota/Contado</button>
 							</div>
-
+                       
 							<div class="col-md-2">
 								<select class='form-control input-sm' id="pago">
 									<option value="1">Efectivo</option>
@@ -221,11 +253,13 @@ while ($r=$query->fetch_array()){
 									<option value="4">Transferencia bancaria</option>
 									<option value="5">Pago Combinado</option>
 								</select>
+								   <input type="checkbox" id="check_pago" onchange="habilitar_pago(this.checked);" checked> Pago Combinado
+	                                </div>      
 							</div>
 							
-						</div>
 
 						<div class="form-group row">
+
 							
 							<label for="efectivo" class="col-md-1 control-label">Pago Efectivo</label>
 							<div class="col-md-2">

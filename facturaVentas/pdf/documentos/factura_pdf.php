@@ -45,6 +45,13 @@
 	//$pago=mysqli_real_escape_string($con,(strip_tags($_REQUEST['pago'], ENT_QUOTES)));
 	$total=0;
 	$monto=0;
+	if($condiciones==2){
+		if($cuota<=0){
+            echo "<script>alert('Las cuota no pueden tener valor negativo o nulo')</script>";
+	       echo "<script>window.close();</script>";
+	       exit;
+		}
+	}
     if($pago==5){
        $sql_venta=mysqli_query($con, "select * from tmp where tmp.session_id='".$session_id."'");
        while($row_venta=mysqli_fetch_array($sql_venta)){

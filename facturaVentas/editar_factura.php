@@ -102,7 +102,8 @@ while ($r=$query->fetch_array()){
 	   $active_excelnproveedor="";
 
     }
-		
+	
+	$efectivo=
 	
 	$active_bk="";
 
@@ -116,7 +117,7 @@ while ($r=$query->fetch_array()){
 	if (isset($_GET['id_factura']))
 	{
 		$id_factura=intval($_GET['id_factura']);
-		$campos="cliente.id_cliente, cliente.nombre_cliente, cliente.telefono_cliente, cliente.email_cliente, venta.id_vendedor, venta.fecha_factura, venta.condiciones, venta.estado_factura, venta.numero_factura,venta.tipo_pago,venta.saldo_factura";
+		$campos="cliente.id_cliente, cliente.nombre_cliente, cliente.telefono_cliente, cliente.email_cliente, venta.id_vendedor, venta.fecha_factura, venta.condiciones, venta.estado_factura, venta.numero_factura,venta.tipo_pago,venta.saldo_factura,venta.efectivo,venta.tarjeta,venta.cheque,venta.transferencia,venta.tipo_pago";
 		$sql_factura=mysqli_query($con,"select $campos from venta, cliente where venta.id_cliente=cliente.id_cliente and id_factura='".$id_factura."'");
 		$count=mysqli_num_rows($sql_factura);
 		if ($count==1)
@@ -131,6 +132,11 @@ while ($r=$query->fetch_array()){
 				$condiciones=$rw_factura['condiciones'];
 				$estado_factura=$rw_factura['estado_factura'];
 				$numero_factura=$rw_factura['numero_factura'];
+				$pago=$rw_factura['tipo_pago'];
+				$efectivo=$rw_factura['efectivo'];
+				$tarjeta=$rw_factura['tarjeta'];
+				$cheque=$rw_factura['cheque'];
+				$transferencia=$rw_factura['transferencia'];
 				$tipo=$rw_factura['tipo_pago'];
 				$saldo=$rw_factura['saldo_factura'];
 				if ($estado_factura==1){$leyenda_pago="PAGADO";}
@@ -141,6 +147,11 @@ while ($r=$query->fetch_array()){
                 elseif ($tipo==4){$leyenda="Transferencia bancaria";}
 				$_SESSION['id_factura']=$id_factura;
 				$_SESSION['numero_factura']=$numero_factura;
+				$_SESSION['pago']=$pago;
+				$_SESSION['efectivo']=$efectivo;
+				$_SESSION['tarjeta']=$tarjeta;
+				$_SESSION['cheque']=$cheque;
+				$_SESSION['transferencia']=$transferencia;
 		}	
 		else
 		{
@@ -153,6 +164,8 @@ while ($r=$query->fetch_array()){
 		header("location: facturas.php");
 		exit;
 	}
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -239,7 +252,45 @@ while ($r=$query->fetch_array()){
 								<?php } ?>
 							</div>
 						</div>
-				
+
+                <div class="form-group row">
+                    <label for="efectivo" class="col-md-1 control-label">Forma Pago</label>
+							<div class="col-md-2">
+								<select class='form-control input-sm' id="pago" name="pago">
+									<option value="1">Efectivo</option>
+									<option value="2">Tarjeta</option>
+									<option value="3">Cheque</option>
+									<option value="4">Transferencia bancaria</option>
+									<option value="5">Pago Combinado</option>
+								</select>
+							</div>
+               </div>
+
+				<div class="form-group row">
+							<label for="efectivo" class="col-md-1 control-label">Pago Efectivo</label>
+							<div class="col-md-2">
+								<input type="number" class="form-control input-sm" id="efectivo" name="efectivo">
+							</div>
+
+							<label for="tarjeta" class="col-md-1 control-label">Pago Tarjeta</label>
+							<div class="col-md-2">
+								<input type="number" class="form-control input-sm" id="tarjeta" name="tarjeta">
+							</div>
+
+							<label for="cheque" class="col-md-1 control-label">Pago Cheque</label>
+							<div class="col-md-2">
+								<input type="number" class="form-control input-sm" id="cheque" name="cheque">
+							</div>
+
+							<label for="transferencia" class="col-md-1 control-label">Pago Transferencia</label>
+							<div class="col-md-2">
+								<input type="number" class="form-control input-sm" id="transferencia" name="transferencia">
+							</div>
+							
+							
+						</div>
+
+                    
 				
 				<div class="col-md-12">
 					<div class="pull-right">
@@ -308,6 +359,8 @@ while ($r=$query->fetch_array()){
 						}
 			});	
 	</script>
+
+	
 
   </body>
 </html>

@@ -19,12 +19,25 @@
 		/* Connect To Database*/
 		require_once ("../config/db.php");//Contiene las variables de configuracion para conectar a la base de datos
 		require_once ("../config/conexion.php");//Contiene funcion que conecta a la base de datos
+		require("fpdf/fpdf.php");
 		// escaping, additionally removing everything that could be (html/javascript-) code
 		$id_cliente=intval($_POST['id_cliente']);
 		$id_vendedor=intval($_POST['id_vendedor']);
 		$condiciones=intval($_POST['condiciones']);
+		$pago=intval($_POST['pago']);
+		$efectivo=intval($_POST['efectivo']);
+		$tarjeta=intval($_POST['tarjeta']);
+		$cheque=intval($_POST['cheque']);
+		$transferencia=intval($_POST['transferencia']);
+		/*echo $pago;
+		echo $efectivo;
+		echo $tarjeta;
+		echo $cheque;*/
+		//echo $transferencia;
+		$date=date("Y-m-d H:i:s");
 		//$estado_factura=intval($_POST['estado_factura']);
         $estado_factura=intval($_POST['estado_factura']);
+       $insert=mysqli_query($con,"INSERT INTO saldo_cliente VALUES (NULL,'$id_factura','$estado_factura','1000','$id_cliente','$date')");
 		$sql_user=mysqli_query($con,"select * from venta where id_factura='$id_factura'");
 	    //$rw_user=mysqli_fetch_array($sql_user);
 	     while ($rw_user=mysqli_fetch_array($sql_user))
@@ -47,7 +60,8 @@
              }else{
              	$date=date("Y-m-d H:i:s");
             //SALDO DE CLIETNES
-             $insert=mysqli_query($con,"INSERT INTO saldo_cliente VALUES (NULL,'$id_factura','$estado_factura','$total','$id_cliente','$date')");
+             //$insert=mysqli_query($con,"INSERT INTO saldo VALUES (NULL,'$id_factura','$estado_factura','$total','$id_cliente','$date')");
+             $insert=mysqli_query($con,"INSERT INTO saldo_cliente VALUES (NULL,'$id_factura','$estado_factura','$total','$id_cliente','$date','$date','$pago','$efectivo','$tarjeta','$cheque','$transferencia')");
 		    $estado_factura=intval($_POST['estado_factura']);
 
 		    //CUENTA CLIENTE
@@ -58,6 +72,8 @@
              //FACTURA VENTA
 		     $sql="UPDATE venta SET id_cliente='".$id_cliente."', id_vendedor='".$id_vendedor."', condiciones='".$condiciones."', estado_factura='".$estado."', saldo_factura='".$total."' WHERE id_factura='".$id_factura."'";
 		      $query_update = mysqli_query($con,$sql);
+                 
+
 		      $validar=1;
              }
 
