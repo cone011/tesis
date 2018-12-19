@@ -18,6 +18,7 @@
 			<td style="width: 25%;text-align:right">
 			FACTURA Nº 001-001-<?php echo $numero_factura;?>
 			TIMBRADO: 89455126
+			RUC: 80024518-5
 			
 			</td>
 			

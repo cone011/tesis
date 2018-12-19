@@ -81,7 +81,7 @@
 						</div></td>
 					<?php }else{ ?>
                         <div class="pull-right">
-						<input type="text" class="form-control" style="text-align:right" id="cantidad_<?php echo $id_producto; ?>"  value="1" >
+						<input type="number" min="1" pattern="[0-9]+" class="form-control" style="text-align:right" id="cantidad_<?php echo $id_producto; ?>"  value="1" >
 						</div></td>
 					<?php } ?>	
 						<td class='col-xs-2'><div class="pull-right">

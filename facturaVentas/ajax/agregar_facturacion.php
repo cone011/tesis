@@ -16,8 +16,7 @@ if (isset($_POST['precio_venta'])){$precio_venta=$_POST['precio_venta'];}
 	//Archivo de funciones PHP
 	include("../funciones.php");
 
-	
-if (!empty($id) and !empty($cantidad) and !empty($precio_venta))
+if (!empty($id) and !empty($cantidad) and !empty($precio_venta) and $cantidad>0)
 {
 $insert_tmp=mysqli_query($con, "INSERT INTO tmp (id_producto,cantidad_tmp,precio_tmp,session_id) VALUES ('$id','$cantidad','$precio_venta','$session_id')");
 
@@ -77,6 +76,7 @@ $simbolo_moneda=get_row('perfil','moneda', 'id_perfil', 1);
 	  $sumador_total+=$precio_total_r;//Sumador
 	}else{
 	  $cantidad=$row['cantidad_tmp'];
+	  $cantidad_mostrar=$row['cantidad_tmp'];
       $precio_venta_f=number_format($precio_venta,2);//Formateo variables
 	  $precio_venta_r=str_replace(",","",$precio_venta_f);//Reemplazo las comas
 	  $precio_total=$precio_venta_r*$cantidad;
