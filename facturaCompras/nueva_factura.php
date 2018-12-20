@@ -113,6 +113,43 @@ while ($r=$query->fetch_array()){
 <!DOCTYPE html>
 <html lang="en">
   <head>
+  	 <script>
+
+    	function mostrar(id) {
+   
+    if (id == "0") {
+		$("#pagocombinado").hide();
+    }
+	if (id == "5") {
+		$("#pagocombinado").show();
+    }
+	if (id == "4") {
+        $("#pagocombinado").hide();
+    }
+	if (id == "3") {
+        $("#pagocombinado").hide();
+    }
+    if (id == "2") {
+        $("#pagocombinado").hide();
+    }
+    if (id == "1") {
+        $("#pagocombinado").hide();
+    }
+}
+
+function mostrar_cuota(id) {
+    if (id == "1") {
+        $("#cargacuota").hide();
+    }
+
+    if (id == "2") {
+        $("#cargacuota").show();
+    }
+
+}
+
+
+	</script>
     <?php include("head.php");?>
   </head>
   <body>
@@ -210,24 +247,24 @@ while ($r=$query->fetch_array()){
 							</div>
 							<label for="email" class="col-md-1 control-label">Pago: </label>
 							<div class="col-md-2">
-								<select class='form-control input-sm' id="condiciones">
+								<select class='form-control input-sm' id="condiciones" onChange="mostrar_cuota(this.value);">
 									<option value="1">Contado</option>
-									<option value="2">Credito</option>
+									<option value="2" selected>Credito</option>
 								</select>
 							</div>
 							<label for="pago" class="col-md-1 control-label">Tipo Pago: </label>
 							<div class="col-md-2">
-								<select class='form-control input-sm' id="pago">
+								<select class='form-control input-sm' id="pago" onChange="mostrar(this.value);">
 									<option value="1">Efectivo</option>
 									<option value="2">Tarjeta</option>
 									<option value="3">Cheque</option>
 									<option value="4">Transferencia bancaria</option>
-									<option value="5">Pago Combinado</option>
+									<option value="5" selected>Pago Combinado</option>
 								</select>
 							</div>
 						</div>
 
-						<div class="form-group row">
+						<div class="form-group row" id="pagocombinado">
 
 							
 							<label for="efectivo" class="col-md-1 control-label">Pago Efectivo</label>
@@ -253,7 +290,7 @@ while ($r=$query->fetch_array()){
 							
 						</div>
 
-						<div class="form-group row">
+						<div class="form-group row" id="cargacuota">
 							<label for="cuota" class="col-md-1 control-label"> Cuotas</label>
 							<div class="col-md-1">
 								<input type="number" class="form-control input-sm" id="cuota">

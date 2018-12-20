@@ -145,6 +145,7 @@ while ($r=$query->fetch_array()){
                 elseif ($tipo==2){$leyenda="Tarjeta";}
                 elseif ($tipo==3){$leyenda="Cheque";}
                 elseif ($tipo==4){$leyenda="Transferencia bancaria";}
+                elseif ($tipo==5){$leyenda="Pago Combinado";}
 				$_SESSION['id_factura']=$id_factura;
 				$_SESSION['numero_factura']=$numero_factura;
 				$_SESSION['pago']=$pago;
@@ -252,7 +253,7 @@ while ($r=$query->fetch_array()){
 								<?php } ?>
 							</div>
 						</div>
-
+            <?php if($condiciones==2){ ?>
                 <div class="form-group row">
                     <label for="efectivo" class="col-md-1 control-label">Forma Pago</label>
 							<div class="col-md-2">
@@ -265,31 +266,64 @@ while ($r=$query->fetch_array()){
 								</select>
 							</div>
                </div>
+            <?php }else{ ?>
 
+
+            <?php } ?>	
+        <?php if($tipo==5 and $condiciones==1){ ?>
 				<div class="form-group row">
 							<label for="efectivo" class="col-md-1 control-label">Pago Efectivo</label>
 							<div class="col-md-2">
-								<input type="number" class="form-control input-sm" id="efectivo" name="efectivo">
+								<input type="number" class="form-control input-sm" id="efectivo" name="efectivo" readonly value="<?php echo $efectivo; ?>">
 							</div>
 
 							<label for="tarjeta" class="col-md-1 control-label">Pago Tarjeta</label>
 							<div class="col-md-2">
-								<input type="number" class="form-control input-sm" id="tarjeta" name="tarjeta">
+								<input type="number" class="form-control input-sm" id="tarjeta" name="tarjeta" readonly value="<?php echo $tarjeta; ?>">
 							</div>
 
 							<label for="cheque" class="col-md-1 control-label">Pago Cheque</label>
 							<div class="col-md-2">
-								<input type="number" class="form-control input-sm" id="cheque" name="cheque">
+								<input type="number" class="form-control input-sm" id="cheque" name="cheque" readonly value="<?php echo $cheque; ?>">
 							</div>
 
 							<label for="transferencia" class="col-md-1 control-label">Pago Transferencia</label>
 							<div class="col-md-2">
-								<input type="number" class="form-control input-sm" id="transferencia" name="transferencia">
+								<input type="number" class="form-control input-sm" id="transferencia" name="transferencia" readonly value="<?php echo $transferencia; ?>">
 							</div>
 							
 							
 						</div>
+			<?php }elseif($tipo==5 and $condiciones==2){ ?>		
 
+			<div class="form-group row">
+							<label for="efectivo" class="col-md-1 control-label">Pago Efectivo</label>
+							<div class="col-md-2">
+								<input type="number" class="form-control input-sm" id="efectivo" name="efectivo" >
+							</div>
+
+							<label for="tarjeta" class="col-md-1 control-label">Pago Tarjeta</label>
+							<div class="col-md-2">
+								<input type="number" class="form-control input-sm" id="tarjeta" name="tarjeta" >
+							</div>
+
+							<label for="cheque" class="col-md-1 control-label">Pago Cheque</label>
+							<div class="col-md-2">
+								<input type="number" class="form-control input-sm" id="cheque" name="cheque" >
+							</div>
+
+							<label for="transferencia" class="col-md-1 control-label">Pago Transferencia</label>
+							<div class="col-md-2">
+								<input type="number" class="form-control input-sm" id="transferencia" name="transferencia" >
+							</div>
+							
+							
+						</div>	
+
+
+
+            
+            <?php } ?>
                     
 				
 				<div class="col-md-12">
