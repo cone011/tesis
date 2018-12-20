@@ -1,9 +1,5 @@
 <?php
-	/*-------------------------
-	Autor: Obed Alvarado
-	Web: obedalvarado.pw
-	Mail: info@obedalvarado.pw
-	---------------------------*/
+
 	session_start();
 	$id=$_SESSION['user_id'];
 
@@ -112,6 +108,9 @@ while ($r=$query->fetch_array()){
     }
 
     $active_bk="";
+
+    $title="Editar O.C. | E.M.R.";
+	
 	
 	/* Connect To Database*/
 	require_once ("config/db.php");//Contiene las variables de configuracion para conectar a la base de datos
@@ -120,7 +119,7 @@ while ($r=$query->fetch_array()){
 	if (isset($_GET['id_factura']))
 	{
 		$id_factura=intval($_GET['id_factura']);
-		$campos="proveedores.id_cliente, proveedores.nombre_cliente, proveedores.telefono_cliente, proveedores.ruc_cliente, compra.id_vendedor, compra.fecha_factura, compra.condiciones, compra.estado_factura, compra.numero_factura,compra.tipo_pago,compra.saldo_factura,compra.monto_bk";
+		$campos="proveedores.id_cliente, proveedores.nombre_cliente, proveedores.telefono_cliente, proveedores.ruc_cliente, compra.id_vendedor, compra.fecha_factura, compra.condiciones, compra.estado_factura, compra.numero_factura,compra.tipo_pago,compra.saldo_factura,compra.pf1,compra.efectivo,compra.tarjeta,compra.cheque,compra.transferencia,compra.pf2,compra.nrodoc,compra.timbrado";
 		$sql_factura=mysqli_query($con,"select $campos from compra, proveedores where compra.id_cliente=proveedores.id_cliente and id_factura='".$id_factura."'");
 		$count=mysqli_num_rows($sql_factura);
 		if ($count==1)
@@ -137,13 +136,27 @@ while ($r=$query->fetch_array()){
 				$numero_factura=$rw_factura['numero_factura'];
 				$saldo=$rw_factura['saldo_factura'];
 				$tipo=$rw_factura['tipo_pago'];
+				$cobrar=$rw_factura['tipo_pago'];
+				$efectivo=$rw_factura['efectivo'];
+				$tarjeta=$rw_factura['tarjeta'];
+				$cheque=$rw_factura['cheque'];
+				$transferencia=$rw_factura['transferencia'];
+                $pf1=$rw_factura['pf1'];
+                $pf2=$rw_factura['pf2'];
+                $nrodoc=$rw_factura['nrodoc'];
+				$timbrado=$rw_factura['timbrado'];
 				if ($tipo==1){$leyenda="Efectivo";}
                 elseif ($tipo==2){$leyenda="Tarjeta";}
                 elseif ($tipo==3){$leyenda="Cheque";}
                 elseif ($tipo==4){$leyenda="Transferencia bancaria";}
+                elseif ($tipo==5){$leyenda="Pago Combinado";}
 				$_SESSION['id_factura']=$id_factura;
 				$_SESSION['numero_factura']=$numero_factura;
-
+				$_SESSION['cobrar']=$cobrar;
+				$_SESSION['efectivo']=$efectivo;
+				$_SESSION['tarjeta']=$tarjeta;
+				$_SESSION['cheque']=$cheque;
+				$_SESSION['transferencia']=$transferencia;
 		}	
 		else
 		{
@@ -193,16 +206,6 @@ while ($r=$query->fetch_array()){
 							<div class="col-md-2">
 									<input type="text" class="form-control input-sm" id="pago" value="<?php echo $leyenda;?>" readonly>
 							</div>
-					<?php 
-					   if($estado_factura==10){
-					   	?>		
-					   <?php }else{ ?>
-
-                         <button type="button" class="btn btn-default" data-toggle="modal" data-target="#nuevoCliente">
-						 <span class="glyphicon glyphicon-list-alt"></span> Generar Factura
-						</button>
-					   <?php } ?>
-
 									
 				 </div>
 						<div class="form-group row">
@@ -248,6 +251,70 @@ while ($r=$query->fetch_array()){
 							       <input type="text" class="form-control input-sm" id="estado_factura"  name="estado_factura" value="<?php echo $saldo ?>" placeholder="Cantidad Gs.">								
 								<?php } ?>
 							</div>
+						</div>
+
+
+						<div class="form-group row">
+							<label for="pf1" class="col-md-1 control-label"> Pf1</label>
+							<div class="col-md-1">
+								<input type="text" class="form-control input-sm" id="pf1" value="<?php echo $pf1 ?>;" readonly>
+							</div>
+
+							<label for="pf2" class="col-md-1 control-label"> Pf2</label>
+							<div class="col-md-1">
+								<input type="text" class="form-control input-sm" id="pf2" value="<?php echo $pf2 ?>;"readonly>
+							</div>
+
+							<label for="nrodoc" class="col-md-1 control-label"> Nro Fact.</label>
+							<div class="col-md-2">
+								<input type="text" class="form-control input-sm" id="nrodoc" value="<?php echo $nrodoc ?>;" readonly>
+							</div>
+
+							<label for="timbrado" class="col-md-1 control-label"> Timbrado</label>
+							<div class="col-md-2">
+								<input type="text" class="form-control input-sm" id="timbrado" value="<?php echo $timbrado ?>;" readonly>
+							</div>
+				</div>
+
+						<div class="form-group row">
+							 <div class="form-group row">
+                    <label for="efectivo" class="col-md-1 control-label">Tipo Pago</label>
+							<div class="col-md-2">
+								<select class='form-control input-sm' id="cobrar" name="cobrar">
+									<option value="1">Efectivo</option>
+									<option value="2">Tarjeta</option>
+									<option value="3">Cheque</option>
+									<option value="4">Transferencia bancaria</option>
+									<option value="5">Pago Combinado</option>
+								</select>
+							</div>
+               </div>
+                           
+
+						</div>
+
+						<div class="form-group row">
+							<label for="efectivo" class="col-md-1 control-label">Pago Efectivo</label>
+							<div class="col-md-2">
+								<input type="number" class="form-control input-sm" id="efectivo" name="efectivo">
+							</div>
+
+							<label for="tarjeta" class="col-md-1 control-label">Pago Tarjeta</label>
+							<div class="col-md-2">
+								<input type="number" class="form-control input-sm" id="tarjeta" name="tarjeta">
+							</div>
+
+							<label for="cheque" class="col-md-1 control-label">Pago Cheque</label>
+							<div class="col-md-2">
+								<input type="number" class="form-control input-sm" id="cheque" name="cheque">
+							</div>
+
+							<label for="transferencia" class="col-md-1 control-label">Pago Transferencia</label>
+							<div class="col-md-2">
+								<input type="number" class="form-control input-sm" id="transferencia" name="transferencia">
+							</div>
+							
+							
 						</div>
 				
 				

@@ -24,6 +24,17 @@
 		$id_vendedor=intval($_POST['id_vendedor']);
 		$condiciones=intval($_POST['condiciones']);
      	$estado_factura=intval($_POST['estado_factura']);
+     	//$estado_factura=intval($_POST['estado_factura']);
+     	$cobrar=intval($_POST['cobrar']);
+     	$efectivo=intval($_POST['efectivo']);
+     	$tarjeta=intval($_POST['tarjeta']);
+     	$cheque=intval($_POST['cheque']);
+     	$transferencia=intval($_POST['transferencia']);
+     	echo $cobrar;
+        echo $efectivo;
+        echo $tarjeta;
+        echo $cheque;
+        echo $transferencia;
      	$sql_user=mysqli_query($con,"select * from compra where id_factura='$id_factura'");
 	    //$rw_user=mysqli_fetch_array($sql_user);
 	     while ($rw_user=mysqli_fetch_array($sql_user))
