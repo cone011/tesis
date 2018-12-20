@@ -138,31 +138,29 @@ while ($r=$query->fetch_array()){
 
     <script>
 
-
-		function habilitar_pago(value)
-		{
-			if(value==true)
-			{
-				// habilitamos
-				//document.getElementById("segundo").disabled=false;
-				document.getElementById("efectivo").disabled=false;
-				document.getElementById("tarjeta").disabled=false;
-				document.getElementById("transferencia").disabled=false;
-				document.getElementById("cheque").disabled=false;
-			}else if(value==false){
-				// deshabilitamos
-				document.getElementById("efectivo").disabled=true;
-				document.getElementById("tarjeta").disabled=true;
-				document.getElementById("transferencia").disabled=true;
-				document.getElementById("cheque").disabled=true;
-			}
-		}
-
-
-function myFunction() {
-    document.getElementById("cuota").disabled = document.getElementById("validacion").checked;
+    	function mostrar(id) {
+   
+    if (id == "0") {
+		$("#pagocombinado").hide();
+    }
+	if (id == "5") {
+		$("#pagocombinado").show();
+    }
+	if (id == "4") {
+        $("#pagocombinado").hide();
+    }
+	if (id == "3") {
+        $("#pagocombinado").hide();
+    }
+    if (id == "2") {
+        $("#pagocombinado").hide();
+    }
+    if (id == "1") {
+        $("#pagocombinado").hide();
+    }
 }
-	
+
+
 
 	</script>
 
@@ -244,19 +242,19 @@ function myFunction() {
 							</div>
                        
 							<div class="col-md-2">
-								<select class='form-control input-sm' id="pago">
+								<select class='form-control input-sm' id="pago" onChange="mostrar(this.value);">
 									<option value="1">Efectivo</option>
 									<option value="2">Tarjeta</option>
 									<option value="3">Cheque</option>
 									<option value="4">Transferencia bancaria</option>
-									<option value="5">Pago Combinado</option>
+									<option value="5" selected>Pago Combinado</option>
 								</select>
-								   <input type="checkbox" id="check_pago" onchange="habilitar_pago(this.checked);" checked> Pago Combinado
+								   
 	                                </div>      
 							</div>
 							
 
-						<div class="form-group row">
+						<div class="form-group row" id="pagocombinado">
 
 							
 							<label for="efectivo" class="col-md-1 control-label">Pago Efectivo</label>

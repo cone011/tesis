@@ -117,6 +117,35 @@ if ($factura==0) {
 <html lang="en">
   <head>
     <?php include("head.php");?>
+      
+       <script>
+
+    	function mostrar(id) {
+   
+    if (id == "0") {
+		$("#pagocombinado").hide();
+    }
+	if (id == "5") {
+		$("#pagocombinado").show();
+    }
+	if (id == "4") {
+        $("#pagocombinado").hide();
+    }
+	if (id == "3") {
+        $("#pagocombinado").hide();
+    }
+    if (id == "2") {
+        $("#pagocombinado").hide();
+    }
+    if (id == "1") {
+        $("#pagocombinado").hide();
+    }
+}
+
+
+
+	</script>
+
   </head>
   <body>
 	<?php
@@ -190,22 +219,23 @@ if ($factura==0) {
 							</div>
 							<label for="email" class="col-md-1 control-label">Pago: </label>
 							<div class="col-md-2">
-								<select class='form-control input-sm' id="condiciones">
+								<select class='form-control input-sm' id="condiciones" onChange="mostrar_cuota(this.value);">
 									<option value="1">Recibido</option>
 									<option value="2">Emitido</option>
 								</select>
 							</div>
 							<div class="col-md-2">
-								<select class='form-control input-sm' id="pago">
+								<select class='form-control input-sm' id="pago" onChange="mostrar(this.value);">
 									<option value="1">Efectivo</option>
 									<option value="2">Tarjeta</option>
 									<option value="3">Cheque</option>
 									<option value="4">Transferencia bancaria</option>
+									<option value="5" selected>Pago Combinado</option>
 								</select>
 							</div>
 						</div>
 
-						<div class="form-group row">
+						<div class="form-group row" id="pagocombinado">
 
 							
 							<label for="efectivo" class="col-md-1 control-label">Pago Efectivo</label>

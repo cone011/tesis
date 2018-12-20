@@ -257,22 +257,22 @@ while ($r=$query->fetch_array()){
 						<div class="form-group row">
 							<label for="pf1" class="col-md-1 control-label"> Pf1</label>
 							<div class="col-md-1">
-								<input type="text" class="form-control input-sm" id="pf1" value="<?php echo $pf1 ?>;" readonly>
+								<input type="text" class="form-control input-sm" id="pf1" value="<?php echo $pf1; ?>" readonly>
 							</div>
 
 							<label for="pf2" class="col-md-1 control-label"> Pf2</label>
 							<div class="col-md-1">
-								<input type="text" class="form-control input-sm" id="pf2" value="<?php echo $pf2 ?>;"readonly>
+								<input type="text" class="form-control input-sm" id="pf2" value="<?php echo $pf2; ?>"readonly>
 							</div>
 
 							<label for="nrodoc" class="col-md-1 control-label"> Nro Fact.</label>
 							<div class="col-md-2">
-								<input type="text" class="form-control input-sm" id="nrodoc" value="<?php echo $nrodoc ?>;" readonly>
+								<input type="text" class="form-control input-sm" id="nrodoc" value="<?php echo $nrodoc; ?>" readonly>
 							</div>
 
 							<label for="timbrado" class="col-md-1 control-label"> Timbrado</label>
 							<div class="col-md-2">
-								<input type="text" class="form-control input-sm" id="timbrado" value="<?php echo $timbrado ?>;" readonly>
+								<input type="text" class="form-control input-sm" id="timbrado" value="<?php echo $timbrado; ?>" readonly>
 							</div>
 				</div>
 
@@ -280,12 +280,12 @@ while ($r=$query->fetch_array()){
 							 <div class="form-group row">
                     <label for="efectivo" class="col-md-1 control-label">Tipo Pago</label>
 							<div class="col-md-2">
-								<select class='form-control input-sm' id="cobrar" name="cobrar">
+								<select class='form-control input-sm' id="cobrar" name="cobrar" onChange="mostrar(this.value);">
 									<option value="1">Efectivo</option>
 									<option value="2">Tarjeta</option>
 									<option value="3">Cheque</option>
 									<option value="4">Transferencia bancaria</option>
-									<option value="5">Pago Combinado</option>
+									<option value="5" selected>Pago Combinado</option>
 								</select>
 							</div>
                </div>
@@ -293,7 +293,7 @@ while ($r=$query->fetch_array()){
 
 						</div>
 
-						<div class="form-group row">
+						<div class="form-group row" id="pagocombinado">
 							<label for="efectivo" class="col-md-1 control-label">Pago Efectivo</label>
 							<div class="col-md-2">
 								<input type="number" class="form-control input-sm" id="efectivo" name="efectivo">
@@ -341,11 +341,40 @@ while ($r=$query->fetch_array()){
 	<?php
 	include("footer.php");
 	?>
+
+     
+
+
 	<script type="text/javascript" src="js/VentanaCentrada.js"></script>
 	<script type="text/javascript" src="js/editar_factura.js"></script>
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 	<script>
+
+         function mostrar(id) {
+   
+    if (id == "0") {
+		$("#pagocombinado").hide();
+    }
+	if (id == "5") {
+		$("#pagocombinado").show();
+    }
+	if (id == "4") {
+        $("#pagocombinado").hide();
+    }
+	if (id == "3") {
+        $("#pagocombinado").hide();
+    }
+    if (id == "2") {
+        $("#pagocombinado").hide();
+    }
+    if (id == "1") {
+        $("#pagocombinado").hide();
+    }
+}
+
+
+
 		$(function() {
 						$("#nombre_cliente").autocomplete({
 							source: "./ajax/autocomplete/clientes.php",

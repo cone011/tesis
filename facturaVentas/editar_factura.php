@@ -257,12 +257,12 @@ while ($r=$query->fetch_array()){
                 <div class="form-group row">
                     <label for="efectivo" class="col-md-1 control-label">Forma Pago</label>
 							<div class="col-md-2">
-								<select class='form-control input-sm' id="pago" name="pago">
+								<select class='form-control input-sm' id="pago" name="pago" onChange="mostrar(this.value);">
 									<option value="1">Efectivo</option>
 									<option value="2">Tarjeta</option>
 									<option value="3">Cheque</option>
 									<option value="4">Transferencia bancaria</option>
-									<option value="5">Pago Combinado</option>
+									<option value="5" selected>Pago Combinado</option>
 								</select>
 							</div>
                </div>
@@ -296,7 +296,7 @@ while ($r=$query->fetch_array()){
 						</div>
 			<?php }elseif($tipo==5 and $condiciones==2){ ?>		
 
-			<div class="form-group row">
+			<div class="form-group row" id="pagocombinado">
 							<label for="efectivo" class="col-md-1 control-label">Pago Efectivo</label>
 							<div class="col-md-2">
 								<input type="number" class="form-control input-sm" id="efectivo" name="efectivo" >
@@ -359,6 +359,29 @@ while ($r=$query->fetch_array()){
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 	<script>
+
+		function mostrar(id) {
+   
+    if (id == "0") {
+		$("#pagocombinado").hide();
+    }
+	if (id == "5") {
+		$("#pagocombinado").show();
+    }
+	if (id == "4") {
+        $("#pagocombinado").hide();
+    }
+	if (id == "3") {
+        $("#pagocombinado").hide();
+    }
+    if (id == "2") {
+        $("#pagocombinado").hide();
+    }
+    if (id == "1") {
+        $("#pagocombinado").hide();
+    }
+}
+
 		$(function() {
 						$("#nombre_cliente").autocomplete({
 							source: "./ajax/autocomplete/clientes.php",
