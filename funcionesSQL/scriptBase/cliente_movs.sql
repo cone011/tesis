@@ -13,7 +13,8 @@ CREATE OR REPLACE TABLE cliente_movs(
 	UNIQUE KEY numero_cotizacion (numero_factura),
 	FOREIGN KEY (numero_factura) REFERENCES venta(numero_factura),
 	FOREIGN KEY (id_vendedor)    REFERENCES users(user_id),
-	FOREIGN KEY (id_cliente)     REFERENCES cliente(id_cliente)
+	FOREIGN KEY (id_cliente)     REFERENCES cliente(id_cliente),
+	FOREIGN KEY (tipo_mov)   REFERENCES tipo_mov(tipo_mov)
 	);
 COMMIT;
 
