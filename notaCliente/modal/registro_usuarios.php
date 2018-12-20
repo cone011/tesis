@@ -32,9 +32,15 @@
 				</div>
 			  </div>
 			  <div class="form-group">
-				<label for="user_email" class="col-sm-3 control-label">Email</label>
+				<label for="user_email" class="col-sm-3 control-label">Nivel</label>
 				<div class="col-sm-8">
-				  <input type="email" class="form-control" id="user_email" name="user_email" placeholder="Correo electrónico" required>
+				   <select class="form-control" id="user_email" name=user_email required>
+					<option value="" selected>-- Selecciona nivel --</option>
+					<option value="1">Gerente</option>
+					<option value="2">Administrador</option>
+					<option value="3">Playero/Shop</option>
+					<option value="4">Capitan</option>
+				  </select>
 				</div>
 			  </div>
 			  <div class="form-group">
@@ -49,6 +55,7 @@
 				  <input type="password" class="form-control" id="user_password_repeat" name="user_password_repeat" placeholder="Repite contraseña" pattern=".{6,}" required>
 				</div>
 			  </div>
+			
 			 
 			  
 

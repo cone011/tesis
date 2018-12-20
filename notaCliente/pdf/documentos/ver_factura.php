@@ -30,6 +30,7 @@
 	$id_vendedor=$rw_factura['id_vendedor'];
 	$fecha_factura=$rw_factura['fecha_factura'];
 	$condiciones=$rw_factura['condiciones'];
+	//$tipo=$rw_factura['tipo_pago'];
 	$simbolo_moneda=get_row('perfil','moneda', 'id_perfil', 1);
 	require_once(dirname(__FILE__).'/../html2pdf.class.php');
     // get the HTML

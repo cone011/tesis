@@ -25,11 +25,9 @@ if (version_compare(PHP_VERSION, '5.3.7', '<')) {
         } elseif (!preg_match('/^[a-z\d]{2,64}$/i', $_POST['user_name'])) {
             $errors[] = "Nombre de usuario no encaja en el esquema de nombre: Sólo aZ y los números están permitidos , de 2 a 64 caracteres";
         } elseif (empty($_POST['user_email'])) {
-            $errors[] = "El correo electrónico no puede estar vacío";
+            $errors[] = "El rol  fue no pasado";
         } elseif (strlen($_POST['user_email']) > 64) {
             $errors[] = "El correo electrónico no puede ser superior a 64 caracteres";
-        } elseif (!filter_var($_POST['user_email'], FILTER_VALIDATE_EMAIL)) {
-            $errors[] = "Su dirección de correo electrónico no está en un formato de correo electrónico válida";
         } elseif (
 			!empty($_POST['user_name'])
 			&& !empty($_POST['firstname'])
@@ -38,8 +36,6 @@ if (version_compare(PHP_VERSION, '5.3.7', '<')) {
             && strlen($_POST['user_name']) >= 2
             && preg_match('/^[a-z\d]{2,64}$/i', $_POST['user_name'])
             && !empty($_POST['user_email'])
-            && strlen($_POST['user_email']) <= 64
-            && filter_var($_POST['user_email'], FILTER_VALIDATE_EMAIL)
             && !empty($_POST['user_password_new'])
             && !empty($_POST['user_password_repeat'])
             && ($_POST['user_password_new'] === $_POST['user_password_repeat'])
@@ -53,7 +49,8 @@ if (version_compare(PHP_VERSION, '5.3.7', '<')) {
 				$user_name = mysqli_real_escape_string($con,(strip_tags($_POST["user_name"],ENT_QUOTES)));
                 $user_email = mysqli_real_escape_string($con,(strip_tags($_POST["user_email"],ENT_QUOTES)));
 				$user_password = $_POST['user_password_new'];
-				$date_added=date("Y-m-d H:i:s");
+                //$nivel=$_POST['nivel'];
+				$date_added=date("Y-m-d H:i:s");      
                 // crypt the user's password with PHP 5.5's password_hash() function, results in a 60 character
                 // hash string. the PASSWORD_DEFAULT constant is defined by the PHP 5.5, or if you are using
                 // PHP 5.3/5.4, by the password hashing compatibility library

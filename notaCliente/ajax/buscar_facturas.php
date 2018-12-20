@@ -1,10 +1,6 @@
 <?php
 
-	/*-------------------------
-	Autor: Obed Alvarado
-	Web: obedalvarado.pw
-	Mail: info@obedalvarado.pw
-	---------------------------*/
+
 	include('is_logged.php');//Archivo verifica que el usario que intenta acceder a la URL esta logueado
 	/* Connect To Database*/
 	require_once ("../config/db.php");//Contiene las variables de configuracion para conectar a la base de datos
@@ -13,19 +9,19 @@
 	$action = (isset($_REQUEST['action'])&& $_REQUEST['action'] !=NULL)?$_REQUEST['action']:'';
 	if (isset($_GET['id'])){
 		$numero_factura=intval($_GET['id']);
-		//$del1="delete from compra where numero_factura='".$numero_factura."'";
+		/*$del1="delete from venta where numero_factura='".$numero_factura."'";
+		$del2="delete from detalle_venta where numero_factura='".$numero_factura."'";*/
 		$condiciones=999;
 		$accion='ANULADO';
-		$accionfact=999;
 		$id_product=0;
 		$cant='ANULADO';
 		$vent='ANULADO';
 		$id_clien='999';
 		//$vendedor=1;
 		$estado_factura=10;
-		$facturadrop=0;
-		$total=0;
-		$sql=mysqli_query($con, "select * from detalle_nc where numero_factura='".$numero_factura."'");
+		$factura=0;
+		
+       $sql=mysqli_query($con, "select * from detalle_nc where numero_factura='".$numero_factura."'");
        while ($row=mysqli_fetch_array($sql))
 	   {
 	        //$idprouc=$row['id_producto'];
@@ -66,7 +62,7 @@
          $q = mysqli_real_escape_string($con,(strip_tags($_REQUEST['q'], ENT_QUOTES)));
 		  $sTable = "ncliente, detalle_nc, cliente, users";
 		 $sWhere = "";
-		 $sWhere.=" WHERE ncliente.id_cliente=cliente.id_cliente and ncliente.id_vendedor=users.user_id and ncliente.numero_factura=detalle_nc.numero_factura";
+		 $sWhere.="WHERE ncliente.id_cliente=cliente.id_cliente and ncliente.id_vendedor=users.user_id and ncliente.numero_factura=detalle_nc.numero_factura";
 		if ( $_GET['q'] != "" )
 		{
 		$sWhere.= " and  (cliente.nombre_cliente like '%$q%' or ncliente.numero_factura like '%$q%' or ncliente.fecha like '%$q%')";
@@ -110,7 +106,6 @@
 				</tr>
 				<?php
 				while ($row=mysqli_fetch_array($query)){
-
 						$id_factura=$row['id_factura'];
 						$numero_factura=$row['numero_factura'];
 						$fecha=date("d/m/Y", strtotime($row['fecha_factura']));
@@ -139,10 +134,9 @@
 						/*if ($estado_factura==1){$text_estado="Pagada";$label_class='label-success';}
 						elseif($estado_factura==2){$text_estado="Pendiente";$label_class='label-danger';}
                         else{$text_estado="Anulado";$label_class='label-warning';}*/
-						$total_venta=$row['total_venta'];
+						$total_venta=$row['total_venta'];	
 					?>
 					<tr>
-							
 						<td ><?php echo $numero_factura; ?></td>
 
 						<td><?php echo $fecha; ?></td>

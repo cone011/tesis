@@ -7,7 +7,7 @@ $return_arr = array();
 if ($con)
 {
 	
-	$fetch = mysqli_query($con,"SELECT * FROM cliente where nombre_cliente like '%" . mysqli_real_escape_string($con,($_GET['term'])) . "%' or ruc_cliente like '%" . mysqli_real_escape_string($con,($_GET['term'])) . "%' LIMIT 0 ,50"); 
+	$fetch = mysqli_query($con,"SELECT * FROM cliente where nombre_cliente like '%" . mysqli_real_escape_string($con,($_GET['term'])) . "%' or telefono_cliente like '%" . mysqli_real_escape_string($con,($_GET['term'])) . "%' LIMIT 0 ,50"); 
 	
 	/* Retrieve and store in array the results of the query.*/
 	while ($row = mysqli_fetch_array($fetch)) {

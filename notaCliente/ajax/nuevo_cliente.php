@@ -15,11 +15,10 @@
 		$ruc=mysqli_real_escape_string($con,(strip_tags($_POST["ruc"],ENT_QUOTES)));
 		$estado=intval($_POST['estado']);
 		$date_added=date("Y-m-d H:i:s");
-		$pcname=gethostname();
-		$sql="INSERT INTO factura (nombre_cliente, telefono_cliente, email_cliente, direccion_cliente, status_cliente, date_added,ruc_cliente,donde) VALUES ('$nombre','$telefono','$email','$direccion','$estado','$date_added','$ruc','$pcname')";
+		$sql="INSERT INTO cliente (nombre_cliente, telefono_cliente, email_cliente, direccion_cliente, status_cliente, date_added,ruc_cliente) VALUES ('$nombre','$telefono','$email','$direccion','$estado','$date_added','$ruc')";
 		$query_new_insert = mysqli_query($con,$sql);
 			if ($query_new_insert){
-				$messages[] = "La relacion de la O.C. y la factura fue exitosa.";
+				$messages[] = "Cliente ha sido ingresado satisfactoriamente.";
 			} else{
 				$errors []= "Lo siento algo ha salido mal intenta nuevamente.".mysqli_error($con);
 			}

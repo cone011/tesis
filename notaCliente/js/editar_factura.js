@@ -4,6 +4,7 @@
 			$( "#resultados" ).load( "ajax/editar_facturacion.php" );
 		});
 
+
 		function load(page){
 			var q= $("#q").val();
 			$("#loader").fadeIn('slow');
@@ -71,7 +72,7 @@
 		
 		$("#datos_factura").submit(function(event){
 		  var id_cliente = $("#id_cliente").val();
-	  
+
 		  if (id_cliente==""){
 			  alert("Debes seleccionar un cliente");
 			  $("#nombre_cliente").focus();

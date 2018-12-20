@@ -15,12 +15,13 @@
 		$query=mysqli_query($con, "select * from users where user_id='".$user_id."'");
 		$rw_user=mysqli_fetch_array($query);
 		$count=$rw_user['user_id'];
-		if ($user_id!=1){
-			if ($delete1=mysqli_query($con,"DELETE FROM users WHERE user_id='".$user_id."'")){
+		$estado=1;
+		$sql_anulado="UPDATE users SET estado='".$estado."' WHERE user_id='".$user_id."'";
+			if ($delete1=mysqli_query($con,$sql_anulado)){
 			?>
 			<div class="alert alert-success alert-dismissible" role="alert">
 			  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-			  <strong>Aviso!</strong> Datos eliminados exitosamente.
+			  <strong>Aviso!</strong> Usuario Bajado exitosamente.
 			</div>
 			<?php 
 		}else {
@@ -33,14 +34,7 @@
 			
 		}
 			
-		} else {
-			?>
-			<div class="alert alert-danger alert-dismissible" role="alert">
-			  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-			  <strong>Error!</strong> No se puede borrar el usuario administrador. 
-			</div>
-			<?php
-		}
+		
 		
 		
 		
@@ -87,7 +81,7 @@
 					<th>ID</th>
 					<th>Nombres</th>
 					<th>Usuario</th>
-					<th>Email</th>
+					<th>Nivel</th>
 					<th>Agregado</th>
 					<th><span class="pull-right">Acciones</span></th>
 					
@@ -98,6 +92,15 @@
 						$fullname=$row['firstname']." ".$row["lastname"];
 						$user_name=$row['user_name'];
 						$user_email=$row['user_email'];
+						if($user_email==1){
+                           $leyenda='Gerente';
+						}elseif($user_email==2){
+							$leyenda='Administrador';
+						}elseif($user_email==3){
+							$leyenda='Empleado';
+						}elseif($user_email==4){
+							$leyenda='Capitan';
+						}
 						$date_added= date('d/m/Y', strtotime($row['date_added']));
 						
 					?>
@@ -111,13 +114,13 @@
 						<td><?php echo $user_id; ?></td>
 						<td><?php echo $fullname; ?></td>
 						<td ><?php echo $user_name; ?></td>
-						<td ><?php echo $user_email; ?></td>
+						<td ><?php echo $leyenda; ?></td>
 						<td><?php echo $date_added;?></td>
 						
 					<td ><span class="pull-right">
 					<a href="#" class='btn btn-default' title='Editar usuario' onclick="obtener_datos('<?php echo $user_id;?>');" data-toggle="modal" data-target="#myModal2"><i class="glyphicon glyphicon-edit"></i></a> 
 					<a href="#" class='btn btn-default' title='Cambiar contraseña' onclick="get_user_id('<?php echo $user_id;?>');" data-toggle="modal" data-target="#myModal3"><i class="glyphicon glyphicon-cog"></i></a>
-					<a href="#" class='btn btn-default' title='Borrar usuario' onclick="eliminar('<? echo $user_id; ?>')"><i class="glyphicon glyphicon-trash"></i> </a></span></td>
+					</span></td>
 						
 					</tr>
 					<?php

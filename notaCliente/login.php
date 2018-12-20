@@ -18,13 +18,19 @@ require_once("classes/Login.php");
 // so this single line handles the entire login process. in consequence, you can simply ...
 $login = new Login();
 
+
 // ... ask if we are logged in here:
-if ($login->isUserLoggedIn() == true) {
-    // the user is logged in. you can do whatever you want here.
-    // for demonstration purposes, we simply show the "you are logged in" view.
+if ($login->isUserLoggedIn() == true and $login->isGerente()) {
+
+   header("location: usuarios.php");
+
+} elseif ($login->isUserLoggedIn() == true and $login->isAdmin()) {
+
    header("location: facturas.php");
 
-} else {
+} elseif ($login->isUserLoggedIn() == true and $login->isEmpleado()) {
+	header("location: nueva_factura.php");
+}else {
     // the user is not logged in. you can do whatever you want here.
     // for demonstration purposes, we simply show the "you are not logged in" view.
     ?>

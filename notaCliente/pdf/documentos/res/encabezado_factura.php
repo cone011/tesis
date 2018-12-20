@@ -16,10 +16,12 @@
                 
             </td>
 			<td style="width: 25%;text-align:right">
-			Nro de N.C.: 001-001-<?php echo $numero_factura;?>
-			Timbrado: 89563015
+			Numero N.C.<?php echo $numero_factura;?>
+			TIMBRADO: 89455126
+			RUC: 80024518-5
+			
 			</td>
-			 
+			
         </tr>
     </table>
 	<?php }?>	

@@ -23,8 +23,8 @@ include('is_logged.php');//Archivo verifica que el usario que intenta acceder a 
 		$nombre=mysqli_real_escape_string($con,(strip_tags($_POST["nombre"],ENT_QUOTES)));
 		$estado=intval($_POST['estado']);
 		$precio_venta=floatval($_POST['precio']);
-		$date_added=date("Y-m-d H:i:s");
 		$iva=intval($_POST['iva']);
+		$date_added=date("Y-m-d H:i:s");
 		$sql="INSERT INTO productos (codigo_producto, nombre_producto, status_producto, date_added, precio_producto,iva_producto) VALUES ('$codigo','$nombre','$estado','$date_added','$precio_venta','$iva')";
 		$query_new_insert = mysqli_query($con,$sql);
 			if ($query_new_insert){

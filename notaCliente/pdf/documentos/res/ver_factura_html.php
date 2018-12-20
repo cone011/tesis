@@ -272,15 +272,13 @@ table.page_footer {width: 100%; border: none; background-color: white; padding: 
 		  <td style="width:20%;"><?php echo date("d/m/Y", strtotime($fecha_factura));?></td>
 		   <td style="width:20%;" >
 				<?php 
-				if ($condiciones==1){echo "Efectivo";}
-				elseif ($condiciones==2){echo "Cheque";}
-				elseif ($condiciones==3){echo "Transferencia bancaria";}
-				elseif ($condiciones==4){echo "Crédito";}
+				if ($condiciones==1){echo "Contado";}
+				elseif ($condiciones==2){echo "Credito";}
 				?>
 		   </td>
             <td style="width:20%;">
                 <?php 
-                    $sql_tipo=mysqli_query($con, "select * from ncliente where ncliente.id_factura='".$id_factura."'");
+                    $sql_tipo=mysqli_query($con, "select * from venta where venta.id_factura='".$id_factura."'");
                     while ($row_tipo=mysqli_fetch_array($sql_tipo))
                     {
                         $pago=$row_tipo['tipo_pago'];
@@ -289,23 +287,56 @@ table.page_footer {width: 100%; border: none; background-color: white; padding: 
                 elseif ($pago==2){echo "Tarjeta";}
                 elseif ($pago==3){echo "Cheque";}
                 elseif ($pago==4){echo "Transferencia bancaria";}
+                elseif ($pago==5){echo "Pago Combinado";}
                 ?>      
            </td>
         </tr>
 		
+    </table>
+
+ <?php if($pago==5){ 
+
+     $sql_combinado=mysqli_query($con,"select * from venta where id_factura='".$id_factura."'");
+                $rw_combinado=mysqli_fetch_array($sql_combinado); 
+                $efectivo=$rw_combinado['efectivo'];
+                $tarjeta=$rw_combinado['tarjeta'];
+                $cheque=$rw_combinado['cheque'];
+                $transferencia=$rw_combinado['transferencia']
+                ?>
+    <table cellspacing="0" style="width: 100%; text-align: left; font-size: 11pt;">
+        <tr>
+           <td style="width:20%;" class='midnight-blue'>PAGO EFECTIVO</td>
+          <td style="width:20%;" class='midnight-blue'>PAGO TARJETA</td>
+           <td style="width:20%;" class='midnight-blue'>PAGO CHEQUE</td>
+            <td style="width:20%;" class='midnight-blue'>PAGO TRANSFERENCIA</td>
+        </tr>
+        <tr>
+           <td style="width:20%;"><?php echo $efectivo;?></td>
+          <td style="width:20%;"><?php echo $tarjeta;?></td>
+           <td style="width:20%;"><?php echo $cheque;?></td>
+           <td style="width:20%;"><?php echo $transferencia;?></td>
+
+        </tr>
+        
         
    
     </table>
+<?php } ?>
+
+
+
+
 	<br>
   
     <table cellspacing="0" style="width: 100%; text-align: left; font-size: 10pt;">
         <tr>
-            <th style="width: 10%;text-align:center" class='midnight-blue'>CANT./LITROS</th>
+            <th style="width: 10%;text-align:center" class='midnight-blue'>NRO FACTURA.</th>
             <th style="width: 60%" class='midnight-blue'>DESCRIPCION</th>
-            <th style="width: 15%;text-align: right" class='midnight-blue'>PRECIO UNIT.</th>
-            <th style="width: 15%;text-align: right" class='midnight-blue'>PRECIO TOTAL</th>
+            <th style="width: 15%;text-align: right" class='midnight-blue'>MONTO N.C.</th>
+            <th style="width: 15%;text-align: right" class='midnight-blue'>Sal. Sobra</th>
             
         </tr>
+   </table>
 
 <?php
 $nums=1;
@@ -319,7 +350,7 @@ $auxiva10=0;
 $monto10=0;
 $monto5=0;
 $monto0=0;
-$sql=mysqli_query($con, "select * from productos, detalle_nc, ncliente where productos.id_producto=detalle_nc.id_producto and detalle_nc.numero_factura=ncliente.numero_factura and ncliente.id_factura='".$id_factura."'");
+$sql=mysqli_query($con, "select * from productos, detalle_venta, venta where productos.id_producto=detalle_venta.id_producto and detalle_venta.numero_factura=venta.numero_factura and venta.id_factura='".$id_factura."'");
 
 while ($row=mysqli_fetch_array($sql))
 	{
@@ -331,6 +362,7 @@ while ($row=mysqli_fetch_array($sql))
 	$precio_venta=$row['precio_venta'];
     $iva=$row['iva_producto'];
 
+    $cantidad_imprimir=number_format($cantidad,2);
 	$precio_venta_f=number_format($precio_venta,0);//Formateo variables
 	$precio_venta_r=str_replace(",","",$precio_venta_f);//Reemplazo las comas
     if($tipo==1){
@@ -371,7 +403,7 @@ while ($row=mysqli_fetch_array($sql))
 	?>
 
         <tr>
-            <td class='<?php echo $clase;?>' style="width: 10%; text-align: center"><?php echo $cantidad; ?></td>
+            <td class='<?php echo $clase;?>' style="width: 10%; text-align: center"><?php echo $cantidad_imprimir; ?></td>
             <td class='<?php echo $clase;?>' style="width: 60%; text-align: left"><?php echo $nombre_producto;?></td>
             <td class='<?php echo $clase;?>' style="width: 15%; text-align: right"><?php echo $precio_venta_f;?></td>
             <td class='<?php echo $clase;?>' style="width: 15%; text-align: right"><?php echo $precio_total_f;?></td>
@@ -383,9 +415,63 @@ while ($row=mysqli_fetch_array($sql))
 	
 	$nums++;
 	}
-
+    $print10=10;
+    $print05=5;
+    $print0=0;
+	$impuesto=get_row('perfil','impuesto', 'id_perfil', 1);
+	$subtotal=number_format($sumador_total,0,'.','');
+	$total_iva=($subtotal / 1.1 )*0.1;
+	$total_iva=number_format($total_iva,2,'.','');
+	$total_factura=$subtotal;
+	$titulo_monto = numtoletras($total_factura);
 ?>
+	  
+       
+        <tr>
+            <td colspan="3" style="widtd: 85%; text-align: right;">SUBTOTAL <?php echo $simbolo_moneda;?> </td>
+            <td style="widtd: 15%; text-align: right;"> <?php echo number_format($subtotal,0);?></td>
+        </tr>
+        <tr>
+            <td colspan="3" style="widtd: 85%; text-align: right;">TOTAL GRAV. (<?php echo $print10; ?>)% <?php echo $simbolo_moneda;?> </td>
+            <td style="widtd: 15%; text-align: right;"> <?php echo number_format($monto10,0);?></td>
+        </tr>
 
+        <tr>
+            <td colspan="3" style="widtd: 85%; text-align: right;">TOTAL GRAV. (<?php echo $print05; ?>)% <?php echo $simbolo_moneda;?> </td>
+            <td style="widtd: 15%; text-align: right;"> <?php echo number_format($monto5,0);?></td>
+        </tr>
+        
+        <tr>
+            <td colspan="3" style="widtd: 85%; text-align: right;">TOTAL GRAV. 0% <?php echo $simbolo_moneda;?> </td>
+            <td style="widtd: 15%; text-align: right;"> <?php echo number_format($monto0,0);?></td>
+        </tr>
+
+        <tr>
+            <td colspan="3" style="widtd: 85%; text-align: right;">IVA (<?php echo $print10; ?>)% <?php echo $simbolo_moneda;?> </td>
+            <td style="widtd: 15%; text-align: right;"> <?php echo number_format($iva10,2);?></td>
+        </tr>
+
+        <tr>
+            <td colspan="3" style="widtd: 85%; text-align: right;">IVA (<?php echo $print05; ?>)% <?php echo $simbolo_moneda;?> </td>
+            <td style="widtd: 15%; text-align: right;"> <?php echo number_format($iva5,2);?></td>
+        </tr>
+        
+        <tr>
+            <td colspan="3" style="widtd: 85%; text-align: right;">TOTAL IVA <?php echo $simbolo_moneda;?> </td>
+            <td style="widtd: 15%; text-align: right;"> <?php echo number_format($ivatotal,2);?></td>
+        </tr>
+
+        <tr>
+            <td colspan="3" style="widtd: 85%; text-align: right;">TOTAL <?php echo $simbolo_moneda;?> </td>
+            <td style="widtd: 15%; text-align: right;"> <?php echo number_format($total_factura);?></td>
+        </tr>
+    </table>
+	
+	<div style="font-size:09pt;text-align:center;font-weight:bold"><?php echo $titulo_monto;?></div>
+	
+	<br>
+	<div style="font-size:11pt;text-align:center;font-weight:bold">Gracias por su compra!</div>
+	
 	
 	  
 

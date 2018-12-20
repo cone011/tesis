@@ -6,9 +6,9 @@
         }else if (empty($_POST['mod_nombre'])) {
            $errors[] = "Nombre vacío";
         }  else if ($_POST['mod_estado']==""){
-			$errors[] = "Selecciona el estado del proveedor";
+			$errors[] = "Selecciona el estado del cliente";
 		}  else if ($_POST['mod_ruc']==""){
-            $errors[] = "Ruc del Proveedor Vacio";
+            $errors[] = "Ruc del Cliente Vacio";
 		}  else if (
 			!empty($_POST['mod_id']) &&
 			!empty($_POST['mod_nombre']) &&
@@ -26,10 +26,10 @@
 		$estado=intval($_POST['mod_estado']);
 		
 		$id_cliente=intval($_POST['mod_id']);
-		$sql="UPDATE proveedores SET nombre_cliente='".$nombre."', telefono_cliente='".$telefono."', email_cliente='".$email."', direccion_cliente='".$direccion."', status_cliente='".$estado."', ruc_cliente='".$ruc."' WHERE id_cliente='".$id_cliente."'";
+		$sql="UPDATE cliente SET nombre_cliente='".$nombre."', telefono_cliente='".$telefono."', email_cliente='".$email."', direccion_cliente='".$direccion."', status_cliente='".$estado."', ruc_cliente='".$ruc."' WHERE id_cliente='".$id_cliente."'";
 		$query_update = mysqli_query($con,$sql);
 			if ($query_update){
-				$messages[] = "Proveedor ha sido actualizado satisfactoriamente.";
+				$messages[] = "Cliente ha sido actualizado satisfactoriamente.";
 			} else{
 				$errors []= "Lo siento algo ha salido mal intenta nuevamente.".mysqli_error($con);
 			}

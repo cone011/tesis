@@ -1,7 +1,8 @@
 <?php
 
 	session_start();
-	$id=$_SESSION['user_id'];
+
+	    $id=$_SESSION['user_id'];
 
 $host="localhost";
 $user="root";
@@ -17,17 +18,19 @@ while ($r=$query->fetch_array()){
     $ajuste=$r['inventario'];
     $reporte=$r['reporte'];
     $gestion=$r['gestion'];
+    $nivel=$r['user_email'];
  }
+
 	if (!isset($_SESSION['user_login_status']) AND $_SESSION['user_login_status'] != 1) {
         header("location: login.php");
 		exit;
         }
 
-	if ($factura==0) {
+    if ($factura==0) {
         $active_facturas="hide";
         $active_ncliente="hide";
 	}else{
-		$active_facturas="";
+		$active_facturas="active";
 		$active_ncliente="";
 	}
 
@@ -37,7 +40,6 @@ while ($r=$query->fetch_array()){
 	}else{
 		$active_compra="";
 		$active_nproov="";
-
 	}
 
 	if ($ajuste==0) {
@@ -104,10 +106,26 @@ while ($r=$query->fetch_array()){
 
     }
 		
+    if($nivel==3 || $nivel==4){
+        $active_bk="hide";
+    }else{
+    	$active_bk="";
+    }	
+    
+    if($nivel==4){
+        $active_cierre="";
+        $factura="";
+    }else{
+    	$active_cierre="hide";
+    	$factura="hide";
+    }
+
 	
-	$active_bk="";
-	
+
+
 	$title="Nueva N.C. | Estacion E.M.R.";
+
+
 	
 	/* Connect To Database*/
 	require_once ("config/db.php");//Contiene las variables de configuracion para conectar a la base de datos
@@ -117,6 +135,37 @@ while ($r=$query->fetch_array()){
 <html lang="en">
   <head>
     <?php include("head.php");?>
+
+    <script>
+
+
+		function habilitar_pago(value)
+		{
+			if(value==true)
+			{
+				// habilitamos
+				//document.getElementById("segundo").disabled=false;
+				document.getElementById("efectivo").disabled=false;
+				document.getElementById("tarjeta").disabled=false;
+				document.getElementById("transferencia").disabled=false;
+				document.getElementById("cheque").disabled=false;
+			}else if(value==false){
+				// deshabilitamos
+				document.getElementById("efectivo").disabled=true;
+				document.getElementById("tarjeta").disabled=true;
+				document.getElementById("transferencia").disabled=true;
+				document.getElementById("cheque").disabled=true;
+			}
+		}
+
+
+function myFunction() {
+    document.getElementById("cuota").disabled = document.getElementById("validacion").checked;
+}
+	
+
+	</script>
+
   </head>
   <body>
 	<?php
@@ -125,7 +174,7 @@ while ($r=$query->fetch_array()){
     <div class="container">
 	<div class="panel panel-info">
 		<div class="panel-heading">
-			<h4><i class='glyphicon glyphicon-edit'></i> Nueva N.C.</h4>
+			<h4><i class='glyphicon glyphicon-edit'></i> Nueva Factura</h4>
 		</div>
 		<div class="panel-body">
 		<?php 
@@ -135,21 +184,20 @@ while ($r=$query->fetch_array()){
 		?>
 			<form class="form-horizontal" role="form" id="datos_factura">
 				<div class="form-group row">
-				  <label for="nombre_cliente" class="col-md-1 control-label">Cliente: </label>
+				  <label for="nombre_cliente" class="col-md-1 control-label">Cliente</label>
 				  <div class="col-md-2">
 					  <input type="text" class="form-control input-sm" id="nombre_cliente" placeholder="Selecciona un cliente" required>
 					  <input id="id_cliente" type='hidden'>	
 				  </div>
-				  <label for="tel1" class="col-md-1 control-label">Teléfono: </label>
+				  <label for="tel1" class="col-md-1 control-label">Nombre</label>
 							<div class="col-md-2">
-								<input type="text" class="form-control input-sm" id="tel1" placeholder="Teléfono" readonly>
+								<input type="text" class="form-control input-sm" id="tel1" placeholder="Nombre del Cliente" readonly>
 							</div>
-					<label for="mail" class="col-md-1 control-label">Ruc: </label>
-							<div class="col-md-3">
-								<input type="text" class="form-control input-sm" id="mail" placeholder="Ruc" readonly>
+					<label for="mail" class="col-md-1 control-label">Telefono</label>
+							<div class="col-md-2">
+								<input type="text" class="form-control input-sm" id="mail" placeholder="Telefono del Cliente" readonly>
 							</div>
-
-					<label for="factura" class="col-md-1 control-label">Nro de N.C.: </label>		
+					<label for="factura" class="col-md-1 control-label">Numero NC:</label>		
 							<div class="col-md-1">
 								<?php   
 										$sql_factura=mysqli_query($con,"select max(numero_factura) as last from ncliente");
@@ -161,10 +209,9 @@ while ($r=$query->fetch_array()){
 										}
 									?>
 							</div>		
-
 				 </div>
 						<div class="form-group row">
-							<label for="empresa" class="col-md-1 control-label">Encargado: </label>
+							<label for="empresa" class="col-md-1 control-label">Encargado</label>
 							<div class="col-md-2">
 								<select class="form-control input-sm" id="id_vendedor">
 									<?php
@@ -184,17 +231,18 @@ while ($r=$query->fetch_array()){
 									?>
 								</select>
 							</div>
-							<label for="tel2" class="col-md-1 control-label">Fecha: </label>
+							<label for="tel2" class="col-md-1 control-label">Fecha</label>
 							<div class="col-md-2">
 								<input type="text" class="form-control input-sm" id="fecha" value="<?php echo date("d/m/Y");?>" readonly>
 							</div>
-							<label for="email" class="col-md-1 control-label">Pago: </label>
+							<label for="email" class="col-md-1 control-label">Tipo</label>
 							<div class="col-md-2">
 								<select class='form-control input-sm' id="condiciones">
-									<option value="1">Contado</option>
-									<option value="2">Credito</option>
+									<option value="1">Emitido</option>
+									<option value="2">Recibido</option>
 								</select>
 							</div>
+                       
 							<div class="col-md-2">
 								<select class='form-control input-sm' id="pago">
 									<option value="1">Efectivo</option>
@@ -203,33 +251,38 @@ while ($r=$query->fetch_array()){
 									<option value="4">Transferencia bancaria</option>
 									<option value="5">Pago Combinado</option>
 								</select>
+								   <input type="checkbox" id="check_pago" onchange="habilitar_pago(this.checked);" checked> Pago Combinado
+	                                </div>      
 							</div>
-						</div>
+							
 
 						<div class="form-group row">
-							<label for="efectivo" class="col-md-1 control-label">Efectivo: </label>
+
+							
+							<label for="efectivo" class="col-md-1 control-label">Pago Efectivo</label>
 							<div class="col-md-2">
-								<input type="text" class="form-control input-sm" id="efectivo">
+								<input type="number" class="form-control input-sm" id="efectivo">
 							</div>
 
-							<label for="tarjeta" class="col-md-1 control-label">Tarjeta: </label>
+							<label for="tarjeta" class="col-md-1 control-label">Pago Tarjeta</label>
 							<div class="col-md-2">
-								<input type="text" class="form-control input-sm" id="tarjeta">
+								<input type="number" class="form-control input-sm" id="tarjeta">
 							</div>
 
-							<label for="transferecia" class="col-md-1 control-label">Transferencia: </label>
+							<label for="cheque" class="col-md-1 control-label">Pago Cheque</label>
 							<div class="col-md-2">
-								<input type="text" class="form-control input-sm" id="transferecia">
+								<input type="number" class="form-control input-sm" id="cheque">
 							</div>
 
-							<label for="cheque" class="col-md-1 control-label">Cheque: </label>
+							<label for="transferencia" class="col-md-1 control-label">Pago Transferencia</label>
 							<div class="col-md-2">
-								<input type="text" class="form-control input-sm" id="cheque">
+								<input type="number" class="form-control input-sm" id="transferencia">
 							</div>
-
-
+							
+							
 						</div>
 
+				
 				
 				<div class="col-md-12">
 					<div class="pull-right">
@@ -273,7 +326,7 @@ while ($r=$query->fetch_array()){
 								$('#id_cliente').val(ui.item.id_cliente);
 								$('#nombre_cliente').val(ui.item.nombre_cliente);
 								$('#tel1').val(ui.item.telefono_cliente);
-								$('#mail').val(ui.item.ruc_cliente);
+								$('#mail').val(ui.item.email_cliente);
 																
 								
 							 }

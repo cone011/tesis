@@ -5,6 +5,24 @@
 	Mail: info@obedalvarado.pw
 	---------------------------*/
 	session_start();
+	    $id=$_SESSION['user_id'];
+
+$host="localhost";
+$user="root";
+$password="";
+$db="tesis";
+$con = new mysqli($host,$user,$password,$db);
+
+$sql1= "select * from users where user_id='$id'";
+$query = $con->query($sql1);
+while ($r=$query->fetch_array()){
+    $factura=$r['factura'];
+    $compra=$r['compra'];
+    $ajuste=$r['inventario'];
+    $reporte=$r['reporte'];
+    $gestion=$r['gestion'];
+ }
+
 	if (!isset($_SESSION['user_login_status']) AND $_SESSION['user_login_status'] != 1) {
         header("location: login.php");
 		exit;
@@ -13,21 +31,90 @@
 	/* Connect To Database*/
 	require_once ("config/db.php");//Contiene las variables de configuracion para conectar a la base de datos
 	require_once ("config/conexion.php");//Contiene funcion que conecta a la base de datos
+	
+	 if ($factura==0) {
+        $active_facturas="hide";
+        $active_ncliente="hide";
+	}else{
+		$active_facturas="";
+		$active_ncliente="";
+	}
 
-    $active_facturas="";
-	$active_productos="";
-	$active_clientes="active";
-	$active_compra="";
-	$active_ajuste="";
-	$active_venta="";
-	$active_prooveedor="";
-	$active_usuarios="";	
-	$active_reporte_venta="";
-	$active_reporte_compra="";
-	$active_reporte_cliente="";
-	$active_reporte_prov="";
+	if ($compra==0) {
+        $active_compra="hide";
+        $active_nproov="";
+	}else{
+		$active_compra="";
+		$active_nproov="";
+	}
+
+	if ($ajuste==0) {
+        $active_ajuste="hide";
+	}else{
+		$active_ajuste="";
+	}
+    
+    if($gestion==0){
+       $active_productos="hide";
+	   $active_clientes="hide";
+	   $active_prooveedor="hide";
+	   $active_usuarios="hide";
+	   $active_funcion="hide";
+    }else{
+       $active_productos="";
+	   $active_clientes="active";
+	   $active_prooveedor="";
+	   $active_usuarios="";
+	   $active_funcion="";
+    }
+    
+    if($reporte==0){
+    	//PDF
+       $active_reporte_venta="hide";
+	   $active_reporte_compra="hide";
+	   $active_reporte_cliente="hide";
+	   $active_reporte_prov="hide";  
+	   $active_ajuste="hide";  
+	   $active_cierre="hide";
+	   $active_ncliente="hide";
+	   $active_nproveedor="hide";
+	  
+
+	   //EXCEL
+	   $active_venta_ex="hide";
+	   $active_compra_ex="hide";
+	   $active_compra_det="hide";
+	   $active_venta_det="hide";
+	   $active_excelcierre="hide";
+	   $active_excelncliente="hide";
+	   $active_excelnproveedor="hide";
+	  
+
+    }else{
+    	//PDF
+       $active_reporte_venta="";
+	   $active_reporte_compra="";
+	   $active_reporte_cliente="";
+	   $active_reporte_prov="";
+	   $active_ajuste="";   
+	   $active_cierre="";
+	   $active_ncliente="";
+	   $active_nproveedor="";
+
+	   //EXCEL
+	   $active_venta_ex="";
+	   $active_compra_ex="";
+	   $active_compra_det="";
+	   $active_venta_det="";
+	   $active_excelcierre="";
+	   $active_excelncliente="";
+	   $active_excelnproveedor="";
+
+    }
+		
+	
 	$active_bk="";
-	$title="Clientes | E.M.R.";
+	$title="Facturas | E.M.R.";
 ?>
 <!DOCTYPE html>
 <html lang="en">

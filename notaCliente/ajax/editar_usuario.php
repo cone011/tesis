@@ -22,8 +22,6 @@ if (version_compare(PHP_VERSION, '5.3.7', '<')) {
             $errors[] = "El correo electrónico no puede estar vacío";
         } elseif (strlen($_POST['user_email2']) > 64) {
             $errors[] = "El correo electrónico no puede ser superior a 64 caracteres";
-        } elseif (!filter_var($_POST['user_email2'], FILTER_VALIDATE_EMAIL)) {
-            $errors[] = "Su dirección de correo electrónico no está en un formato de correo electrónico válida";
         } elseif (
 			!empty($_POST['user_name2'])
 			&& !empty($_POST['firstname2'])
@@ -32,8 +30,6 @@ if (version_compare(PHP_VERSION, '5.3.7', '<')) {
             && strlen($_POST['user_name2']) >= 2
             && preg_match('/^[a-z\d]{2,64}$/i', $_POST['user_name2'])
             && !empty($_POST['user_email2'])
-            && strlen($_POST['user_email2']) <= 64
-            && filter_var($_POST['user_email2'], FILTER_VALIDATE_EMAIL)
           )
          {
             require_once ("../config/db.php");//Contiene las variables de configuracion para conectar a la base de datos

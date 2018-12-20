@@ -25,7 +25,7 @@
 			function eliminar (id)
 		{
 			var q= $("#q").val();
-		if (confirm("Realmente deseas eliminar la factura")){	
+		if(confirm("Deseas realizar la anulacion de esta factura?")){	
 		$.ajax({
         type: "GET",
         url: "./ajax/buscar_facturas.php",

@@ -33,9 +33,15 @@
 				</div>
 			  </div>
 			  <div class="form-group">
-				<label for="user_email2" class="col-sm-3 control-label">Email</label>
+				<label for="user_email2" class="col-sm-3 control-label">Nivel</label>
 				<div class="col-sm-8">
-				  <input type="email" class="form-control" id="user_email2" name="user_email2" placeholder="Correo electrónico" required>
+				  <select class="form-control" id="user_email2" name=user_email2 required>
+					<option value="" selected>-- Selecciona nivel --</option>
+					<option value="1">Gerente</option>
+					<option value="2">Administrador</option>
+					<option value="3">Playero/Shop</option>
+					<option value="4">Capitan</option>
+				  </select>
 				</div>
 			  </div>
 						 	 

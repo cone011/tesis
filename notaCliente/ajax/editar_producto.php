@@ -26,10 +26,8 @@
 		$nombre=mysqli_real_escape_string($con,(strip_tags($_POST["mod_nombre"],ENT_QUOTES)));
 		$estado=intval($_POST['mod_estado']);
 		$precio_venta=floatval($_POST['mod_precio']);
+		//$precio_costo=floatval($_POST['mod_preciocosto']);
 		$id_producto=$_POST['mod_id'];
-		$fechapro=date("Y-m-d H:i:s");
-
-		$productosauxi = mysqli_query($con,"SELECT precio_venta  FROM detalle_compra where id_producto='".$id_producto."' order by numero_factura desc LIMIT 1"); 
 		$sql="UPDATE productos SET codigo_producto='".$codigo."', nombre_producto='".$nombre."', status_producto='".$estado."', precio_producto='".$precio_venta."' WHERE id_producto='".$id_producto."'";
 		$query_update = mysqli_query($con,$sql);
 			if ($query_update){

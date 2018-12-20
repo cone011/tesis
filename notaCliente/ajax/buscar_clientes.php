@@ -13,10 +13,10 @@
 	$action = (isset($_REQUEST['action'])&& $_REQUEST['action'] !=NULL)?$_REQUEST['action']:'';
 	if (isset($_GET['id'])){
 		$id_cliente=intval($_GET['id']);
-		$query=mysqli_query($con, "select * from proveedores where id_cliente='".$id_cliente."'");
+		$query=mysqli_query($con, "select * from cliente where id_cliente='".$id_cliente."'");
 		$count=mysqli_num_rows($query);
 		if ($count==0){
-			if ($delete1=mysqli_query($con,"DELETE FROM proveedores WHERE id_cliente='".$id_cliente."'")){
+			if ($delete1=mysqli_query($con,"DELETE FROM cliente WHERE id_cliente='".$id_cliente."'")){
 			?>
 			<div class="alert alert-success alert-dismissible" role="alert">
 			  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -49,7 +49,7 @@
 		// escaping, additionally removing everything that could be (html/javascript-) code
          $q = mysqli_real_escape_string($con,(strip_tags($_REQUEST['q'], ENT_QUOTES)));
 		 $aColumns = array('nombre_cliente','ruc_cliente');//Columnas de busqueda
-		 $sTable = "proveedores";
+		 $sTable = "cliente";
 		 $sWhere = "";
 		if ( $_GET['q'] != "" )
 		{
@@ -89,6 +89,7 @@
 					<th>Email</th>
 					<th>Dirección</th>
 					<th>Ruc</th>
+					<th>Saldo Cliente</th>
 					<th>Estado</th>
 					<th>Agregado</th>
 					<th class='text-right'>Acciones</th>
@@ -96,6 +97,8 @@
 				</tr>
 				<?php
 				while ($row=mysqli_fetch_array($query)){
+
+                        $monto=0;
 						$id_cliente=$row['id_cliente'];
 						$nombre_cliente=$row['nombre_cliente'];
 						$telefono_cliente=$row['telefono_cliente'];
@@ -106,6 +109,13 @@
 						if ($status_cliente==1){$estado="Activo";}
 						else {$estado="Inactivo";}
 						$date_added= date('d/m/Y', strtotime($row['date_added']));
+						$sql_factura=mysqli_query($con,"select * from venta where id_cliente='".$id_cliente."' and estado_factura=2");
+						while ($rw=mysqli_fetch_array($sql_factura)){
+							    $monto=0;
+							    $estado_factura=$rw['estado_factura'];
+							    $monto+=$rw['total_venta'];
+					    }
+
 						
 					?>
 					
@@ -123,6 +133,7 @@
 						<td><?php echo $email_cliente;?></td>
 						<td><?php echo $direccion_cliente;?></td>
 						<td><?php echo $ruc_cliente;?></td>
+						<td><?php echo $monto;?></td>
 						<td><?php echo $estado;?></td>
 						<td><?php echo $date_added;?></td>
 						

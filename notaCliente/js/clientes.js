@@ -91,7 +91,7 @@ $( "#editar_cliente" ).submit(function( event ) {
 	
 			$("#mod_nombre").val(nombre_cliente);
 			$("#mod_telefono").val(telefono_cliente);
-			$("#mod_email").val(ruc_cliente);
+			$("#mod_email").val(email_cliente);
 			$("#mod_direccion").val(direccion_cliente);
 			$("#mod_ruc").val(ruc_cliente);
 			$("#mod_estado").val(status_cliente);

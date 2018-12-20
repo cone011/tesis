@@ -16,7 +16,7 @@
 			  <div class="form-group">
 				<label for="mod_codigo" class="col-sm-3 control-label">Código</label>
 				<div class="col-sm-8">
-				  <input type="text" class="form-control" id="mod_codigo" name="mod_codigo" placeholder="Código del producto" readonly>
+				  <input type="text" class="form-control" id="mod_codigo" name="mod_codigo" placeholder="Código del producto" required readonly="">
 					<input type="hidden" name="mod_id" id="mod_id">
 				</div>
 			  </div>
@@ -43,7 +43,6 @@
 				  <input type="text" class="form-control" id="mod_precio" name="mod_precio" placeholder="Precio de venta del producto" required pattern="^[0-9]{1,5}(\.[0-9]{0,2})?$" title="Ingresa sólo números con 0 ó 2 decimales" maxlength="20">
 				</div>
 			  </div>
-
 			 
 			 
 			

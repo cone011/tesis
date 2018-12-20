@@ -15,7 +15,8 @@ if (isset($_POST['precio_venta'])){$precio_venta=$_POST['precio_venta'];}
 	require_once ("../config/conexion.php");//Contiene funcion que conecta a la base de datos
 	//Archivo de funciones PHP
 	include("../funciones.php");
-if (!empty($id) and !empty($cantidad) and !empty($precio_venta))
+
+if (!empty($id) and !empty($cantidad) and !empty($precio_venta) and $cantidad>0)
 {
 $insert_tmp=mysqli_query($con, "INSERT INTO tmp (id_producto,cantidad_tmp,precio_tmp,session_id) VALUES ('$id','$cantidad','$precio_venta','$session_id')");
 
@@ -64,74 +65,8 @@ $simbolo_moneda=get_row('perfil','moneda', 'id_perfil', 1);
 	}
 	$format=number_format($precio_venta,0);
 	$diferencia=$precio_venta-$cantidadtmp;
-	//$precioUnitario=$row['precio_producto'];	
-	//$precio_venta=$row['precio_tmp'];
-	//$id_tmp=$row["id_tmp"];
-	//$codigo_producto=$row['codigo_producto'];
-	//$cantidad=$row['cantidad_tmp'];
-	//$cantidad=number_format($precio_venta/$precioUnitario,2);
-	//$nombre_producto=$row['nombre_producto'];
-	//$tipo=$row['tipo'];
-	//$iva=$row['iva_producto'];
-	//$cantidadtmp=$row['cantidad_tmp'];
+	
 
-	/*$precio_venta_f=number_format($precio_venta,2);//Formateo variables
-	$precio_venta_r=str_replace(",","",$precio_venta_f);//Reemplazo las comas
-	//$precio_total=$precio_venta_r*$cantidad;
-	$precio_total=$precio_venta_r;
-	$precio_total_f=number_format($precio_total,2);//Precio total formateado
-	$precio_total_r=str_replace(",","",$precio_total_f);//Reemplazo las comas
-	$sumador_total+=$precio_total_r;//Sumador*/
-
-	/*if($tipo==1){
-      $cantidad=number_format($precio_venta/$precioUnitario,2); 
-      $precio_venta_f=number_format($precio_venta,2);//Formateo variables
-      $precio_venta_r=str_replace(",","",$precio_venta_f);//Reemplazo las comas
-      //$precio_total=$precio_venta_r*$cantidad;
-      $precio_total=$precio_venta_r;
-      $precio_total_f=number_format($precio_total,2);//Precio total formateado
-      $precio_total_r=str_replace(",","",$precio_total_f);//Reemplazo las comas
-      $sumador_total+=$precio_total_r;//Sumador
-    }else{
-      $cantidad=$row['cantidad_tmp'];
-      $precio_venta_f=number_format($precio_venta,2);//Formateo variables
-      $precio_venta_r=str_replace(",","",$precio_venta_f);//Reemplazo las comas
-      $precio_total=$precio_venta_r*$cantidad;
-      //$precio_total=$precio_venta_r;
-      $precio_total_f=number_format($precio_total,2);//Precio total formateado
-      $precio_total_r=str_replace(",","",$precio_total_f);//Reemplazo las comas
-      $sumador_total+=$precio_total_r;//Sumador
-    }*/
-
-    /*if($iva==1){
-      $ivaux=($precio_total_r / 1.1 )*0.1;
-      $ivaux=number_format($ivaux,2,'.','');
-      $auxiva10=($precio_total_r / 1.1 )*0.1;
-      $auxiva10=number_format($auxiva10,2,'.','');
-      $monto10+=$precio_total_r;
-      $iva10+=$auxiva10;
-      $ivatotal+=$ivaux;
-    }elseif($iva==2){
-      $ivaux=($precio_total_r / 1.05 )*0.1;
-      $ivaux=number_format($ivaux,2,'.','');
-      $auxiva05=($precio_total_r / 1.05 )*0.1;
-      $auxiva05=number_format($auxiva05,2,'.','');
-      $monto5+=$precio_total_r;
-      $iva5+=$auxiva05;
-      $ivatotal+=$ivaux;
-    }*/
-
-    if($cantidadtmp<0){
-       $sumador_total=0;
-       $ivatotal=0;
-       $monto5=0;
-       $iva5=0;
-       $monto10=0;
-       $iva10=0;
-       $precio_total_r=0;
-       $cantidad='NEGATIVO';
-       $codigo_producto='ERROR';
-    }
 	
 		?>
 		<tr>
@@ -149,10 +84,11 @@ $simbolo_moneda=get_row('perfil','moneda', 'id_perfil', 1);
     $print0=0;
 	$impuesto=get_row('perfil','impuesto', 'id_perfil', 1);
 	$subtotal=number_format($sumador_total,2,'.','');
-	$total_iva=($subtotal /1.1 )*0.1;
-	$total_iva=number_format($total_iva,2,'.','');
-	$total_factura=$subtotal;*/
+	/*$total_iva=($subtotal /1.1 )*0.1;
+	$total_iva=number_format($total_iva,2,'.','');*/
+	//$total_factura=$subtotal;*/
 
 ?>
+
 
 </table>

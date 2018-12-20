@@ -67,7 +67,7 @@ class Login
 
                 // database query, getting all the info of the selected user (allows login via email address in the
                 // username field)
-                $sql = "SELECT user_id, user_name, user_email, user_password_hash
+                $sql = "SELECT user_id, user_name, user_email, user_password_hash,estado
                         FROM users
                         WHERE user_name = '" . $user_name . "' OR user_email = '" . $user_name . "';";
                 $result_of_login_check = $this->db_connection->query($sql);
@@ -86,7 +86,38 @@ class Login
                         $_SESSION['user_id'] = $result_row->user_id;
 						$_SESSION['user_name'] = $result_row->user_name;
                         $_SESSION['user_email'] = $result_row->user_email;
+                        $estado=$result_row->estado;
+                        $nivel=$result_row->user_email;              
+
+                        if($estado==1){
+                           $_SESSION['estado'] = $result_row->estado;
+                        }
+
+                        if($nivel==1){
+                           $_SESSION['gerente'] = $result_row->user_email;
+                        }
+                        if($nivel==2){
+                           $_SESSION['admin'] = $result_row->user_email;
+                        }
+
+                        if($nivel==3 || $nivel==4){
+                           $_SESSION['empleado'] = $result_row->user_email;
+                        }
+
+                        /*if($factura<0){
+                           $_SESSION['factura'] = $result_row->user_id;
+                        }*/
+
+                       /* if($compras<0){
+                           $_SESSION['compra'] = $result_row->factura;
+                        }*/
+
+
+
+                        
                         $_SESSION['user_login_status'] = 1;
+                        //$_SESSION['factura'] = $factura;
+
 
                     } else {
                         $this->errors[] = "Usuario y/o contraseña no coinciden.";
@@ -119,10 +150,39 @@ class Login
      */
     public function isUserLoggedIn()
     {
-        if (isset($_SESSION['user_login_status']) AND $_SESSION['user_login_status'] == 1) {
+        if (isset($_SESSION['user_login_status']) AND $_SESSION['user_login_status'] == 1 and isset($_SESSION['estado']) and $_SESSION['estado']==1) {
             return true;
         }
         // default return
         return false;
     }
+
+    public function isGerente()
+    {
+        if (isset($_SESSION['gerente'])== 1) {
+            return true;
+        }
+        // default return
+        return false;
+    }
+
+    public function isAdmin()
+    {
+        if (isset($_SESSION['admin'])== 1) {
+            return true;
+        }
+        // default return
+        return false;
+    }
+
+    public function isEmpleado()
+    {
+        if (isset($_SESSION['empleado'])== 1) {
+            return true;
+        }
+        // default return
+        return false;
+    }
+
+
 }
