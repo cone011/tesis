@@ -8,11 +8,12 @@ CREATE OR REPLACE TABLE proveedores_movs(
 	importe_cobrado int(11) NOT NULL,
 	dc              int(1)  NOT NULL,
 	id_vendedor     int(11) NOT NULL,
-	tipo_mov        int     NOT NULL,
+	tipo_mov        char(4) NOT NULL,
 	PRIMARY KEY (id_mov_prov),
 	UNIQUE KEY numero_cotizacion (numero_factura),
 	FOREIGN KEY (numero_factura) REFERENCES venta(numero_factura),
 	FOREIGN KEY (id_vendedor)    REFERENCES users(user_id),
-	FOREIGN KEY (id_proveedor)   REFERENCES proveedores(id_cliente)
+	FOREIGN KEY (id_proveedor)   REFERENCES proveedores(id_cliente),
+	FOREIGN KEY (tipo_mov)   REFERENCES tipo_mov(tipo_mov)
 	);
 COMMIT;

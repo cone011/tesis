@@ -8,12 +8,13 @@ CREATE OR REPLACE TABLE cliente_movs(
 	importe_cobrado int(11) NOT NULL,
 	dc              int(1)  NOT NULL,
 	id_vendedor     int(11) NOT NULL,
-	tipo_mov        int     NOT NULL,
+	tipo_mov        char(4) NOT NULL,
 	PRIMARY KEY (id_mov_cli),
 	UNIQUE KEY numero_cotizacion (numero_factura),
 	FOREIGN KEY (numero_factura) REFERENCES venta(numero_factura),
 	FOREIGN KEY (id_vendedor)    REFERENCES users(user_id),
-	FOREIGN KEY (id_cliente)     REFERENCES cliente(id_cliente)
+	FOREIGN KEY (id_cliente)     REFERENCES cliente(id_cliente),
+	FOREIGN KEY (tipo_mov)   REFERENCES tipo_mov(tipo_mov)
 	);
 COMMIT;
 
