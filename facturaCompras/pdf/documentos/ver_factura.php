@@ -1,9 +1,5 @@
 <?php
-	/*-------------------------
-	Autor: Obed Alvarado
-	Web: obedalvarado.pw
-	Mail: info@obedalvarado.pw
-	---------------------------*/
+
 	session_start();
 	if (!isset($_SESSION['user_login_status']) AND $_SESSION['user_login_status'] != 1) {
         header("location: ../../login.php");
@@ -30,6 +26,11 @@
 	$id_vendedor=$rw_factura['id_vendedor'];
 	$fecha_factura=$rw_factura['fecha_factura'];
 	$condiciones=$rw_factura['condiciones'];
+	$tipo=$rw_factura['tipo_pago'];
+	$pf1=$rw_factura['pf1'];
+	$pf2=$rw_factura['pf2'];
+	$nrodoc=$rw_factura['nrodoc'];
+	$timbrado=$rw_factura['timbrado'];
 	$simbolo_moneda=get_row('perfil','moneda', 'id_perfil', 1);
 	require_once(dirname(__FILE__).'/../html2pdf.class.php');
     // get the HTML

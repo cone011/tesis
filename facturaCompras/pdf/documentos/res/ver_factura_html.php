@@ -219,7 +219,7 @@ table.page_footer {width: 100%; border: none; background-color: white; padding: 
                     P&aacute;gina [[page_cu]]/[[page_nb]]
                 </td>
                 <td style="width: 50%; text-align: right">
-                    &copy; <?php echo "obedalvarado.pw "; echo  $anio=date('Y'); ?>
+                    &copy; <?php //echo "obedalvarado.pw "; echo  $anio=date('Y'); ?>
                 </td>
             </tr>
         </table>
@@ -227,7 +227,20 @@ table.page_footer {width: 100%; border: none; background-color: white; padding: 
 	<?php include("encabezado_factura.php");?>
     <br>
     
-
+<?php 
+         /*$tipo=0;
+          $pf1=0;
+          $pf2=0;
+          $nrodoc=0;
+          $timbrado=0;
+          $sql_datos=mysqli_query($con,"select * from compra where id_venta='".$id_factura."'");
+            while ($rw_dato=mysqli_fetch_array($sql_datos)){
+                $tipo=$rw_dato['tipo_dato'];
+               
+            }*/
+            echo $id_factura;
+            echo $tipo;
+        ?>
 	
     <table cellspacing="0" style="width: 100%; text-align: left; font-size: 11pt;">
         <tr>
@@ -252,37 +265,96 @@ table.page_footer {width: 100%; border: none; background-color: white; padding: 
         
    
     </table>
+
+     <table cellspacing="0" style="width: 100%; text-align: left; font-size: 11pt;">
+        <tr>
+           <td style="width:20%;" class='midnight-blue'>Pf1</td>
+          <td style="width:20%;" class='midnight-blue'>Pf2</td>
+           <td style="width:20%;" class='midnight-blue'>Nro Documento</td>
+            <td style="width:20%;" class='midnight-blue'>Timbrado</td>
+        </tr>
+        <tr>
+           <td style="width:20%;"><?php echo $pf1;?></td>
+          <td style="width:20%;"><?php echo $pf2;?></td>
+           <td style="width:20%;"><?php echo $nrodoc;?></td>
+           <td style="width:20%;"><?php echo $timbrado;?></td>
+
+        </tr>      
+        
+   
+    </table>
+
+
     
        <br>
 		<table cellspacing="0" style="width: 100%; text-align: left; font-size: 11pt;">
         <tr>
-           <td style="width:35%;" class='midnight-blue'>ENCARGADO</td>
-		  <td style="width:25%;" class='midnight-blue'>FECHA</td>
-		   <td style="width:40%;" class='midnight-blue'>FORMA DE PAGO</td>
+           <td style="width:20%;" class='midnight-blue'>ENCARGADO</td>
+		  <td style="width:20%;" class='midnight-blue'>FECHA</td>
+		   <td style="width:20%;" class='midnight-blue'>FORMA DE PAGO</td>
+            <td style="width:20%;" class='midnight-blue'>TIPO DE PAGO</td>
         </tr>
 		<tr>
-           <td style="width:35%;">
+           <td style="width:20%;">
 			<?php 
 				$sql_user=mysqli_query($con,"select * from users where user_id='$id_vendedor'");
 				$rw_user=mysqli_fetch_array($sql_user);
 				echo $rw_user['firstname']." ".$rw_user['lastname'];
 			?>
 		   </td>
-		  <td style="width:25%;"><?php echo date("d/m/Y", strtotime($fecha_factura));?></td>
-		   <td style="width:40%;" >
+		  <td style="width:20%;"><?php echo date("d/m/Y", strtotime($fecha_factura));?></td>
+		   <td style="width:20%;" >
 				<?php 
 				if ($condiciones==1){echo "Efectivo";}
 				elseif ($condiciones==2){echo "Crédito";}
-				elseif ($condiciones==3){echo "Transferencia bancaria";}
-				elseif ($condiciones==4){echo "Cheque";}
 				?>
 		   </td>
+
+           <td style="width:20%;" >
+                <?php 
+                if ($tipo==1){echo "Efectivo";}
+                elseif ($tipo==2){echo "Crédito";}
+                elseif ($tipo==3){echo "Transferencia bancaria";}
+                elseif ($tipo==4){echo "Cheque";}
+                elseif ($tipo==5){echo "Pago Combinado";}
+                //echo $tipo;
+                ?>
+           </td>
         </tr>
-		
+ 
+    </table>
+
+
+    <?php if($tipo==5){  
+                $sql_combinado=mysqli_query($con,"select * from compra where id_factura='".$id_factura."'");
+                $rw_combinado=mysqli_fetch_array($sql_combinado); 
+                $efectivo=$rw_combinado['efectivo'];
+                $tarjeta=$rw_combinado['tarjeta'];
+                $cheque=$rw_combinado['cheque'];
+                $transferencia=$rw_combinado['transferencia'];
+                ?>
+    <table cellspacing="0" style="width: 100%; text-align: left; font-size: 11pt;">
+        <tr>
+           <td style="width:20%;" class='midnight-blue'>PAGO EFECTIVO</td>
+          <td style="width:20%;" class='midnight-blue'>PAGO TARJETA</td>
+           <td style="width:20%;" class='midnight-blue'>PAGO CHEQUE</td>
+            <td style="width:20%;" class='midnight-blue'>PAGO TRANSFERENCIA</td>
+        </tr>
+        <tr>
+           <td style="width:20%;"><?php echo $efectivo;?></td>
+          <td style="width:20%;"><?php echo $tarjeta;?></td>
+           <td style="width:20%;"><?php echo $cheque;?></td>
+           <td style="width:20%;"><?php echo $transferencia;?></td>
+        </tr>
+        
         
    
     </table>
+<?php } ?>
+
 	<br>
+
+
   
     <table cellspacing="0" style="width: 100%; text-align: left; font-size: 10pt;">
         <tr>
@@ -306,6 +378,10 @@ $auxiva10=0;
 $monto10=0;
 $monto5=0;
 $monto0=0;
+$efectivo=0;
+$tarjeta=0;
+$cheque=0;
+$transferencia=0;
 $sql=mysqli_query($con, "select * from productos, detalle_compra, compra where productos.id_producto=detalle_compra.id_producto and detalle_compra.numero_factura=compra.numero_factura and compra.id_factura='".$id_factura."'");
 
 while ($row=mysqli_fetch_array($sql))
@@ -316,7 +392,12 @@ while ($row=mysqli_fetch_array($sql))
 	$nombre_producto=$row['nombre_producto'];
     $tipo=$row['tipo'];
     $iva=$row['iva_producto'];
-	
+	$efectivo=$row['efectivo'];
+    $tarjeta=$row['tarjeta'];
+    $cheque=$row['cheque'];
+    //echo $efectivo;
+    $transferencia=$row['transferencia']; 
+
 	$precio_venta=$row['precio_venta'];
 	$precio_venta_f=number_format($precio_venta,2);//Formateo variables
 	$precio_venta_r=str_replace(",","",$precio_venta_f);//Reemplazo las comas
@@ -377,7 +458,14 @@ while ($row=mysqli_fetch_array($sql))
 	$total_factura=$subtotal;
 	$titulo_monto = numtoletras($total_factura);
 ?>
-	  
+	   
+
+
+
+
+
+
+
         <tr>
             <td colspan="3" style="widtd: 85%; text-align: right;">SUBTOTAL <?php echo $simbolo_moneda;?> </td>
             <td style="widtd: 15%; text-align: right;"> <?php echo number_format($subtotal,2);?></td>

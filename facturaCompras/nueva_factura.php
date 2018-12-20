@@ -142,7 +142,7 @@ while ($r=$query->fetch_array()){
 								<input type="text" class="form-control input-sm" id="tel1" placeholder="Teléfono" readonly>
 							</div>
 					<label for="mail" class="col-md-1 control-label">Ruc: </label>
-							<div class="col-md-3">
+							<div class="col-md-2">
 								<input type="text" class="form-control input-sm" id="mail" placeholder="Ruc" readonly>
 							</div>
 
@@ -160,6 +160,29 @@ while ($r=$query->fetch_array()){
 							</div>		
 
 				 </div>
+
+				 <div class="form-group row">
+							<label for="pf1" class="col-md-1 control-label"> Pf1</label>
+							<div class="col-md-1">
+								<input type="number" class="form-control input-sm" id="pf1" required>
+							</div>
+
+							<label for="pf2" class="col-md-1 control-label"> Pf2</label>
+							<div class="col-md-1">
+								<input type="number" class="form-control input-sm" id="pf2" required>
+							</div>
+
+							<label for="nrodoc" class="col-md-1 control-label"> Nro Fact.</label>
+							<div class="col-md-2">
+								<input type="number" class="form-control input-sm" id="nrodoc" required>
+							</div>
+
+							<label for="timbrado" class="col-md-1 control-label"> Timbrado</label>
+							<div class="col-md-2">
+								<input type="number" class="form-control input-sm" id="timbrado" required>
+							</div>
+				</div>
+
 						<div class="form-group row">
 							<label for="empresa" class="col-md-1 control-label">Encargado: </label>
 							<div class="col-md-2">
@@ -199,7 +222,41 @@ while ($r=$query->fetch_array()){
 									<option value="2">Tarjeta</option>
 									<option value="3">Cheque</option>
 									<option value="4">Transferencia bancaria</option>
+									<option value="5">Pago Combinado</option>
 								</select>
+							</div>
+						</div>
+
+						<div class="form-group row">
+
+							
+							<label for="efectivo" class="col-md-1 control-label">Pago Efectivo</label>
+							<div class="col-md-2">
+								<input type="number" class="form-control input-sm" id="efectivo">
+							</div>
+
+							<label for="tarjeta" class="col-md-1 control-label">Pago Tarjeta</label>
+							<div class="col-md-2">
+								<input type="number" class="form-control input-sm" id="tarjeta">
+							</div>
+
+							<label for="cheque" class="col-md-1 control-label">Pago Cheque</label>
+							<div class="col-md-2">
+								<input type="number" class="form-control input-sm" id="cheque">
+							</div>
+
+							<label for="transferencia" class="col-md-1 control-label">Pago Transferencia</label>
+							<div class="col-md-2">
+								<input type="number" class="form-control input-sm" id="transferencia">
+							</div>
+							
+							
+						</div>
+
+						<div class="form-group row">
+							<label for="cuota" class="col-md-1 control-label"> Cuotas</label>
+							<div class="col-md-1">
+								<input type="number" class="form-control input-sm" id="cuota">
 							</div>
 						</div>
 				

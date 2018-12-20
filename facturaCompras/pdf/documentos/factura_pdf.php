@@ -1,10 +1,7 @@
 <?php
-	/*-------------------------
-	Autor: Obed Alvarado
-	Web: obedalvarado.pw
-	Mail: info@obedalvarado.pw
-	---------------------------*/
+	
 	session_start();
+	$validar=0;
 	if (!isset($_SESSION['user_login_status']) AND $_SESSION['user_login_status'] != 1) {
         header("location: ../../login.php");
 		exit;
@@ -19,7 +16,7 @@
 	$session_id= session_id();
 	$sql_count=mysqli_query($con,"select * from tmp where session_id='".$session_id."'");
 	$count=mysqli_num_rows($sql_count);
-	if ($count==0)
+	if ($count==0 or $validar==1)
 	{
 	echo "<script>alert('No hay productos agregados a la factura')</script>";
 	echo "<script>window.close();</script>";
@@ -33,9 +30,52 @@
 	$id_vendedor=intval($_GET['id_vendedor']);
 	$condiciones=mysqli_real_escape_string($con,(strip_tags($_REQUEST['condiciones'], ENT_QUOTES)));
 	$pago=mysqli_real_escape_string($con,(strip_tags($_REQUEST['pago'], ENT_QUOTES)));
+	//$parcial=intval($_GET['parcial']);
+	$efectivo=intval($_GET['efectivo']);
+	$tarjeta=intval($_GET['tarjeta']);
+	$cheque=intval($_GET['cheque']);
+	$transferencia=intval($_GET['transferencia']);
+	$cuota=intval($_GET['cuota']);
+	$pf1=intval($_GET['pf1']);
+	$pf2=intval($_GET['pf2']);
+	$nrodoc=intval($_GET['nrodoc']);
+	$timbrado=intval($_GET['timbrado']);
 	//$pago=mysqli_real_escape_string($con,(strip_tags($_REQUEST['pago'], ENT_QUOTES)));
+	$total=0;
+	$monto=0;
+    
+	if($condiciones==2){
+		if($cuota<=0){
+            echo "<script>alert('Las cuota no pueden tener valor negativo o nulo')</script>";
+	       echo "<script>window.close();</script>";
+	       exit;
+		}
+	}
 
-	//Fin de variables por GET
+	 if($pf1<0 || $pf2<0 || $nrodoc<0 || $timbrado<0){
+           echo "<script>alert('Las cargas de Factura son incorrectas')</script>";
+	       echo "<script>window.close();</script>";
+	       exit;
+       }
+    if($pago==5){
+       $sql_venta=mysqli_query($con, "select * from tmp where tmp.session_id='".$session_id."'");
+       while($row_venta=mysqli_fetch_array($sql_venta)){
+       	    $monto+=$row_venta['cantidad_tmp']*$row_venta['precio_tmp'];
+       	    //$monto=number_format($monto,0);
+       }
+       $total=$efectivo+$tarjeta+$cheque+$transferencia;
+       //$total=number_format($total,2);
+       
+
+       if($cheque<0 || $efectivo<0 || $transferencia<0 || $tarjeta<0){
+           echo "<script>alert('Los montos de los pagos combinados no son correctos')</script>";
+	       echo "<script>window.close();</script>";
+	       exit;
+       }
+       
+    }
+    
+
 	$sql=mysqli_query($con, "select LAST_INSERT_ID(numero_factura) as last from compra order by id_factura desc limit 0,1 ");
 	$rw=mysqli_fetch_array($sql);
 	$numero_factura=$rw['last']+1;	

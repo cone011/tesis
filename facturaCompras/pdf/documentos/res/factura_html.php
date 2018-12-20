@@ -284,6 +284,8 @@ table.page_footer {width: 100%; border: none; background-color: white; padding: 
                 elseif ($pago==2){echo "Tarjeta";}
                 elseif ($pago==3){echo "Cheque";}
                 elseif ($pago==4){echo "Transferencia bancaria";}
+                elseif ($pago==5){echo "Pago Combinado";}
+
                 ?>      
            </td>
         </tr>
@@ -291,6 +293,50 @@ table.page_footer {width: 100%; border: none; background-color: white; padding: 
         
    
     </table>
+
+    <table cellspacing="0" style="width: 100%; text-align: left; font-size: 11pt;">
+        <tr>
+           <td style="width:20%;" class='midnight-blue'>Pf1</td>
+          <td style="width:20%;" class='midnight-blue'>Pf2</td>
+           <td style="width:20%;" class='midnight-blue'>Nro Documento</td>
+            <td style="width:20%;" class='midnight-blue'>Timbrado</td>
+        </tr>
+        <tr>
+           <td style="width:20%;"><?php echo $pf1;?></td>
+          <td style="width:20%;"><?php echo $pf2;?></td>
+           <td style="width:20%;"><?php echo $nrodoc;?></td>
+           <td style="width:20%;"><?php echo $timbrado;?></td>
+
+        </tr>
+        
+        
+   
+    </table>
+
+
+
+    <?php if($pago==5){ ?>
+    <table cellspacing="0" style="width: 100%; text-align: left; font-size: 11pt;">
+        <tr>
+           <td style="width:20%;" class='midnight-blue'>PAGO EFECTIVO</td>
+          <td style="width:20%;" class='midnight-blue'>PAGO TARJETA</td>
+           <td style="width:20%;" class='midnight-blue'>PAGO CHEQUE</td>
+            <td style="width:20%;" class='midnight-blue'>PAGO TRANSFERENCIA</td>
+        </tr>
+        <tr>
+           <td style="width:20%;"><?php echo $efectivo;?></td>
+          <td style="width:20%;"><?php echo $tarjeta;?></td>
+           <td style="width:20%;"><?php echo $cheque;?></td>
+           <td style="width:20%;"><?php echo $transferencia;?></td>
+           <?php// $parcial=$efectivo+$tarjeta+$cheque+$transferencia?>
+
+        </tr>
+        
+        
+   
+    </table>
+<?php } ?>
+
     <br>
   
     <table cellspacing="0" style="width: 100%; text-align: left; font-size: 10pt;">
@@ -497,20 +543,34 @@ $pcname=gethostname();
 $accion='AGREGADO';
 $fecha=date("Y-m-d");
 $saldo=0;
-if($verificador_factura==1){
-   $messages[] = "Uno de los Productos Tiene existencia CERO VERIFCAR CON LA ADMINISTRACION.";
+
+
+/*if($tipo==5){
+    if($total_factura!=$parcial){
+        $verificador_factura=1;
+    }
 }else{
-  if ($condiciones==2){
-    $saldo=$total_factura;
-    $fecha_vencimiento=date("Y-m-d",strtotime($date."+ 1 month")); 
-    //echo "$fecha_vencimiento";
-     $insert=mysqli_query($con,"INSERT INTO compra VALUES (NULL,'$numero_factura','$date','$id_cliente','$id_vendedor','$condiciones','$total_factura','$condiciones','$accion','$fecha','$saldo','$pago','$total_factura')");
-     $insert_audi=mysqli_query($con,"INSERT INTO audicompra VALUES (NULL,'$numero_factura','$date','$id_cliente','$id_vendedor','$condiciones','$total_factura','$condiciones','$fechaudi','$quien','$pcname','$accion')");
-     $insert=mysqli_query($con,"INSERT INTO cuentaproveedor VALUES (NULL,'$numero_factura','$date','$id_cliente','$id_vendedor','$condiciones','$total_factura','$condiciones','$fecha_vencimiento','$total_factura')");
-  }else{
-    $insert=mysqli_query($con,"INSERT INTO compra VALUES (NULL,'$numero_factura','$date','$id_cliente','$id_vendedor','$condiciones','$total_factura','$condiciones','$accion','$fecha','$saldo','$pago','$total_factura')");
-   $insert_audi=mysqli_query($con,"INSERT INTO audicompra VALUES (NULL,'$numero_factura','$date','$id_cliente','$id_vendedor','$condiciones','$total_factura','$condiciones','$fechaudi','$quien','$pcname','$accion')");
-  }
+    $tarjeta=0;
+    $efectivo=0;
+    $cheque=0;
+    $transferencia=0;
+}*/
+//prueba_compra
+ //$saldo_cliente=1200;
+// $insert=mysqli_query($con,"INSERT INTO prueba_compra VALUES (NULL,'$numero_factura','$date','$id_cliente','$id_vendedor','$condiciones','$sumador_total','$condiciones','$accion','$fecha','$saldo_cliente','$pago','$sumador_total','$efectivo','$tarjeta','$cheque','$transferencia','$cuota','$pf1','$pf2','$nrodoc','$timbrado')");
+if($condiciones==1){
+    $saldo_cliente=0;
+     $insert=mysqli_query($con,"INSERT INTO compra VALUES (NULL,'$numero_factura','$date','$id_cliente','$id_vendedor','$condiciones','$sumador_total','$condiciones','$accion','$fecha','$saldo_cliente','$pago','$sumador_total','$efectivo','$tarjeta','$cheque','$transferencia','$cuota','$pf1','$pf2','$nrodoc','$timbrado')");
+   $insert_audi=mysqli_query($con,"INSERT INTO audicompra VALUES (NULL,'$numero_factura','$date','$id_cliente','$id_vendedor','$condiciones','$sumador_total','$condiciones','$fechaudi','$quien','$pcname')");
+}elseif($condiciones==2){
+    $fecha=date("Y-m-d");
+    $fecha_vencimiento=date("Y-m-d",strtotime($date."+ 1 month"));
+    $saldo_cliente=0;
+    $saldo_cliente=$sumador_total;
+     $insert=mysqli_query($con,"INSERT INTO compra VALUES (NULL,'$numero_factura','$date','$id_cliente','$id_vendedor','$condiciones','$sumador_total','$condiciones','$accion','$fecha','$sumador_total','$pago','$sumador_total','$efectivo','$tarjeta','$cheque','$transferencia','$cuota','$pf1','$pf2','$nrodoc','$timbrado')");
+    $insert_audi=mysqli_query($con,"INSERT INTO audicompra VALUES (NULL,'$numero_factura','$date','$id_cliente','$id_vendedor','$condiciones','$sumador_total','$condiciones','$fechaudi','$quien','$pcname','$accion')");
+     $insert=mysqli_query($con,"INSERT INTO cuentaproveedor VALUES (NULL,'$numero_factura','$date','$id_cliente','$id_vendedor','$condiciones','$sumador_total','$condiciones','$fecha_vencimiento','$sumador_total')");
+
 }  
 $delete=mysqli_query($con,"DELETE FROM tmp WHERE session_id='".$session_id."'");
 ?>

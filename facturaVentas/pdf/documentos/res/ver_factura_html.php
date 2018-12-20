@@ -287,13 +287,45 @@ table.page_footer {width: 100%; border: none; background-color: white; padding: 
                 elseif ($pago==2){echo "Tarjeta";}
                 elseif ($pago==3){echo "Cheque";}
                 elseif ($pago==4){echo "Transferencia bancaria";}
+                elseif ($pago==5){echo "Pago Combinado";}
                 ?>      
            </td>
         </tr>
 		
+    </table>
+
+ <?php if($pago==5){ 
+
+     $sql_combinado=mysqli_query($con,"select * from venta where id_factura='".$id_factura."'");
+                $rw_combinado=mysqli_fetch_array($sql_combinado); 
+                $efectivo=$rw_combinado['efectivo'];
+                $tarjeta=$rw_combinado['tarjeta'];
+                $cheque=$rw_combinado['cheque'];
+                $transferencia=$rw_combinado['transferencia']
+                ?>
+    <table cellspacing="0" style="width: 100%; text-align: left; font-size: 11pt;">
+        <tr>
+           <td style="width:20%;" class='midnight-blue'>PAGO EFECTIVO</td>
+          <td style="width:20%;" class='midnight-blue'>PAGO TARJETA</td>
+           <td style="width:20%;" class='midnight-blue'>PAGO CHEQUE</td>
+            <td style="width:20%;" class='midnight-blue'>PAGO TRANSFERENCIA</td>
+        </tr>
+        <tr>
+           <td style="width:20%;"><?php echo $efectivo;?></td>
+          <td style="width:20%;"><?php echo $tarjeta;?></td>
+           <td style="width:20%;"><?php echo $cheque;?></td>
+           <td style="width:20%;"><?php echo $transferencia;?></td>
+
+        </tr>
+        
         
    
     </table>
+<?php } ?>
+
+
+
+
 	<br>
   
     <table cellspacing="0" style="width: 100%; text-align: left; font-size: 10pt;">

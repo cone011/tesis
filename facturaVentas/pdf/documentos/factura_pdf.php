@@ -22,7 +22,7 @@
 
 	$sql_count=mysqli_query($con,"select * from tmp where session_id='".$session_id."'");
 	$count=mysqli_num_rows($sql_count);
-	if ($count==0 and $validar==1)
+	if ($count==0 or $validar==1)
 	{
 	echo "<script>alert('No hay productos agregados a la factura')</script>";
 	echo "<script>window.close();</script>";
