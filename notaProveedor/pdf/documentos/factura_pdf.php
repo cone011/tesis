@@ -1,9 +1,5 @@
 <?php
-	/*-------------------------
-	Autor: Obed Alvarado
-	Web: obedalvarado.pw
-	Mail: info@obedalvarado.pw
-	---------------------------*/
+
 	session_start();
 	if (!isset($_SESSION['user_login_status']) AND $_SESSION['user_login_status'] != 1) {
         header("location: ../../login.php");
@@ -33,7 +29,10 @@
 	$id_vendedor=intval($_GET['id_vendedor']);
 	$condiciones=mysqli_real_escape_string($con,(strip_tags($_REQUEST['condiciones'], ENT_QUOTES)));
 	$pago=mysqli_real_escape_string($con,(strip_tags($_REQUEST['pago'], ENT_QUOTES)));
-
+    $efectivo=intval($_GET['efectivo']);
+    $tarjeta=intval($_GET['tarjeta']);
+    $cheque=intval($_GET['cheque']);
+    $transferencia=intval($_GET['transferencia']);
 	//Fin de variables por GET
 	$sql=mysqli_query($con, "select LAST_INSERT_ID(numero_factura) as last from nproveedor order by id_factura desc limit 0,1 ");
 	$rw=mysqli_fetch_array($sql);

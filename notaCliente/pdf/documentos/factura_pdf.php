@@ -33,9 +33,7 @@
 	$id_vendedor=intval($_GET['id_vendedor']);
 	$condiciones=mysqli_real_escape_string($con,(strip_tags($_REQUEST['condiciones'], ENT_QUOTES)));
 	$pago=mysqli_real_escape_string($con,(strip_tags($_REQUEST['pago'], ENT_QUOTES)));
-	//$pago=mysqli_real_escape_string($con,(strip_tags($_REQUEST['pago'], ENT_QUOTES)));
-
-	//Fin de variables por GET
+	$efectivo=intval($_GET['efectivo']);
 	$sql=mysqli_query($con, "select LAST_INSERT_ID(numero_factura) as last from ncliente order by id_factura desc limit 0,1 ");
 	$rw=mysqli_fetch_array($sql);
 	$numero_factura=$rw['last']+1;	

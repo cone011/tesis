@@ -279,17 +279,50 @@ table.page_footer {width: 100%; border: none; background-color: white; padding: 
            </td>
            <td style="width:20%;">
                 <?php 
-                if ($pago==1){echo "Efectivo";}
-                elseif ($pago==2){echo "Tarjeta";}
-                elseif ($pago==3){echo "Cheque";}
-                elseif ($pago==4){echo "Transferencia bancaria";}
+                if ($pago==1){
+                    echo "Efectivo";
+                    $tarjeta=0;
+                    $cheque=0;
+                    $transferencia=0;}
+                elseif ($pago==2){echo "Tarjeta";
+                        $efectivo=0;
+                        $cheque=0;
+                        $transferencia=0;}
+                elseif ($pago==3){echo "Cheque";
+                        $efectivo=0;
+                        $tarjeta=0;
+                        $transferencia=0;}
+                elseif ($pago==4){echo "Transferencia bancaria";
+                       $efectivo=0;
+                       $tarjeta=0;
+                       $transferencia=0;}
+                elseif ($pago==5){echo "Pago Combinado";}
                 ?>      
            </td>
+        </tr>
+   
+    </table>
+
+    <table cellspacing="0" style="width: 100%; text-align: left; font-size: 11pt;">
+        <tr>
+           <td style="width:20%;" class='midnight-blue'>PAGO EFECTIVO</td>
+          <td style="width:20%;" class='midnight-blue'>PAGO TARJETA</td>
+           <td style="width:20%;" class='midnight-blue'>PAGO CHEQUE</td>
+            <td style="width:20%;" class='midnight-blue'>PAGO TRANSFERENCIA</td>
+        </tr>
+        <tr>
+           <td style="width:20%;"><?php echo $efectivo;?></td>
+          <td style="width:20%;"><?php echo $tarjeta;?></td>
+           <td style="width:20%;"><?php echo $cheque;?></td>
+           <td style="width:20%;"><?php echo $transferencia;?></td>
+           <?php $parcial=$efectivo+$tarjeta+$cheque+$transferencia?>
+
         </tr>
         
         
    
     </table>
+
     <br>
   
     <table cellspacing="0" style="width: 100%; text-align: left; font-size: 10pt;">
@@ -470,7 +503,7 @@ while ($row=mysqli_fetch_array($sql))
 
             $insert_audidetail=mysqli_query($con, "INSERT INTO audidetalle_np VALUES ('','$numero_nc','$numero_factura','$cantidadtmp','$diferencia','$accion')");  
 
-            $insert_nc=mysqli_query($con,"INSERT INTO nproveedor VALUES (NULL,'$numero_nc','$date','$id_cliente','$id_vendedor','$condiciones','$diferencia','$condiciones','$accion','$fecha','$diferencia','$pago','$numero_factura')");
+            $insert_nc=mysqli_query($con,"INSERT INTO nproveedor VALUES (NULL,'$numero_nc','$date','$id_cliente','$id_vendedor','$condiciones','$diferencia','$condiciones','$accion','$fecha','$diferencia','$pago','$numero_factura','$efectivo','$tarjeta','$cheque','$transferencia')");
            
 
             $insert_audi=mysqli_query($con,"INSERT INTO audincproveedor VALUES (NULL,'$numero_nc','$date','$id_cliente','$id_vendedor','$condiciones','$diferencia','$condiciones','$fechaudi','$quien','$pcname','$accion')");

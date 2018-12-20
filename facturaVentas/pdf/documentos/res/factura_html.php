@@ -284,6 +284,7 @@ table.page_footer {width: 100%; border: none; background-color: white; padding: 
                 elseif ($pago==3){echo "Cheque";}
                 elseif ($pago==4){echo "Transferencia bancaria";}
                 elseif ($pago==5){echo "Pago Combinado";
+                   // echo $efectivo;
                 }
                 ?>      
            </td>
@@ -604,7 +605,7 @@ while ($row=mysqli_fetch_array($sql))
         </tr>
 
         <tr>
-            <td colspan="3" style="widtd: 85%; text-align: right;">TOTAL <?php echo $simbolo_moneda;?> </td>
+            <td colspan="3" style="widtd: 85%; text-align: right;">TOTAL <?php echo $simbolo_moneda; echo $efectivo?> </td>
             <td style="widtd: 15%; text-align: right;"> <?php echo number_format($sumador_total,0);?></td>
         </tr>
     </table>
@@ -630,15 +631,7 @@ $fechaudi=date("Y-m-d H:i:s");
 $pcname=gethostname();
 $acc='AGREGADO';
 
-if($tipo!=5){
-    /*if($total_factura!=$parcial){
-        $verificador_factura=1;
-    }*/
-    $tarjeta=0;
-    $efectivo=0;
-    $cheque=0;
-    $transferencia=0;
-}
+
 //echo $sumador_total;
 
 

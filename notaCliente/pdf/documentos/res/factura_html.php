@@ -279,10 +279,12 @@ table.page_footer {width: 100%; border: none; background-color: white; padding: 
            </td>
            <td style="width:20%;">
                 <?php 
+                echo $efectivo;
                 if ($pago==1){echo "Efectivo";}
                 elseif ($pago==2){echo "Tarjeta";}
                 elseif ($pago==3){echo "Cheque";}
-                elseif ($pago==4){echo "Transferencia bancaria";}
+                elseif ($pago==4){echo "Transferencia bancaria";
+                echo $efectivo;}
                 ?>      
            </td>
         </tr>

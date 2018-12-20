@@ -145,7 +145,7 @@ if ($factura==0) {
 								<input type="text" class="form-control input-sm" id="tel1" placeholder="Teléfono" readonly>
 							</div>
 					<label for="mail" class="col-md-1 control-label">Ruc: </label>
-							<div class="col-md-3">
+							<div class="col-md-2">
 								<input type="text" class="form-control input-sm" id="mail" placeholder="Ruc" readonly>
 							</div>
 
@@ -191,7 +191,7 @@ if ($factura==0) {
 							<label for="email" class="col-md-1 control-label">Pago: </label>
 							<div class="col-md-2">
 								<select class='form-control input-sm' id="condiciones">
-									<option value="1">Contado</option>
+									<option value="1">Recibido</option>
 									<option value="2">Emitido</option>
 								</select>
 							</div>
@@ -204,7 +204,33 @@ if ($factura==0) {
 								</select>
 							</div>
 						</div>
-				
+
+						<div class="form-group row">
+
+							
+							<label for="efectivo" class="col-md-1 control-label">Pago Efectivo</label>
+							<div class="col-md-2">
+								<input type="number" class="form-control input-sm" id="efectivo">
+							</div>
+
+							<label for="tarjeta" class="col-md-1 control-label">Pago Tarjeta</label>
+							<div class="col-md-2">
+								<input type="number" class="form-control input-sm" id="tarjeta">
+							</div>
+
+							<label for="cheque" class="col-md-1 control-label">Pago Cheque</label>
+							<div class="col-md-2">
+								<input type="number" class="form-control input-sm" id="cheque">
+							</div>
+
+							<label for="transferencia" class="col-md-1 control-label">Pago Transferencia</label>
+							<div class="col-md-2">
+								<input type="number" class="form-control input-sm" id="transferencia">
+							</div>
+							
+							
+						</div>
+
 				
 				<div class="col-md-12">
 					<div class="pull-right">

@@ -165,7 +165,7 @@ while ($r=$query->fetch_array()){
 				 </div>
 						<div class="form-group row">
 							<label for="empresa" class="col-md-1 control-label">Encargado: </label>
-							<div class="col-md-3">
+							<div class="col-md-2">
 								<select class="form-control input-sm" id="id_vendedor">
 									<?php
 										$sql_vendedor=mysqli_query($con,"select * from users order by lastname");
@@ -201,10 +201,35 @@ while ($r=$query->fetch_array()){
 									<option value="2">Tarjeta</option>
 									<option value="3">Cheque</option>
 									<option value="4">Transferencia bancaria</option>
+									<option value="5">Pago Combinado</option>
 								</select>
 							</div>
 						</div>
-				
+
+						<div class="form-group row">
+							<label for="efectivo" class="col-md-1 control-label">Efectivo: </label>
+							<div class="col-md-2">
+								<input type="text" class="form-control input-sm" id="efectivo">
+							</div>
+
+							<label for="tarjeta" class="col-md-1 control-label">Tarjeta: </label>
+							<div class="col-md-2">
+								<input type="text" class="form-control input-sm" id="tarjeta">
+							</div>
+
+							<label for="transferecia" class="col-md-1 control-label">Transferencia: </label>
+							<div class="col-md-2">
+								<input type="text" class="form-control input-sm" id="transferecia">
+							</div>
+
+							<label for="cheque" class="col-md-1 control-label">Cheque: </label>
+							<div class="col-md-2">
+								<input type="text" class="form-control input-sm" id="cheque">
+							</div>
+
+
+						</div>
+
 				
 				<div class="col-md-12">
 					<div class="pull-right">

@@ -271,6 +271,7 @@ table.page_footer {width: 100%; border: none; background-color: white; padding: 
 		  <td style="width:25%;"><?php echo date("d/m/Y", strtotime($fecha_factura));?></td>
 		   <td style="width:40%;" >
 				<?php 
+                echo $id_factura;
 				if ($condiciones==1){echo "Efectivo";}
 				elseif ($condiciones==2){echo "Cheque";}
 				elseif ($condiciones==3){echo "Transferencia bancaria";}
@@ -306,11 +307,18 @@ $auxiva10=0;
 $monto10=0;
 $monto5=0;
 $monto0=0;
-$sql=mysqli_query($con, "select * from cliente detalle_np, nproveedor where cliente.id_cliente=nproveedor.id_cliente and detalle_np.numero_factura=nproveedor.numero_nc and nproveedor.id_factura='".$id_factura."'");
+$sql=mysqli_query($con, "select * from nproveedor where nproveedor.id_factura='".$id_factura."'");
 
 while ($row=mysqli_fetch_array($sql))
 	{
-
+    $numero_factura=$row['numero_factura'];   
+    $sql_detalle=mysqli_query($con, "select * from detalle_np where numero_factura='".$id_factura."'");
+    while ($rw_detalle=mysqli_fetch_array($sql_detalle))
+    {
+        $oc=$rw_detalle['id_producto'];
+        $monto_nc=$rw_detalle['cantidad'];
+        $saldo_restante=$rw_detalle['precio_venta'];
+    }
     $precioUnitario=$row['total_venta'];    
     $id_producto=$row["id_producto"];
     $codigo_cliente=$row['id_cliente'];
@@ -320,9 +328,6 @@ while ($row=mysqli_fetch_array($sql))
         $nombre=$rw['nombre_cliente'];
     }
     
-    $monto_nc=$row['cantidad'];
-    $saldo_restante=$row['precio_venta'];
-;
 	
 	/*$precio_venta=$row['precio_venta'];
 	$precio_venta_f=number_format($precio_venta,2);//Formateo variables

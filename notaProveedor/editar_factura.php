@@ -123,6 +123,7 @@ while ($r=$query->fetch_array()){
 		{
 				$rw_factura=mysqli_fetch_array($sql_factura);
 				$id_cliente=$rw_factura['id_cliente'];
+				$numero_factura=$rw_factura['numero_factura'];
 				$nombre_cliente=$rw_factura['nombre_cliente'];
 				$telefono_cliente=$rw_factura['telefono_cliente'];
 				$email_cliente=$rw_factura['ruc_cliente'];
@@ -131,6 +132,10 @@ while ($r=$query->fetch_array()){
 				$condiciones=$rw_factura['condiciones'];
 				$estado_factura=$rw_factura['estado_factura'];
 				$numero_factura=$rw_factura['numero_factura'];
+				//$pago=$rw_factura['tipo_pago'];
+				
+
+				
 				$_SESSION['id_factura']=$id_factura;
 				$_SESSION['numero_factura']=$numero_factura;
 
@@ -159,7 +164,7 @@ while ($r=$query->fetch_array()){
     <div class="container">
 	<div class="panel panel-info">
 		<div class="panel-heading">
-			<h4><i class='glyphicon glyphicon-edit'></i> Editar Orden</h4>
+			<h4><i class='glyphicon glyphicon-edit'></i> Mostrar NC Proveedores</h4>
 		</div>
 		<div class="panel-body">
 		<?php 
@@ -179,9 +184,15 @@ while ($r=$query->fetch_array()){
 								<input type="text" class="form-control input-sm" id="tel1" placeholder="Teléfono" value="<?php echo $telefono_cliente;?>" readonly>
 							</div>
 					<label for="mail" class="col-md-1 control-label">Ruc</label>
-							<div class="col-md-3">
+							<div class="col-md-2">
 								<input type="text" class="form-control input-sm" id="mail" placeholder="Email" readonly value="<?php echo $email_cliente;?>">
 							</div>
+
+				    <label for="nc" class="col-md-1 control-label">Numero N.C.</label>
+							<div class="col-md-2">
+								<input type="text" class="form-control input-sm" id="nc" placeholder="nc" readonly value="<?php echo $numero_factura;?>">
+							</div>
+					
 					
 
 									
@@ -234,6 +245,10 @@ while ($r=$query->fetch_array()){
 								<?php } ?>
 							</div>
 						</div>
+
+
+						 </div>
+				
 				
 				
 				<div class="col-md-12">

@@ -35,6 +35,10 @@
         echo $tarjeta;
         echo $cheque;
         echo $transferencia;
+       // prueba_saldo_proveedor
+        //$saldo=15000;
+        //$date=date("Y-m-d H:i:s");
+       
      	$sql_user=mysqli_query($con,"select * from compra where id_factura='$id_factura'");
 	    //$rw_user=mysqli_fetch_array($sql_user);
 	     while ($rw_user=mysqli_fetch_array($sql_user))
@@ -57,7 +61,9 @@
              }else{
              	$date=date("Y-m-d H:i:s");
             //SALDO DE CLIETNES
-             $insert=mysqli_query($con,"INSERT INTO saldo_proveedor VALUES (NULL,'$id_factura','$estado_factura','$total','$id_cliente','$date')");
+             //$insert=mysqli_query($con,"INSERT INTO saldo_proveedorbk VALUES (NULL,'$id_factura','$estado_factura','$total','$id_cliente','$date')");
+              $insert=mysqli_query($con,"INSERT INTO saldo_proveedor VALUES(NULL,'$id_factura','$estado_factura','$id_cliente','$date','$cobrar','$efectivo','$tarjeta','$cheque','$transferencia')");
+
 		    $estado_factura=intval($_POST['estado_factura']);
 
 		    //CUENTA CLIENTE
