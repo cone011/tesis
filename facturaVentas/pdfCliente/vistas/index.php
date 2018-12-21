@@ -21,6 +21,7 @@
   <div class="table-responsive">      
     <table border="0" align="center">
     	<tr>
+            <td width="335"><input type="text" placeholder="Busca un producto por: Nombre o Tipo" id="bs-prod"/></td>
             <td><input type="date" id="bd-desde"/></td>
             <td>Hasta&nbsp;&nbsp;&nbsp;&nbsp;</td>
             <td><input type="date" id="bd-hasta"/></td>

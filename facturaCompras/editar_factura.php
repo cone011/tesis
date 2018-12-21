@@ -248,7 +248,7 @@ while ($r=$query->fetch_array()){
 								</select>
 								<?php } ?>
 								<?php if($estado_factura==2){ ?>
-							       <input type="text" class="form-control input-sm" id="estado_factura"  name="estado_factura" value="<?php echo $saldo ?>" placeholder="Cantidad Gs.">								
+							       <input type="text" class="form-control input-sm" id="estado_factura"  name="estado_factura" value="<?php echo $saldo ?>" placeholder="Cantidad Gs." >								
 								<?php } ?>
 							</div>
 						</div>
@@ -296,22 +296,22 @@ while ($r=$query->fetch_array()){
 						<div class="form-group row" id="pagocombinado">
 							<label for="efectivo" class="col-md-1 control-label">Pago Efectivo</label>
 							<div class="col-md-2">
-								<input type="number" class="form-control input-sm" id="efectivo" name="efectivo">
+								<input type="text" class="form-control input-sm" id="efectivo" name="efectivo" >
 							</div>
 
 							<label for="tarjeta" class="col-md-1 control-label">Pago Tarjeta</label>
 							<div class="col-md-2">
-								<input type="number" class="form-control input-sm" id="tarjeta" name="tarjeta">
+								<input type="text" class="form-control input-sm" id="tarjeta" name="tarjeta" >
 							</div>
 
 							<label for="cheque" class="col-md-1 control-label">Pago Cheque</label>
 							<div class="col-md-2">
-								<input type="number" class="form-control input-sm" id="cheque" name="cheque">
+								<input type="text" class="form-control input-sm" id="cheque" name="cheque" >
 							</div>
 
 							<label for="transferencia" class="col-md-1 control-label">Pago Transferencia</label>
 							<div class="col-md-2">
-								<input type="number" class="form-control input-sm" id="transferencia" name="transferencia">
+								<input type="text" class="form-control input-sm" id="transferencia" name="transferencia" >
 							</div>
 							
 							
@@ -373,7 +373,19 @@ while ($r=$query->fetch_array()){
     }
 }
 
-
+function format(input)
+{
+var num = input.value.replace(/\./g,'');
+if(!isNaN(num)){
+num = num.toString().split('').reverse().join('').replace(/(?=\d*\.?)(\d{3})/g,'$1.');
+num = num.split('').reverse().join('').replace(/^[\.]/,'');
+input.value = num;
+}
+ 
+else{ alert('Solo se permiten numeros');
+input.value = input.value.replace(/[^\d\.]*/g,'');
+}
+}
 
 		$(function() {
 						$("#nombre_cliente").autocomplete({

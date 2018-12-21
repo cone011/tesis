@@ -249,7 +249,7 @@ while ($r=$query->fetch_array()){
 
 								<?php } ?>
 								<?php if($estado_factura==2){ ?>
-							       <input type="text" class="form-control input-sm" id="estado_factura"  name="estado_factura" value="<?php echo $saldo; ?>" placeholder="Cantidad Gs.">								
+							       <input type="text" class="form-control input-sm" id="estado_factura"  name="estado_factura" value="<?php echo $saldo; ?>" placeholder="Cantidad Gs." >								
 								<?php } ?>
 							</div>
 						</div>
@@ -284,12 +284,12 @@ while ($r=$query->fetch_array()){
 
 							<label for="cheque" class="col-md-1 control-label">Pago Cheque</label>
 							<div class="col-md-2">
-								<input type="number" class="form-control input-sm" id="cheque" name="cheque" readonly value="<?php echo $cheque; ?>">
+								<input type="number" class="form-control input-sm" id="cheque" name="cheque" readonly value="<?php echo $cheque; ?>" >
 							</div>
 
 							<label for="transferencia" class="col-md-1 control-label">Pago Transferencia</label>
 							<div class="col-md-2">
-								<input type="number" class="form-control input-sm" id="transferencia" name="transferencia" readonly value="<?php echo $transferencia; ?>">
+								<input type="number" class="form-control input-sm" id="transferencia" name="transferencia" readonly value="<?php echo $transferencia; ?>" >
 							</div>
 							
 							
@@ -314,7 +314,7 @@ while ($r=$query->fetch_array()){
 
 							<label for="transferencia" class="col-md-1 control-label">Pago Transferencia</label>
 							<div class="col-md-2">
-								<input type="number" class="form-control input-sm" id="transferencia" name="transferencia" >
+								<input type="number" class="form-control input-sm" id="transferencia" name="transferencia" o>
 							</div>
 							
 							
@@ -381,6 +381,7 @@ while ($r=$query->fetch_array()){
         $("#pagocombinado").hide();
     }
 }
+
 
 		$(function() {
 						$("#nombre_cliente").autocomplete({

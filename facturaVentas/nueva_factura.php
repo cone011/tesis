@@ -269,22 +269,22 @@ function mostrar_cuota(id) {
 							
 							<label for="efectivo" class="col-md-1 control-label">Pago Efectivo</label>
 							<div class="col-md-2">
-								<input type="number" class="form-control input-sm" id="efectivo">
+								<input type="number" class="form-control input-sm" id="efectivo" >
 							</div>
 
 							<label for="tarjeta" class="col-md-1 control-label">Pago Tarjeta</label>
 							<div class="col-md-2">
-								<input type="number" class="form-control input-sm" id="tarjeta">
+								<input type="number" class="form-control input-sm" id="tarjeta" >
 							</div>
 
 							<label for="cheque" class="col-md-1 control-label">Pago Cheque</label>
 							<div class="col-md-2">
-								<input type="number" class="form-control input-sm" id="cheque">
+								<input type="number" class="form-control input-sm" id="cheque" >
 							</div>
 
 							<label for="transferencia" class="col-md-1 control-label">Pago Transferencia</label>
 							<div class="col-md-2">
-								<input type="number" class="form-control input-sm" id="transferencia">
+								<input type="number" class="form-control input-sm" id="transferencia" >
 							</div>
 							
 							

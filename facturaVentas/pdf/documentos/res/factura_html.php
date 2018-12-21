@@ -279,11 +279,16 @@ table.page_footer {width: 100%; border: none; background-color: white; padding: 
 		   </td>
            <td style="width:20%;">
                 <?php 
+                echo $efectivo;
+                echo $tarjeta;
+                echo $cheque;
+                echo $transferencia;
                 if ($pago==1){echo "Efectivo";}
                 elseif ($pago==2){echo "Tarjeta";}
                 elseif ($pago==3){echo "Cheque";}
                 elseif ($pago==4){echo "Transferencia bancaria";}
                 elseif ($pago==5){echo "Pago Combinado";
+
                    // echo $efectivo;
                 }
                 ?>      
@@ -484,7 +489,7 @@ while ($row=mysqli_fetch_array($sql))
     
      //echo $parcial;
      //echo $verificador_combinado;
-     if($pago==5){
+     /*if($pago==5){
         $sql_verificar=mysqli_query($con, "select * from tmp where tmp.session_id='".$session_id."'");
         while ($row_verificar=mysqli_fetch_array($sql_verificar)){
        $monto=$row_verificar['cantidad_tmp']*$row_verificar['precio_tmp'];
@@ -494,7 +499,7 @@ while ($row=mysqli_fetch_array($sql))
          $verificador_factura=1;
          $condiciones=89;
        }
-     }
+     }*/
 
 
    if($verificador_factura==1){
@@ -633,8 +638,6 @@ $acc='AGREGADO';
 
 
 //echo $sumador_total;
-
-
 
 if($condiciones==1){
     $saldo_cliente=0;

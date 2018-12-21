@@ -275,7 +275,6 @@ table.page_footer {width: 100%; border: none; background-color: white; padding: 
                 <?php 
                 if ($condiciones==1){echo "Contado";}
                 elseif ($condiciones==2){echo "Credito a 30 dias";}
-                elseif ($condiciones==3){echo "Tarjeta de Credito/POS";}
                 ?>
            </td>
             <td style="width:20%;">
@@ -328,7 +327,7 @@ table.page_footer {width: 100%; border: none; background-color: white; padding: 
           <td style="width:20%;"><?php echo $tarjeta;?></td>
            <td style="width:20%;"><?php echo $cheque;?></td>
            <td style="width:20%;"><?php echo $transferencia;?></td>
-           <?php// $parcial=$efectivo+$tarjeta+$cheque+$transferencia?>
+           <?php $parcial=$efectivo+$tarjeta+$cheque+$transferencia; ?>
 
         </tr>
         

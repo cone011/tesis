@@ -3,6 +3,7 @@
 if(strlen($_GET['desde'])>0 and strlen($_GET['hasta'])>0){
 	$desde = $_GET['desde'];
 	$hasta = $_GET['hasta'];
+	$dato = $_GET['dato'];
 
 	$verDesde = date('d/m/Y', strtotime($desde));
 	$verHasta = date('d/m/Y', strtotime($hasta));
@@ -45,7 +46,7 @@ $pdf->Ln(8);
 $pdf->SetFont('Arial', '', 8);
 //CONSULTA
 
-$res = "SELECT * FROM cuentaproveedor,proveedores WHERE fecha_vencimiento BETWEEN '$desde' AND '$hasta' and cuentaproveedor.id_cliente=proveedores.id_cliente";
+$res = "SELECT * FROM cuentaproveedor,proveedores WHERE fecha_vencimiento BETWEEN '$desde' AND '$hasta' and nombre_cliente LIKE '%$dato%' and cuentaproveedor.id_cliente=proveedores.id_cliente";
 $productos = $conexion->query($res);
 
 $item = 0;
