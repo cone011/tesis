@@ -361,6 +361,7 @@ $monto10=0;
 $monto5=0;
 $monto0=0;
 $verificador_factura=0;
+$verificador_combinado=0;
 $sql=mysqli_query($con, "select * from productos, tmp where productos.id_producto=tmp.id_producto and tmp.session_id='".$session_id."'");
 while ($row=mysqli_fetch_array($sql))
     {
@@ -460,6 +461,23 @@ while ($row=mysqli_fetch_array($sql))
         </tr>
 
      <?php 
+
+    //echo $parcial;
+     //echo $verificador_combinado;
+     if($pago==5){
+        $monto=0;
+        $sql_verificar=mysqli_query($con, "select * from tmp where tmp.session_id='".$session_id."'");
+        while ($row_verificar=mysqli_fetch_array($sql_verificar)){
+       $monto=$row_verificar['cantidad_tmp']*$row_verificar['precio_tmp'];
+       $verificador_combinado+=$monto;
+       //echo $verificador_combinado;
+       } 
+       if($verificador_combinado!=$parcial){
+         $verificador_factura=1;
+         $condiciones=89;
+       }
+     }
+
        if($verificador_factura==1){
           $messages[] = "Uno de los Productos cargados es NEGATIVO VERIFCAR.";
         }else{
@@ -486,6 +504,14 @@ while ($row=mysqli_fetch_array($sql))
     $titulo_monto = numtoletras($totalfact);
 
 ?>
+
+ <?php if($verificador_factura==1){ ?>
+
+        <td style="width: 25%; color: #444444;">
+                <img style="width: 100%;" src="../../<?php echo get_row('perfil','marca_url', 'id_perfil', 1);?>" alt="Logo"><br>
+                
+            </td>
+    <?php } ?>  
       
          <tr>
             <td colspan="3" style="widtd: 85%; text-align: right;">SUBTOTAL <?php echo $simbolo_moneda;?> </td>

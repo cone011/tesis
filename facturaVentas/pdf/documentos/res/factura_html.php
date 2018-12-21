@@ -314,7 +314,8 @@ table.page_footer {width: 100%; border: none; background-color: white; padding: 
           <td style="width:20%;"><?php echo $tarjeta;?></td>
            <td style="width:20%;"><?php echo $cheque;?></td>
            <td style="width:20%;"><?php echo $transferencia;?></td>
-           <?php $parcial=$efectivo+$tarjeta+$cheque+$transferencia?>
+           <?php $parcial=$efectivo+$tarjeta+$cheque+$transferencia;
+                 //echo $parcial;?>
 
         </tr>
         
@@ -489,17 +490,18 @@ while ($row=mysqli_fetch_array($sql))
     
      //echo $parcial;
      //echo $verificador_combinado;
-     /*if($pago==5){
+     if($pago==5){
         $sql_verificar=mysqli_query($con, "select * from tmp where tmp.session_id='".$session_id."'");
         while ($row_verificar=mysqli_fetch_array($sql_verificar)){
        $monto=$row_verificar['cantidad_tmp']*$row_verificar['precio_tmp'];
        $verificador_combinado+=$monto;
+       //echo $verificador_combinado;
        } 
        if($verificador_combinado!=$parcial){
          $verificador_factura=1;
          $condiciones=89;
        }
-     }*/
+     }
 
 
    if($verificador_factura==1){
@@ -574,6 +576,13 @@ while ($row=mysqli_fetch_array($sql))
 
 	
 ?>
+    <?php if($verificador_factura==1){ ?>
+
+        <td style="width: 25%; color: #444444;">
+                <img style="width: 100%;" src="../../<?php echo get_row('perfil','marca_url', 'id_perfil', 1);?>" alt="Logo"><br>
+                
+            </td>
+    <?php } ?>        
 
         <tr>
             <td colspan="3" style="widtd: 85%; text-align: right;">SUBTOTAL <?php echo $simbolo_moneda;?> </td>

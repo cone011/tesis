@@ -348,6 +348,7 @@ $monto10=0;
 $monto5=0;
 $monto0=0;
 $verificador_factura=0;
+$verificador_combinado=0;
 $sql=mysqli_query($con, "select * from cuentaproveedor, tmp where cuentaproveedor.numero_factura=tmp.id_producto and tmp.session_id='".$session_id."'");
 while ($row=mysqli_fetch_array($sql))
     {
@@ -470,6 +471,20 @@ while ($row=mysqli_fetch_array($sql))
         </tr>
 
      <?php 
+     if($pago==5){
+        $monto=0;
+        $sql_verificar=mysqli_query($con, "select * from tmp where tmp.session_id='".$session_id."'");
+        while ($row_verificar=mysqli_fetch_array($sql_verificar)){
+       $monto=$row_verificar['cantidad_tmp']*$row_verificar['precio_tmp'];
+       $verificador_combinado+=$monto;
+       //echo $verificador_combinado;
+       } 
+       if($verificador_combinado!=$parcial){
+         $verificador_factura=1;
+         $condiciones=89;
+       }
+     }
+
        if($verificador_factura==1){
           $messages[] = "Uno de los Productos cargados es NEGATIVO VERIFCAR.";
         }else{

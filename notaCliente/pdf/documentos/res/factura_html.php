@@ -315,6 +315,7 @@ table.page_footer {width: 100%; border: none; background-color: white; padding: 
 
     <br>
   
+
     <table cellspacing="0" style="width: 100%; text-align: left; font-size: 10pt;">
         <tr>
             <th style="width: 10%;text-align:center" class='midnight-blue'>NRO FACTURA.</th>
@@ -337,6 +338,7 @@ $auxiva10=0;
 $monto10=0;
 $monto5=0;
 $monto0=0;
+
 $verificador_factura=0;
 $sql=mysqli_query($con, "select * from cuentacliente, tmp where cuentacliente.numero_factura=tmp.id_producto and tmp.session_id='".$session_id."'");
 while ($row=mysqli_fetch_array($sql))
@@ -452,6 +454,7 @@ while ($row=mysqli_fetch_array($sql))
     
     ?>
 
+
         <tr>
             <td class='<?php echo $clase;?>' style="width: 10%; text-align: center"><?php echo $codigo_producto; ?></td>
             <td class='<?php echo $clase;?>' style="width: 60%; text-align: left"><?php echo $nombre;?></td>
@@ -461,6 +464,8 @@ while ($row=mysqli_fetch_array($sql))
         </tr>
 
      <?php 
+
+
        if($verificador_factura==1){
           $messages[] = "Uno de los Productos cargados es NEGATIVO VERIFCAR.";
         }else{
