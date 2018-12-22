@@ -279,10 +279,6 @@ table.page_footer {width: 100%; border: none; background-color: white; padding: 
 		   </td>
            <td style="width:20%;">
                 <?php 
-                echo $efectivo;
-                echo $tarjeta;
-                echo $cheque;
-                echo $transferencia;
                 if ($pago==1){echo "Efectivo";}
                 elseif ($pago==2){echo "Tarjeta";}
                 elseif ($pago==3){echo "Cheque";}
@@ -369,9 +365,9 @@ while ($row=mysqli_fetch_array($sql)){
     
 
     if($tipo==1){
-      $cantidad=number_format($precio_venta/$precioUnitario,8); 
-      $cantidad_imprimir=number_format($precio_venta/$precioUnitario,2); 
-      $precio_venta_f=number_format($precio_venta,2);//Formateo variables
+      $cantidad=number_format($cantidadtmp/$precioUnitario,8); 
+      $cantidad_imprimir=number_format($cantidadtmp/$precioUnitario,2); 
+      $precio_venta_f=number_format($cantidadtmp,2);//Formateo variables
       $precio_venta_r=str_replace(",","",$precio_venta_f);//Reemplazo las comas
       $precio_total=$precio_venta_r;
       $precio_total_f=number_format($precio_total,0);//Precio total formateado
@@ -413,9 +409,9 @@ while ($row=mysqli_fetch_array($sql))
 	$precio_total_r=str_replace(",","",$precio_total_f);//Reemplazo las comas
 	$sumador_total+=$precio_total_r;//Sumador*/
     if($tipo==1){
-      $cantidad=number_format($precio_venta/$precioUnitario,8); 
-      $cantidad_imprimir=number_format($precio_venta/$precioUnitario,2); 
-      $precio_venta_f=number_format($precio_venta,2);//Formateo variables
+      $cantidad=number_format($cantidadtmp/$precioUnitario,8); 
+      $cantidad_imprimir=number_format($cantidadtmp/$precioUnitario,2); 
+      $precio_venta_f=number_format($cantidadtmp,2);//Formateo variables
       $precio_venta_r=str_replace(",","",$precio_venta_f);//Reemplazo las comas
       //$precio_total=$precio_venta_r*$cantidad;
       $precio_total=$precio_venta_r;
@@ -426,6 +422,7 @@ while ($row=mysqli_fetch_array($sql))
       $monto0+=$precio_venta;
     }else{
       $cantidad=$row['cantidad_tmp'];
+      $cantidad_imprimir=$row['cantidad_tmp'];
       $precio_venta_f=number_format($precio_venta,0);//Formateo variables
       $precio_venta_r=str_replace(",","",$precio_venta_f);//Reemplazo las comas
       $precio_total=$precio_venta_r*$cantidad;
@@ -478,10 +475,15 @@ while ($row=mysqli_fetch_array($sql))
 	?>
 
         <tr>
-            <td class='<?php echo $clase;?>' style="width: 10%; text-align: center"><?php echo number_format($cantidad,2); ?></td>
+            <td class='<?php echo $clase;?>' style="width: 10%; text-align: center"><?php echo number_format($cantidad_imprimir,2); ?></td>
             <td class='<?php echo $clase;?>' style="width: 60%; text-align: left"><?php echo $nombre_producto;?></td>
+            <?php if($tipo==1){ ?>
+            <td class='<?php echo $clase;?>' style="width: 15%; text-align: right"><?php echo number_format($precioUnitario,0);?></td>
+        <?php }else{ ?>
             <td class='<?php echo $clase;?>' style="width: 15%; text-align: right"><?php echo $precio_venta_f;?></td>
+        <?php } ?>
             <td class='<?php echo $clase;?>' style="width: 15%; text-align: right"><?php echo $precio_total_f;?></td>
+        
             
         </tr>
 
@@ -490,7 +492,7 @@ while ($row=mysqli_fetch_array($sql))
     
      //echo $parcial;
      //echo $verificador_combinado;
-     if($pago==5){
+     /*if($pago==5){
         $sql_verificar=mysqli_query($con, "select * from tmp where tmp.session_id='".$session_id."'");
         while ($row_verificar=mysqli_fetch_array($sql_verificar)){
        $monto=$row_verificar['cantidad_tmp']*$row_verificar['precio_tmp'];
@@ -501,7 +503,7 @@ while ($row=mysqli_fetch_array($sql))
          $verificador_factura=1;
          $condiciones=89;
        }
-     }
+     }*/
 
 
    if($verificador_factura==1){
@@ -511,7 +513,7 @@ while ($row=mysqli_fetch_array($sql))
         //Insert en la tabla detalle_cotizacion
         $sqlproducto="UPDATE productos SET cantidad_producto='".$totalcantidad."' WHERE id_producto='".$id_producto."'";
         $query_update = mysqli_query($con,$sqlproducto);
-        $insert_detail=mysqli_query($con, "INSERT INTO detalle_venta VALUES ('','$numero_factura','$id_producto','$cantidad','$precio_venta_r','$fech')");
+        $insert_detail=mysqli_query($con, "INSERT INTO detalle_venta VALUES ('','$numero_factura','$id_producto','$cantidad','$precio_venta_r','$fech','$totalcantidad')");
        $insert_audidetail=mysqli_query($con, "INSERT INTO audidetalle_venta VALUES ('','$numero_factura','$id_producto','$cantidad','$precio_venta_r','$accion')");
        $insert_detail=mysqli_query($con, "INSERT INTO venta VALUES ('','$numero_factura')");
     }

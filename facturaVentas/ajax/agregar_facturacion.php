@@ -63,11 +63,12 @@ $simbolo_moneda=get_row('perfil','moneda', 'id_perfil', 1);
 	$iva=$row['iva_producto'];
     $cantidad_producto=$row['cantidad_producto'];
     $precio_aux=$row['precio_producto'];
+    $precio_mostrar=number_format($precio_venta,0);
 
 	if($tipo==1){
-	  $cantidad=number_format($precio_venta/$precioUnitario,6);
-	  $cantidad_mostrar=number_format($precio_venta/$precioUnitario,2);	
-      $precio_venta_f=number_format($precio_venta,0);//Formateo variables
+	  $cantidad=number_format($cantidadtmp/$precioUnitario,6);
+	  $cantidad_mostrar=number_format($cantidadtmp/$precioUnitario,2);	
+      $precio_venta_f=number_format($cantidadtmp,0);//Formateo variables
 	  $precio_venta_r=str_replace(",","",$precio_venta_f);//Reemplazo las comas
 	  //$precio_total=$precio_venta_r*$cantidad;
 	  $precio_total=$precio_venta_r;
@@ -124,7 +125,7 @@ $simbolo_moneda=get_row('perfil','moneda', 'id_perfil', 1);
 			<td class='text-center'><?php echo $codigo_producto;?></td>
 			<td class='text-center'><?php echo $cantidad_mostrar;?></td>
 			<td><?php echo $nombre_producto;?></td>
-			<td class='text-right'><?php echo $precio_aux;?></td>
+			<td class='text-right'><?php echo $precio_mostrar;?></td>
 			<td class='text-right'><?php echo $precio_total_f;?></td>
 			<td class='text-center'><a href="#" onclick="eliminar('<?php echo $id_tmp ?>')"><i class="glyphicon glyphicon-trash"></i></a></td>
 		</tr>		

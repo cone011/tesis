@@ -93,7 +93,7 @@
 					<th>Vendedor</th>
 					<th>Estado de la Factura</th>
 					<th class='text-right'>Total</th>
-					<th class='text-right'>Saldo Existente</th>
+					<th class='text-right'>Saldo Pendiente</th>
 					<th class='text-right'>Acciones</th>
 					
 				</tr>
@@ -110,7 +110,7 @@
 						$aux_venta=$row['total_venta'];
 						$saldo=$row['saldo_factura'];
 						if ($estado_factura==1 and $saldo==0){
-							$text_estado="Pagada";
+							$text_estado="Cobrada";
 							$label_class='label-success';
 						}
 						elseif($estado_factura==2){$text_estado="Pendiente";$label_class='label-danger';}
@@ -129,7 +129,6 @@
 						<?php 
                          if($estado_factura==1 || $estado_factura==2 || $estado_factura==10){
 						?>
-						<a href="editar_factura.php?id_factura=<?php echo $id_factura;?>" class='btn btn-default' title='Editar factura' ><i class="glyphicon glyphicon-edit"></i></a>
 					 <?php 	} ?>
 						<a href="#" class='btn btn-default' title='Mostrar factura' onclick="imprimir_factura('<?php echo $id_factura;?>');"><i class="glyphicon glyphicon-download"></i></a> 
 					<?php if($estado_factura==10){?>

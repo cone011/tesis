@@ -123,7 +123,7 @@ while ($r=$query->fetch_array()){
 	
 
 
-	$title="Nueva N.C. | Estacion E.M.R.";
+	$title="Nueva N.C. EMITIDA | Estacion E.M.R.";
 
 
 	
@@ -239,50 +239,10 @@ while ($r=$query->fetch_array()){
 							<div class="col-md-2">
 								<select class='form-control input-sm' id="condiciones">
 									<option value="1">Emitido</option>
-									<option value="2">Recibido</option>
 								</select>
 							</div>
                        
-							<div class="col-md-2">
-								<select class='form-control input-sm' id="pago" onChange="mostrar(this.value);">
-									<option value="1">Efectivo</option>
-									<option value="2">Tarjeta</option>
-									<option value="3">Cheque</option>
-									<option value="4">Transferencia bancaria</option>
-									<option value="5" selected>Pago Combinado</option>
-								</select>
-								   
-	                                </div>      
-							</div>
-							
-
-						<div class="form-group row" id="pagocombinado">
-
-							
-							<label for="efectivo" class="col-md-1 control-label">Pago Efectivo</label>
-							<div class="col-md-2">
-								<input type="number" class="form-control input-sm" id="efectivo">
-							</div>
-
-							<label for="tarjeta" class="col-md-1 control-label">Pago Tarjeta</label>
-							<div class="col-md-2">
-								<input type="number" class="form-control input-sm" id="tarjeta">
-							</div>
-
-							<label for="cheque" class="col-md-1 control-label">Pago Cheque</label>
-							<div class="col-md-2">
-								<input type="number" class="form-control input-sm" id="cheque">
-							</div>
-
-							<label for="transferencia" class="col-md-1 control-label">Pago Transferencia</label>
-							<div class="col-md-2">
-								<input type="number" class="form-control input-sm" id="transferencia">
-							</div>
-							
-							
-						</div>
-
-				
+										
 				
 				<div class="col-md-12">
 					<div class="pull-right">
@@ -290,7 +250,7 @@ while ($r=$query->fetch_array()){
 						 <span class="glyphicon glyphicon-search"></span> Agregar Factura
 						</button>
 						<button type="submit" class="btn btn-default">
-						  <span class="glyphicon glyphicon-print"></span> Imprimir
+						  <span class="glyphicon glyphicon-print"></span> Guardar N.C.
 						</button>
 					</div>	
 				</div>

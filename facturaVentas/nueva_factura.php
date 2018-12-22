@@ -244,7 +244,7 @@ function mostrar_cuota(id) {
 							<div class="col-md-2">
 								<input type="text" class="form-control input-sm" id="fecha" value="<?php echo date("d/m/Y");?>" readonly>
 							</div>
-							<label for="email" class="col-md-1 control-label" >Pago</label>
+							<label for="email" class="col-md-1 control-label" >Condicion</label>
 							<div class="col-md-2">
 								<select class='form-control input-sm' name="formapago" id="condiciones" onChange="mostrar_cuota(this.value);">
 									<option value="1">Contado</option>
@@ -293,7 +293,7 @@ function mostrar_cuota(id) {
 						<div class="form-group row" id="cargacuota">
 							<label for="cuota" class="col-md-1 control-label"> Cuotas</label>
 							<div class="col-md-1">
-								<input type="number" class="form-control input-sm" id="cuota">
+								<input type="number" class="form-control input-sm" id="cuota" value="1">
 							</div>
 						</div>
 				

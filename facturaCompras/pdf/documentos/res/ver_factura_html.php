@@ -244,7 +244,7 @@ table.page_footer {width: 100%; border: none; background-color: white; padding: 
 	
     <table cellspacing="0" style="width: 100%; text-align: left; font-size: 11pt;">
         <tr>
-           <td style="width:50%;" class='midnight-blue'>DETALLE DE LA ORDEN DE COMPRA</td>
+           <td style="width:50%;" class='midnight-blue'>DETALLE DE LA COMPRA</td>
         </tr>
 		<tr>
            <td style="width:50%;" >

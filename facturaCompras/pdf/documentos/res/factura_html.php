@@ -230,7 +230,7 @@ table.page_footer {width: 100%; border: none; background-color: white; padding: 
     
     <table cellspacing="0" style="width: 100%; text-align: left; font-size: 11pt;">
         <tr>
-           <td style="width:50%;" class='midnight-blue'>DATOS DE LA ORDEN DE COMPRA:</td>
+           <td style="width:50%;" class='midnight-blue'>DATOS DE LA COMPRA:</td>
         </tr>
         <tr>
            <td style="width:50%;" >
@@ -486,7 +486,7 @@ while ($row=mysqli_fetch_array($sql))
           //Insert en la tabla detalle_cotizacion
            $sqlproducto="UPDATE productos SET cantidad_producto='".$totalcantidad."' WHERE id_producto='".$id_producto."'";
            $query_update = mysqli_query($con,$sqlproducto);
-           $insert_detail=mysqli_query($con, "INSERT INTO detalle_compra VALUES ('','$numero_factura','$id_producto','$cantidad','$precio_venta_r','$acciondetalle','$fecha')");
+           $insert_detail=mysqli_query($con, "INSERT INTO detalle_compra VALUES ('','$numero_factura','$id_producto','$cantidad','$precio_venta_r','$acciondetalle','$fecha','$totalcantidad')");
           $insert_audidetail=mysqli_query($con, "INSERT INTO audidetalle_compra VALUES ('','$numero_factura','$id_producto','$cantidad','$precio_venta_r','$acciondetalle')");  
           $insert_producto=mysqli_query($con, "INSERT INTO historia_producto VALUES ('','$codigo_producto','$nombre_producto','$precio_venta','$precioUnitario','$fechapro')");
         }

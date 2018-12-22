@@ -16,7 +16,7 @@
                 
             </td>
 			<td style="width: 25%;text-align:right">
-			Nro de Orden: <?php echo $numero_factura;?>
+			Nro de Compra: <?php echo $numero_factura;?>
 			</td>
 			 
         </tr>

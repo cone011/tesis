@@ -161,7 +161,7 @@ function mostrar_cuota(id) {
     <div class="container">
 	<div class="panel panel-info">
 		<div class="panel-heading">
-			<h4><i class='glyphicon glyphicon-edit'></i> Nueva Orden</h4>
+			<h4><i class='glyphicon glyphicon-edit'></i> Nueva Compra</h4>
 		</div>
 		<div class="panel-body">
 		<?php 
@@ -185,7 +185,7 @@ function mostrar_cuota(id) {
 								<input type="text" class="form-control input-sm" id="mail" placeholder="Ruc" readonly>
 							</div>
 
-					<label for="factura" class="col-md-1 control-label">Nro de Orden: </label>		
+					<label for="factura" class="col-md-1 control-label">Nro de Compra: </label>		
 							<div class="col-md-1">
 								<?php   
 										$sql_factura=mysqli_query($con,"select max(numero_factura) as last from compra");
@@ -247,7 +247,7 @@ function mostrar_cuota(id) {
 							<div class="col-md-2">
 								<input type="text" class="form-control input-sm" id="fecha" value="<?php echo date("d/m/Y");?>" readonly>
 							</div>
-							<label for="email" class="col-md-1 control-label">Pago: </label>
+							<label for="email" class="col-md-1 control-label">Condicion: </label>
 							<div class="col-md-2">
 								<select class='form-control input-sm' id="condiciones" onChange="mostrar_cuota(this.value);">
 									<option value="1">Contado</option>
@@ -306,7 +306,7 @@ function mostrar_cuota(id) {
 						 <span class="glyphicon glyphicon-search"></span> Agregar productos
 						</button>
 						<button type="submit" class="btn btn-default">
-						  <span class="glyphicon glyphicon-print"></span> Imprimir
+						  <span class="glyphicon glyphicon-print"></span> Guardar Compra
 						</button>
 					</div>	
 				</div>

@@ -100,7 +100,7 @@
 					<th>Encargado</th>
 					<th>Estado</th>
 					<th class='text-right'>Total</th>
-					<th class='text-right'>Saldo Existente</th>
+					<th class='text-right'>Saldo Pendiente</th>
 					<th class='text-right'>Acciones</th>
 					
 				</tr>

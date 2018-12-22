@@ -37,7 +37,7 @@
 		$date=date("Y-m-d H:i:s");
 		//$estado_factura=intval($_POST['estado_factura']);
         $estado_factura=intval($_POST['estado_factura']);
-       $insert=mysqli_query($con,"INSERT INTO saldo_cliente VALUES (NULL,'$id_factura','$estado_factura','1000','$id_cliente','$date')");
+       //$insert=mysqli_query($con,"INSERT INTO saldo_cliente VALUES (NULL,'$id_factura','$estado_factura','1000','$id_cliente','$date')");
 		$sql_user=mysqli_query($con,"select * from venta where id_factura='$id_factura'");
 	    //$rw_user=mysqli_fetch_array($sql_user);
 	     while ($rw_user=mysqli_fetch_array($sql_user))

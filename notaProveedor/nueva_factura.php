@@ -107,7 +107,7 @@ if ($factura==0) {
 	
 	$active_bk="";
 
-	$title="Nueva Orden | Estacion E.M.R.";
+	$title="Nueva NC RECIBIDA | Estacion E.M.R.";
 	
 	/* Connect To Database*/
 	require_once ("config/db.php");//Contiene las variables de configuracion para conectar a la base de datos
@@ -217,50 +217,15 @@ if ($factura==0) {
 							<div class="col-md-2">
 								<input type="text" class="form-control input-sm" id="fecha" value="<?php echo date("d/m/Y");?>" readonly>
 							</div>
-							<label for="email" class="col-md-1 control-label">Pago: </label>
+							<label for="email" class="col-md-1 control-label">Tipo NC: </label>
 							<div class="col-md-2">
 								<select class='form-control input-sm' id="condiciones" onChange="mostrar_cuota(this.value);">
 									<option value="1">Recibido</option>
-									<option value="2">Emitido</option>
 								</select>
 							</div>
-							<div class="col-md-2">
-								<select class='form-control input-sm' id="pago" onChange="mostrar(this.value);">
-									<option value="1">Efectivo</option>
-									<option value="2">Tarjeta</option>
-									<option value="3">Cheque</option>
-									<option value="4">Transferencia bancaria</option>
-									<option value="5" selected>Pago Combinado</option>
-								</select>
-							</div>
-						</div>
+                       </div>
 
-						<div class="form-group row" id="pagocombinado">
-
-							
-							<label for="efectivo" class="col-md-1 control-label">Pago Efectivo</label>
-							<div class="col-md-2">
-								<input type="number" class="form-control input-sm" id="efectivo">
-							</div>
-
-							<label for="tarjeta" class="col-md-1 control-label">Pago Tarjeta</label>
-							<div class="col-md-2">
-								<input type="number" class="form-control input-sm" id="tarjeta">
-							</div>
-
-							<label for="cheque" class="col-md-1 control-label">Pago Cheque</label>
-							<div class="col-md-2">
-								<input type="number" class="form-control input-sm" id="cheque">
-							</div>
-
-							<label for="transferencia" class="col-md-1 control-label">Pago Transferencia</label>
-							<div class="col-md-2">
-								<input type="number" class="form-control input-sm" id="transferencia">
-							</div>
-							
-							
-						</div>
-
+						
 				
 				<div class="col-md-12">
 					<div class="pull-right">

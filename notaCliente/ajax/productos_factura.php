@@ -1,10 +1,6 @@
 <?php
 
-	/*-------------------------
-	Autor: Obed Alvarado
-	Web: obedalvarado.pw
-	Mail: info@obedalvarado.pw
-	---------------------------*/
+
 	include('is_logged.php');//Archivo verifica que el usario que intenta acceder a la URL esta logueado
 	/* Connect To Database*/
 	require_once ("../config/db.php");//Contiene las variables de configuracion para conectar a la base de datos
@@ -17,9 +13,9 @@
 		 /*$aColumns = array('codigo_producto', 'nombre_producto', 'status_producto');//Columnas de busqueda
 		 $sTable = "productos";
 		 $sWhere = "";*/
-		  $sTable = "cuentacliente,cliente";
+		  $sTable = "cuentacliente,cliente,detalle_venta";
 		 $sWhere = "";
-		 $sWhere.=" WHERE cuentacliente.id_cliente=cliente.id_cliente and cuentacliente.saldo_factura>0";
+		 $sWhere.=" WHERE cuentacliente.id_cliente=cliente.id_cliente and detalle_venta.numero_factura=cuentacliente.numero_factura and cuentacliente.saldo_factura>0";
 		if ( $_GET['q'] != "" )
 		{
 			/*$sWhere = "WHERE (";

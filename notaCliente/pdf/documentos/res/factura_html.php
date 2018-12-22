@@ -256,10 +256,9 @@ table.page_footer {width: 100%; border: none; background-color: white; padding: 
        <br>
         <table cellspacing="0" style="width: 100%; text-align: left; font-size: 11pt;">
         <tr>
-           <td style="width:25%;" class='midnight-blue'>VENDEDOR</td>
+           <td style="width:25%;" class='midnight-blue'>ENCARGAGO</td>
           <td style="width:20%;" class='midnight-blue'>FECHA</td>
-           <td style="width:20%;" class='midnight-blue'>FORMA DE PAGO</td>
-            <td style="width:20%;" class='midnight-blue'>TIPO PAGO</td>
+          <td style="width:20%;" class='midnight-blue'>TIPO N.C.</td>
         </tr>
         <tr>
            <td style="width:35%;">
@@ -273,45 +272,14 @@ table.page_footer {width: 100%; border: none; background-color: white; padding: 
           <td style="width:25%;"><?php echo date("d/m/Y");?></td>
            <td style="width:20%;" >
                 <?php 
-                if ($condiciones==1){echo "Contado";}
-                elseif ($condiciones==2){echo "Credito a 30 dias";}
+                if ($condiciones==1){echo "EMITIDO";}
                 ?>
            </td>
-           <td style="width:20%;">
-                <?php 
-                //echo $efectivo;
-                if ($pago==1){echo "Efectivo";}
-                elseif ($pago==2){echo "Tarjeta";}
-                elseif ($pago==3){echo "Cheque";}
-                elseif ($pago==4){echo "Transferencia bancaria";}
-                elseif ($pago==5){echo "Pago Combinado";}
-                ?>      
-           </td>
         </tr>
    
     </table>
 
-    <?php if($pago==5){ ?>
-    <table cellspacing="0" style="width: 100%; text-align: left; font-size: 11pt;">
-        <tr>
-           <td style="width:20%;" class='midnight-blue'>PAGO EFECTIVO</td>
-          <td style="width:20%;" class='midnight-blue'>PAGO TARJETA</td>
-           <td style="width:20%;" class='midnight-blue'>PAGO CHEQUE</td>
-            <td style="width:20%;" class='midnight-blue'>PAGO TRANSFERENCIA</td>
-        </tr>
-        <tr>
-           <td style="width:20%;"><?php echo $efectivo;?></td>
-          <td style="width:20%;"><?php echo $tarjeta;?></td>
-           <td style="width:20%;"><?php echo $cheque;?></td>
-           <td style="width:20%;"><?php echo $transferencia;?></td>
-           <?php $parcial=$efectivo+$tarjeta+$cheque+$transferencia?>
-
-        </tr>
-        
-        
-   
-    </table>
-<?php } ?>   
+ 
 
     <br>
   
@@ -338,11 +306,13 @@ $auxiva10=0;
 $monto10=0;
 $monto5=0;
 $monto0=0;
-
+$totalcantidad=0;
+$cantidad=0;
 $verificador_factura=0;
 $sql=mysqli_query($con, "select * from cuentacliente, tmp where cuentacliente.numero_factura=tmp.id_producto and tmp.session_id='".$session_id."'");
 while ($row=mysqli_fetch_array($sql))
     {
+       
     /*$precioUnitario=$row['precio_producto'];    
     $precio_venta=$row['precio_tmp'];   
     $id_tmp=$row["id_tmp"];
@@ -355,13 +325,21 @@ while ($row=mysqli_fetch_array($sql))
     $cantidadProducto=$row['cantidad_producto'];
     $iva=$row['iva_producto'];
     $acciondetalle='AGREGADO';*/
-
+   /* $cantidad=$row_actualizar['cantidad'];
+    $producto=$row_actualizar['id_producto'];
+    $sql_accion=mysqli_query($con, "select * from productos where productos.id_producto='".$producto."'");
+  while ($row_actualizar=mysqli_fetch_array($sql_accion))
+    {
+        $total=$row_actualizar['cantidad_producto'];
+        $update_cantidad=$total+$cantidad;
+    }*/
     $precioUnitario=$row['total_venta'];    
     $precio_venta=$row['precio_tmp'];
     $id_tmp=$row["id_tmp"];
     $codigo_producto='001'.'-'.'001'.'-'.$row['numero_factura'];
     $cantidadtmp=$row['cantidad_tmp'];
     $numero_factura=$row['numero_factura'];
+    //DISMINUYE SALDO DE CLIENTE
     $diferencia=$precio_venta-$cantidadtmp;
     $format=number_format($precio_venta,0);
     $sql_producto=mysqli_query($con, "select * from cliente, cuentacliente where cuentacliente.id_cliente=cliente.id_cliente");
@@ -375,70 +353,32 @@ while ($row=mysqli_fetch_array($sql))
     {
         $numero_nc=$rw['last']+1;
     }
-    $sql_venta=mysqli_query($con, "select * from venta where venta.numero_factura='".$numero_factura."'");
-    while ($rw2=mysqli_fetch_array($sql_producto))
+   
+ 
+   $sql_accion=mysqli_query($con, "select * from productos,detalle_venta where productos.id_producto=detalle_venta.id_producto and detalle_venta.numero_factura='".$numero_factura."'");
+  while ($row_actualizar=mysqli_fetch_array($sql_accion))
     {
-        $saldo=$rw2['saldo_factura'];
-        $monto=$rw2['total_venta'];
-        
+         $update_cantidad=0;
+        $cantidad=$row_actualizar['cantidad'];
+        $producto=$row_actualizar['id_producto'];
+        //echo $cantidad;
+        //echo $producto;
+        $sql_accion=mysqli_query($con, "select * from productos where productos.id_producto='".$producto."'");
+       while ($row_actualizar=mysqli_fetch_array($sql_accion))
+        {   
+         $total=$row_actualizar['cantidad_producto'];
+         $update_cantidad=$total+$cantidad;
+        }
+     $sqlactualizar="UPDATE productos SET cantidad_producto='".$update_cantidad."' WHERE id_producto='".$producto."'";
+        $query_update = mysqli_query($con,$sqlactualizar);
     }
-    $totalcantidad=0;
-    /*$cantidad=number_format($precio_venta/$precioUnitario,2);
-    $precio_venta_f=number_format($precio_venta,2);//Formateo variables
-    $precio_venta_r=str_replace(",","",$precio_venta_f);//Reemplazo las comas
-    $precio_total=$precio_venta_r;
-    $precio_total_f=number_format($precio_total,2);//Precio total formateado
-    $precio_total_r=str_replace(",","",$precio_total_f);//Reemplazo las comas
-    $sumador_total+=$precio_total_r;//Sumador
-    $totalfact+=$precio_total_r;*/
+    
 
-   /* if($tipo==1){
-      $cantidad=number_format($precio_venta/$precioUnitario,2); 
-      $precio_venta_f=number_format($precio_venta,2);//Formateo variables
-      $precio_venta_r=str_replace(",","",$precio_venta_f);//Reemplazo las comas
-      //$precio_total=$precio_venta_r*$cantidad;
-      $precio_total=$precio_venta_r;
-      $precio_total_f=number_format($precio_total,2);//Precio total formateado
-      $precio_total_r=str_replace(",","",$precio_total_f);//Reemplazo las comas
-      $sumador_total+=$precio_total_r;//Sumador
-      $totalcantidad=$cantidadProducto+$cantidad;
-      $totalfact+=$precio_total_r;
-    }else{
-      $cantidad=$row['cantidad_tmp'];
-      $precio_venta_f=number_format($precio_venta,2);//Formateo variables
-      $precio_venta_r=str_replace(",","",$precio_venta_f);//Reemplazo las comas
-      $precio_total=$precio_venta_r*$cantidad;
-      //$precio_total=$precio_venta_r;
-      $precio_total_f=number_format($precio_total,2);//Precio total formateado
-      $precio_total_r=str_replace(",","",$precio_total_f);//Reemplazo las comas
-      $sumador_total+=$precio_total_r;//Sumador
-      $totalcantidad=$cantidadProducto+$cantidad;
-      $totalfact+=$precio_total_r;
-    }
-*/
     if ($nums%2==0){
         $clase="clouds";
     } else {
         $clase="silver";
     }
-
-   /* if($iva==1){
-      $ivaux=($precio_total_r / 1.1 )*0.1;
-      $ivaux=number_format($ivaux,2,'.','');
-      $auxiva10=($precio_total_r / 1.1 )*0.1;
-      $auxiva10=number_format($auxiva10,2,'.','');
-      $monto10+=$precio_total_r;
-      $iva10+=$auxiva10;
-      $ivatotal+=$ivaux;
-    }elseif($iva==2){
-      $ivaux=($precio_total_r / 1.05 )*0.1;
-      $ivaux=number_format($ivaux,2,'.','');
-      $auxiva05=($precio_total_r / 1.05 )*0.1;
-      $auxiva05=number_format($auxiva05,2,'.','');
-      $monto5+=$precio_total_r;
-      $iva5+=$auxiva05;
-      $ivatotal+=$ivaux;
-    }*/
 
       if($cantidadtmp<0){
        $sumador_total=0;
@@ -456,7 +396,7 @@ while ($row=mysqli_fetch_array($sql))
 
 
         <tr>
-            <td class='<?php echo $clase;?>' style="width: 10%; text-align: center"><?php echo $codigo_producto; ?></td>
+            <td class='<?php echo $clase;?>' style="width: 10%; text-align: center"><?php echo $codigo_producto;  ?></td>
             <td class='<?php echo $clase;?>' style="width: 60%; text-align: left"><?php echo $nombre;?></td>
             <td class='<?php echo $clase;?>' style="width: 15%; text-align: right"><?php echo $cantidadtmp;?></td>
             <td class='<?php echo $clase;?>' style="width: 15%; text-align: right"><?php echo $diferencia;?></td>
@@ -486,6 +426,8 @@ while ($row=mysqli_fetch_array($sql))
           }
            
 
+
+          
            $sql_ncliente="UPDATE cuentacliente SET saldo_factura='".$diferencia."' WHERE numero_factura='".$numero_factura."'";
            $query_update = mysqli_query($con,$sql_ncliente);
           /*$sqlproducto="UPDATE productos SET cantidad_producto='".$totalcantidad."' WHERE id_producto='".$id_producto."'";
