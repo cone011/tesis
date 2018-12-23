@@ -220,6 +220,7 @@ function mostrar_cuota(id) {
 							<div class="col-md-2">
 								<input type="number" class="form-control input-sm" id="timbrado" required>
 							</div>
+
 				</div>
 
 						<div class="form-group row">
@@ -243,10 +244,11 @@ function mostrar_cuota(id) {
 									?>
 								</select>
 							</div>
-							<label for="tel2" class="col-md-1 control-label">Fecha: </label>
+							<label for="fecha" class="col-md-1 control-label">Fecha: </label>
 							<div class="col-md-2">
 								<input type="text" class="form-control input-sm" id="fecha" value="<?php echo date("d/m/Y");?>" readonly>
 							</div>
+							
 							<label for="email" class="col-md-1 control-label">Condicion: </label>
 							<div class="col-md-2">
 								<select class='form-control input-sm' id="condiciones" onChange="mostrar_cuota(this.value);">
@@ -295,10 +297,11 @@ function mostrar_cuota(id) {
 						<div class="form-group row" id="cargacuota">
 							<label for="cuota" class="col-md-1 control-label"> Cuotas</label>
 							<div class="col-md-1">
-								<input type="number" class="form-control input-sm" id="cuota">
+								<input type="number" class="form-control input-sm" id="cuota" value="1">
 							</div>
+							
 						</div>
-				
+
 				
 				<div class="col-md-12">
 					<div class="pull-right">

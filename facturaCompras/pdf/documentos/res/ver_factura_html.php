@@ -238,8 +238,8 @@ table.page_footer {width: 100%; border: none; background-color: white; padding: 
                 $tipo=$rw_dato['tipo_dato'];
                
             }*/
-            echo $id_factura;
-            echo $tipo;
+            //echo $id_factura;
+           // echo $tipo;
         ?>
 	
     <table cellspacing="0" style="width: 100%; text-align: left; font-size: 11pt;">

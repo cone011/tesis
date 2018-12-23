@@ -273,12 +273,23 @@ table.page_footer {width: 100%; border: none; background-color: white; padding: 
           <td style="width:20%;"><?php echo date("d/m/Y");?></td>
            <td style="width:20%;" >
                 <?php 
+                //echo $fecha;
                 if ($condiciones==1){echo "Contado";}
                 elseif ($condiciones==2){echo "Credito a 30 dias";}
                 ?>
            </td>
             <td style="width:20%;">
                 <?php 
+                //$combinado=0;
+                if($pago==5){
+                    if($monto==$total){
+                      //echo "PASO LA VALIDACION";
+                      $combinado=0;
+                    }else{
+                      echo "MONTOS DE PAGOS COMBINADOS INCORRECTOS";
+                      $combinado=1;
+                    }
+                }
                 if ($pago==1){echo "Efectivo";}
                 elseif ($pago==2){echo "Tarjeta";}
                 elseif ($pago==3){echo "Cheque";}
@@ -323,10 +334,10 @@ table.page_footer {width: 100%; border: none; background-color: white; padding: 
             <td style="width:20%;" class='midnight-blue'>PAGO TRANSFERENCIA</td>
         </tr>
         <tr>
-           <td style="width:20%;"><?php echo $efectivo;?></td>
-          <td style="width:20%;"><?php echo $tarjeta;?></td>
-           <td style="width:20%;"><?php echo $cheque;?></td>
-           <td style="width:20%;"><?php echo $transferencia;?></td>
+           <td style="width:20%;"><?php echo number_format($efectivo,0);?></td>
+          <td style="width:20%;"><?php echo number_format($tarjeta,0);?></td>
+           <td style="width:20%;"><?php echo number_format($cheque,0);?></td>
+           <td style="width:20%;"><?php echo number_format($transferencia,0);?></td>
            <?php $parcial=$efectivo+$tarjeta+$cheque+$transferencia; ?>
 
         </tr>
@@ -462,23 +473,13 @@ while ($row=mysqli_fetch_array($sql))
 
      <?php 
 
-    //echo $parcial;
-     //echo $verificador_combinado;
-    /* if($pago==5){
-        $monto=0;
-        $sql_verificar=mysqli_query($con, "select * from tmp where tmp.session_id='".$session_id."'");
-        while ($row_verificar=mysqli_fetch_array($sql_verificar)){
-       $monto=$row_verificar['cantidad_tmp']*$row_verificar['precio_tmp'];
-       $verificador_combinado+=$monto;
-       //echo $verificador_combinado;
-       } 
-       if($verificador_combinado!=$parcial){
-         $verificador_factura=1;
+     
+      if($combinado==1){
          $condiciones=89;
        }
-     }*/
 
-       if($verificador_factura==1){
+
+       if($verificador_factura==1 || $combinado==1){
           $messages[] = "Uno de los Productos cargados es NEGATIVO VERIFCAR.";
         }else{
           $fechapro=date("Y-m-d H:i:s");
@@ -505,7 +506,7 @@ while ($row=mysqli_fetch_array($sql))
 
 ?>
 
- <?php if($verificador_factura==1){ ?>
+ <?php if($verificador_factura==1 || $combinado==1){ ?>
 
         <td style="width: 25%; color: #444444;">
                 <img style="width: 100%;" src="../../<?php echo get_row('perfil','marca_url', 'id_perfil', 1);?>" alt="Logo"><br>

@@ -53,18 +53,29 @@
 		}
 	}
     if($pago==5){
-       $sql_venta=mysqli_query($con, "select * from tmp where tmp.session_id='".$session_id."'");
+       $sql_venta=mysqli_query($con, "select * from tmp,productos where tmp.id_producto=productos.id_producto and tmp.session_id='".$session_id."'");
        while($row_venta=mysqli_fetch_array($sql_venta)){
-       	    $monto+=$row_venta['cantidad_tmp']*$row_venta['precio_tmp'];
-       	    //$monto=number_format($monto,0);
+       	    $validar=$row_venta['tipo'];
+       	    if($validar==1){
+               $monto+=$row_venta['cantidad_tmp'];
+       	    }else{
+               $monto+=$row_venta['cantidad_tmp']*$row_venta['precio_tmp'];
+       	    }
+            //echo $monto;
        }
        $total=$efectivo+$tarjeta+$cheque+$transferencia;
+       //echo $total;
        //$total=number_format($total,2);
        if($cheque<0 || $efectivo<0 || $transferencia<0 || $tarjeta<0){
            echo "<script>alert('Los montos de los pagos combinados no son correctos')</script>";
 	       echo "<script>window.close();</script>";
 	       exit;
        }
+       /*if($total!=$monto){
+           echo "<script>alert('Los montos de los pagos combinados no son correctos')</script>";
+	       echo "<script>window.close();</script>";
+	       exit;
+       }*/
        
     }
 	//Fin de variables por GET

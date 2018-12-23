@@ -40,10 +40,11 @@
 	$pf2=intval($_GET['pf2']);
 	$nrodoc=intval($_GET['nrodoc']);
 	$timbrado=intval($_GET['timbrado']);
+	//$fecha=$_GET['fecha'];
 	//$pago=mysqli_real_escape_string($con,(strip_tags($_REQUEST['pago'], ENT_QUOTES)));
 	$total=0;
 	$monto=0;
-    
+    $combinado=0;
 	if($condiciones==2){
 		if($cuota<=0){
             echo "<script>alert('Las cuota no pueden tener valor negativo o nulo')</script>";

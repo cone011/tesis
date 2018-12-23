@@ -16,7 +16,7 @@ if (isset($_POST['precio_venta'])){$precio_venta=$_POST['precio_venta'];}
 	//Archivo de funciones PHP
 	include("../funciones.php");
 
-if (!empty($id) and !empty($cantidad) and !empty($precio_venta) and $cantidad>0)
+if (!empty($id) and !empty($cantidad) and !empty($precio_venta) and $cantidad>0 and $precio_venta>0)
 {
 $insert_tmp=mysqli_query($con, "INSERT INTO tmp (id_producto,cantidad_tmp,precio_tmp,session_id) VALUES ('$id','$cantidad','$precio_venta','$session_id')");
 

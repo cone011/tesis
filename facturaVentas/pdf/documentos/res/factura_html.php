@@ -279,12 +279,23 @@ table.page_footer {width: 100%; border: none; background-color: white; padding: 
 		   </td>
            <td style="width:20%;">
                 <?php 
+                //echo $monto;
+
+                if($pago==5){
+                    if($monto==$total){
+                      //echo "PASO LA VALIDACION";
+                      $combinado=0;
+                    }else{
+                      echo "MONTOS DE PAGOS COMBINADOS INCORRECTOS";
+                      $combinado=1;
+                    }
+                }
                 if ($pago==1){echo "Efectivo";}
                 elseif ($pago==2){echo "Tarjeta";}
                 elseif ($pago==3){echo "Cheque";}
                 elseif ($pago==4){echo "Transferencia bancaria";}
                 elseif ($pago==5){echo "Pago Combinado";
-
+              
                    // echo $efectivo;
                 }
                 ?>      
@@ -426,6 +437,7 @@ while ($row=mysqli_fetch_array($sql))
       $precio_venta_f=number_format($precio_venta,0);//Formateo variables
       $precio_venta_r=str_replace(",","",$precio_venta_f);//Reemplazo las comas
       $precio_total=$precio_venta_r*$cantidad;
+      //echo $precio_total;
       //$precio_total=$precio_venta_r;
       $totalcantidad=$cantidadProducto-$cantidad;
       $precio_total_f=number_format($precio_total,0);//Precio total formateado
@@ -489,24 +501,13 @@ while ($row=mysqli_fetch_array($sql))
 
 	<?php 
     
-    
-     //echo $parcial;
-     //echo $verificador_combinado;
-     /*if($pago==5){
-        $sql_verificar=mysqli_query($con, "select * from tmp where tmp.session_id='".$session_id."'");
-        while ($row_verificar=mysqli_fetch_array($sql_verificar)){
-       $monto=$row_verificar['cantidad_tmp']*$row_verificar['precio_tmp'];
-       $verificador_combinado+=$monto;
-       //echo $verificador_combinado;
-       } 
-       if($verificador_combinado!=$parcial){
-         $verificador_factura=1;
+
+       if($combinado==1){
          $condiciones=89;
        }
-     }*/
 
 
-   if($verificador_factura==1){
+   if($verificador_factura==1 || $combinado==1){
        $messages[] = "Error de cantidad de en la factura porfavor intentelo de nuevo.";
     }else{   
         $fech=date("Y-m-d");
@@ -578,7 +579,7 @@ while ($row=mysqli_fetch_array($sql))
 
 	
 ?>
-    <?php if($verificador_factura==1){ ?>
+    <?php if($verificador_factura==1 || $combinado==1){ ?>
 
         <td style="width: 25%; color: #444444;">
                 <img style="width: 100%;" src="../../<?php echo get_row('perfil','marca_url', 'id_perfil', 1);?>" alt="Logo"><br>

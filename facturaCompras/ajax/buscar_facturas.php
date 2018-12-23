@@ -131,7 +131,6 @@
 						<td class='text-right'><?php echo number_format ($montobk); ?></td>
 						<td class='text-right'><?php echo number_format ($saldo); ?></td>					
 					<td class="text-right"> 
-						<a href="editar_factura.php?id_factura=<?php echo $id_factura;?>" class='btn btn-default' title='Editar O.C.' ><i class="glyphicon glyphicon-edit"></i></a>
 						<a href="#" class='btn btn-default' title='Descargar O.C.' onclick="imprimir_factura('<?php echo $id_factura;?>');"><i class="glyphicon glyphicon-download"></i></a> 
 						<?php if($estado_factura==2){ ?>
 						<a href="#" class='btn btn-default' title='Anular O.C.' onclick="eliminar('<?php echo $numero_factura; ?>')"><i class="glyphicon glyphicon-trash"></i> </a>
