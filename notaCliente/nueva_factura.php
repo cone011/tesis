@@ -174,7 +174,7 @@ while ($r=$query->fetch_array()){
     <div class="container">
 	<div class="panel panel-info">
 		<div class="panel-heading">
-			<h4><i class='glyphicon glyphicon-edit'></i> Nueva Factura</h4>
+			<h4><i class='glyphicon glyphicon-edit'></i> Nueva NC</h4>
 		</div>
 		<div class="panel-body">
 		<?php 

@@ -17,7 +17,7 @@
 	$count=mysqli_num_rows($sql_count);
 	if ($count==0)
 	{
-	echo "<script>alert('No hay productos agregados a la factura')</script>";
+	echo "<script>alert('No hay Facturas Recibidas en la NC')</script>";
 	echo "<script>window.close();</script>";
 	exit;
 	}

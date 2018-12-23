@@ -308,6 +308,7 @@ $monto5=0;
 $monto0=0;
 $totalcantidad=0;
 $cantidad=0;
+$total=0;
 $verificador_factura=0;
 $sql=mysqli_query($con, "select * from cuentacliente, tmp where cuentacliente.numero_factura=tmp.id_producto and tmp.session_id='".$session_id."'");
 while ($row=mysqli_fetch_array($sql))
@@ -338,6 +339,7 @@ while ($row=mysqli_fetch_array($sql))
     $id_tmp=$row["id_tmp"];
     $codigo_producto='001'.'-'.'001'.'-'.$row['numero_factura'];
     $cantidadtmp=$row['cantidad_tmp'];
+    $$total+=$cantidadtmp;
     $numero_factura=$row['numero_factura'];
     //DISMINUYE SALDO DE CLIENTE
     $diferencia=$precio_venta-$cantidadtmp;
@@ -398,8 +400,8 @@ while ($row=mysqli_fetch_array($sql))
         <tr>
             <td class='<?php echo $clase;?>' style="width: 10%; text-align: center"><?php echo $codigo_producto;  ?></td>
             <td class='<?php echo $clase;?>' style="width: 60%; text-align: left"><?php echo $nombre;?></td>
-            <td class='<?php echo $clase;?>' style="width: 15%; text-align: right"><?php echo $cantidadtmp;?></td>
-            <td class='<?php echo $clase;?>' style="width: 15%; text-align: right"><?php echo $diferencia;?></td>
+            <td class='<?php echo $clase;?>' style="width: 15%; text-align: right"><?php echo number_format($cantidadtmp,0);?></td>
+            <td class='<?php echo $clase;?>' style="width: 15%; text-align: right"><?php echo number_format($diferencia,0);?></td>
             
         </tr>
 
@@ -457,6 +459,11 @@ while ($row=mysqli_fetch_array($sql))
     $titulo_monto = numtoletras($totalfact);*/
 
 ?>
+
+    <tr>
+            <td colspan="3" style="widtd: 85%; text-align: right;">TOTAL NC. <?php echo $simbolo_moneda; ?> </td>
+            <td style="widtd: 15%; text-align: right;"> <?php echo number_format($total,0);?></td>
+        </tr>
       
     </table>
     

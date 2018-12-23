@@ -13,9 +13,9 @@
 		 /*$aColumns = array('codigo_producto', 'nombre_producto', 'status_producto');//Columnas de busqueda
 		 $sTable = "productos";
 		 $sWhere = "";*/
-		  $sTable = "cuentacliente,cliente,detalle_venta";
+		  $sTable = "cuentacliente,cliente,venta";
 		 $sWhere = "";
-		 $sWhere.=" WHERE cuentacliente.id_cliente=cliente.id_cliente and detalle_venta.numero_factura=cuentacliente.numero_factura and cuentacliente.saldo_factura>0";
+		 $sWhere.=" WHERE cuentacliente.id_cliente=cliente.id_cliente and venta.numero_factura=cuentacliente.numero_factura and cuentacliente.saldo_factura>0";
 		if ( $_GET['q'] != "" )
 		{
 			/*$sWhere = "WHERE (";

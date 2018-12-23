@@ -256,8 +256,8 @@ table.page_footer {width: 100%; border: none; background-color: white; padding: 
        <br>
         <table cellspacing="0" style="width: 100%; text-align: left; font-size: 11pt;">
         <tr>
-           <td style="width:25%;" class='midnight-blue'>VENDEDOR</td>
-          <td style="width:20%;" class='midnight-blue'>FECHA</td>
+           <td style="width:25%;" class='midnight-blue'>ENCARGADO</td>
+          <td style="width:20%;" class='midnight-blue'>FECHA DEL COBRO</td>
          <?php if($validacion==1){ ?> 
            <td style="width:20%;" class='midnight-blue'>FORMA DE PAGO</td>
             <td style="width:20%;" class='midnight-blue'>TIPO PAGO</td>
@@ -328,7 +328,7 @@ table.page_footer {width: 100%; border: none; background-color: white; padding: 
             <th style="width: 20%;text-align:center" class='midnight-blue'>NRO FACTURA.</th>
             <th style="width: 50%" class='midnight-blue'>DESCRIPCION</th>
             <th style="width: 15%;text-align: right" class='midnight-blue'>MONTO COBRANZA.</th>
-            <th style="width: 15%;text-align: right" class='midnight-blue'>Sal. Sobra</th>
+            <th style="width: 15%;text-align: right" class='midnight-blue'>SALDO SOBRANTE.</th>
             
         </tr>
 
@@ -345,6 +345,7 @@ $auxiva10=0;
 $monto10=0;
 $monto5=0;
 $monto0=0;
+$total=0;
 $verificador_factura=0;
 $sql=mysqli_query($con, "select * from venta, tmp where venta.numero_factura=tmp.id_producto and tmp.session_id='".$session_id."'");
 while ($row=mysqli_fetch_array($sql))
@@ -361,7 +362,7 @@ while ($row=mysqli_fetch_array($sql))
     $cantidadProducto=$row['cantidad_producto'];
     $iva=$row['iva_producto'];
     $acciondetalle='AGREGADO';*/
-
+  
     $precioUnitario=$row['total_venta'];    
     $precio_venta=$row['precio_tmp'];
     $id_tmp=$row["id_tmp"];
@@ -369,6 +370,7 @@ while ($row=mysqli_fetch_array($sql))
     $cantidadtmp=$row['cantidad_tmp'];
     $numero_factura=$row['numero_factura'];
     $diferencia=$precio_venta-$cantidadtmp;
+    $total+=$cantidadtmp;
     $format=number_format($precio_venta,0);
     $sql_producto=mysqli_query($con, "select * from cliente, venta where venta.id_cliente=cliente.id_cliente");
     while ($rw=mysqli_fetch_array($sql_producto))
@@ -417,8 +419,8 @@ while ($row=mysqli_fetch_array($sql))
         <tr>
             <td class='<?php echo $clase;?>' style="width: 20%; text-align: center"><?php echo $codigo_producto; ?></td>
             <td class='<?php echo $clase;?>' style="width: 50%; text-align: left"><?php echo $nombre;?></td>
-            <td class='<?php echo $clase;?>' style="width: 15%; text-align: right"><?php echo $cantidadtmp;?></td>
-            <td class='<?php echo $clase;?>' style="width: 15%; text-align: right"><?php echo $diferencia;?></td>
+            <td class='<?php echo $clase;?>' style="width: 15%; text-align: right"><?php echo number_format($cantidadtmp,0);?></td>
+            <td class='<?php echo $clase;?>' style="width: 15%; text-align: right"><?php echo number_format($diferencia);?></td>
             
         </tr>
 
@@ -472,7 +474,10 @@ while ($row=mysqli_fetch_array($sql))
     $total_factura=$subtotal;
     $titulo_monto = numtoletras($totalfact);*/
 
-?>
+?>   <tr>
+            <td colspan="3" style="widtd: 85%; text-align: right;">TOTAL COBRANZA <?php echo $simbolo_moneda; ?> </td>
+            <td style="widtd: 15%; text-align: right;"> <?php echo number_format($total,0);?></td>
+        </tr>
       
     </table>
     

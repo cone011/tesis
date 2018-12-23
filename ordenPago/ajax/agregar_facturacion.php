@@ -16,7 +16,7 @@ if (isset($_POST['precio_venta'])){$precio_venta=$_POST['precio_venta'];}
 	//Archivo de funciones PHP
 	include("../funciones.php");
 
-if (!empty($id) and !empty($cantidad) and !empty($precio_venta) and $cantidad>0)
+if (!empty($id) and !empty($cantidad) and !empty($precio_venta) and $cantidad>0 and ($cantidad<=$precio_venta))
 {
 $insert_tmp=mysqli_query($con, "INSERT INTO tmp (id_producto,cantidad_tmp,precio_tmp,session_id) VALUES ('$id','$cantidad','$precio_venta','$session_id')");
 
@@ -48,6 +48,7 @@ $simbolo_moneda=get_row('perfil','moneda', 'id_perfil', 1);
     $monto10=0;
     $monto5=0;
     $monto0=0;
+    $total=0;
 	$sql=mysqli_query($con, "select * from compra, tmp where compra.numero_factura=tmp.id_producto and tmp.session_id='".$session_id."'");
 	while ($row=mysqli_fetch_array($sql))
 	{
@@ -66,7 +67,7 @@ $simbolo_moneda=get_row('perfil','moneda', 'id_perfil', 1);
 	}
 	$format=number_format($precio_venta,0);
 	$diferencia=$precio_venta-$cantidadtmp;
-	
+	$total+=$cantidadtmp;
 
 	
 		?>
@@ -74,8 +75,8 @@ $simbolo_moneda=get_row('perfil','moneda', 'id_perfil', 1);
 			<td class='text-center'><?php echo $codigo_producto;?></td>
 			<td class='text-center'><?php echo $dato;?></td>
 			<td><?php echo $format;?></td>
-			<td class='text-right'><?php echo $cantidadtmp;?></td>
-			<td class='text-right'><?php echo $diferencia;?></td>
+			<td class='text-right'><?php echo number_format($cantidadtmp,0);?></td>
+			<td class='text-right'><?php echo number_format($diferencia,0);?></td>
 			<td class='text-center'><a href="#" onclick="eliminar('<?php echo $id_tmp ?>')"><i class="glyphicon glyphicon-trash"></i></a></td>
 		</tr>		
 		<?php
@@ -90,6 +91,10 @@ $simbolo_moneda=get_row('perfil','moneda', 'id_perfil', 1);
 	//$total_factura=$subtotal;*/
 
 ?>
-
+<tr>
+	<td class='text-right' colspan=4>TOTAL COBRANZA <?php echo $simbolo_moneda;?></td>
+	<td class='text-right'><?php echo number_format($total,0);?></td>
+	<td></td>
+</tr>
 
 </table>
