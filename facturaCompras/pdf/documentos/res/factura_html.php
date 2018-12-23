@@ -464,7 +464,7 @@ while ($row=mysqli_fetch_array($sql))
 
     //echo $parcial;
      //echo $verificador_combinado;
-     if($pago==5){
+    /* if($pago==5){
         $monto=0;
         $sql_verificar=mysqli_query($con, "select * from tmp where tmp.session_id='".$session_id."'");
         while ($row_verificar=mysqli_fetch_array($sql_verificar)){
@@ -476,7 +476,7 @@ while ($row=mysqli_fetch_array($sql))
          $verificador_factura=1;
          $condiciones=89;
        }
-     }
+     }*/
 
        if($verificador_factura==1){
           $messages[] = "Uno de los Productos cargados es NEGATIVO VERIFCAR.";
