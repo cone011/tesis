@@ -474,13 +474,11 @@ while ($row=mysqli_fetch_array($sql))
     $total_factura=$subtotal;
     $titulo_monto = numtoletras($totalfact);*/
 
-?>   <tr>
-            <td colspan="3" style="widtd: 85%; text-align: right;">TOTAL COBRANZA <?php echo $simbolo_moneda; ?> </td>
-            <td style="widtd: 15%; text-align: right;"> <?php echo number_format($total,0);?></td>
-        </tr>
+?>   
       
     </table>
-    
+    <div style="font-size:09pt;text-align:center;font-weight:bold">TOTAL COBRANZA:</div>
+        <div style="font-size:09pt;text-align:center;font-weight:bold"><?php echo number_format($total,0);?></div>
      <?php if($verificador_factura==1){ ?>
         <div style="font-size:09pt;text-align:center;font-weight:bold"><?php echo 'ERROR DE CANTIDAD NEGATIVO
         CARGAR DE NUEVO EL PRODUCTO';?></div>

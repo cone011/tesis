@@ -48,11 +48,12 @@ $simbolo_moneda=get_row('perfil','moneda', 'id_perfil', 1);
     $monto5=0;
     $monto0=0;
     $totalnc=0;
-	$sql=mysqli_query($con, "select * from cuentaproveedor, tmp where cuentaproveedor.numero_factura=tmp.id_producto and tmp.session_id='".$session_id."'");
+	$sql=mysqli_query($con, "select * from compra, tmp where compra.numero_factura=tmp.id_producto and tmp.session_id='".$session_id."'");
 	while ($row=mysqli_fetch_array($sql))
 	{
 	$precioUnitario=$row['total_venta'];	
 	$precio_venta=$row['precio_tmp'];
+	$saldo=$row['saldo_factura'];
 	$id_tmp=$row["id_tmp"];
 	$codigo_producto=$row['numero_factura'];
 	$cantidadtmp=$row['cantidad_tmp'];
@@ -62,7 +63,7 @@ $simbolo_moneda=get_row('perfil','moneda', 'id_perfil', 1);
         $nombre=$rw['nombre_cliente'];
 	}
 	$format=number_format($precio_venta,0);
-	$diferencia=$precio_venta-$cantidadtmp;
+	$diferencia=$saldo-$cantidadtmp;
 	$totalnc+=$cantidadtmp;
 	//$precioUnitario=$row['precio_producto'];	
 	//$precio_venta=$row['precio_tmp'];

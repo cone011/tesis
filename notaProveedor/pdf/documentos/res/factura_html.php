@@ -257,7 +257,7 @@ table.page_footer {width: 100%; border: none; background-color: white; padding: 
         <table cellspacing="0" style="width: 100%; text-align: left; font-size: 11pt;">
         <tr>
           <td style="width:25%;" class='midnight-blue'>VENDEDOR</td>
-          <td style="width:20%;" class='midnight-blue'>FECHA</td>
+          <td style="width:20%;" class='midnight-blue'>FECHA DE NC</td>
            <td style="width:20%;" class='midnight-blue'>TIPO NC</td>
         </tr>
         <tr>
@@ -290,7 +290,7 @@ table.page_footer {width: 100%; border: none; background-color: white; padding: 
             <th style="width: 10%;text-align:center" class='midnight-blue'>NRO N.C.</th>
             <th style="width: 60%" class='midnight-blue'>DESCRIPCION</th>
             <th style="width: 15%;text-align: right" class='midnight-blue'>MONTO N.C.</th>
-            <th style="width: 15%;text-align: right" class='midnight-blue'>Sal. Sobra</th>
+            <th style="width: 15%;text-align: right" class='midnight-blue'>SAL. SOBRA</th>
             
         </tr>
 
@@ -310,7 +310,7 @@ $monto0=0;
 $verificador_factura=0;
 $verificador_combinado=0;
 $totalnc=0;
-$sql=mysqli_query($con, "select * from cuentaproveedor, tmp where cuentaproveedor.numero_factura=tmp.id_producto and tmp.session_id='".$session_id."'");
+$sql=mysqli_query($con, "select * from compra, tmp where compra.numero_factura=tmp.id_producto and tmp.session_id='".$session_id."'");
 while ($row=mysqli_fetch_array($sql))
     {
     /*$precioUnitario=$row['precio_producto'];    
@@ -331,9 +331,10 @@ while ($row=mysqli_fetch_array($sql))
     $id_tmp=$row["id_tmp"];
     $codigo_producto=$row['id_producto'];
     $cantidadtmp=$row['cantidad_tmp'];
+    $saldo=$row['saldo_factura'];
     $totalnc+=$cantidadtmp;
     $numero_factura=$row['numero_factura'];
-    $diferencia=$precio_venta-$cantidadtmp;
+    $diferencia=$saldo-$cantidadtmp;
     $format=number_format($precio_venta,0);
     $sql_producto=mysqli_query($con, "select * from proveedores, cuentaproveedor where cuentaproveedor.id_cliente=proveedores.id_cliente");
     while ($rw=mysqli_fetch_array($sql_producto))
@@ -402,7 +403,7 @@ while ($row=mysqli_fetch_array($sql))
         </tr>
 
      <?php 
-     if($pago==5){
+     /*if($pago==5){
         $monto=0;
         $sql_verificar=mysqli_query($con, "select * from tmp where tmp.session_id='".$session_id."'");
         while ($row_verificar=mysqli_fetch_array($sql_verificar)){
@@ -414,7 +415,7 @@ while ($row=mysqli_fetch_array($sql))
          $verificador_factura=1;
          $condiciones=89;
        }
-     }
+     }*/
 
        if($verificador_factura==1){
           $messages[] = "Uno de los Productos cargados es NEGATIVO VERIFCAR.";
@@ -429,7 +430,7 @@ while ($row=mysqli_fetch_array($sql))
           //Insert en la tabla detalle_cotizacion
           if($diferencia==0){
             
-            $sql_cuenta="UPDATE compra SET saldo_factura='".$diferencia."', estado_factura=1 WHERE numero_factura='".$numero_factura."'";
+            $sql_cuenta="UPDATE compra SET saldo_factura='".$diferencia."', estado_factura=10 WHERE numero_factura='".$numero_factura."'";
            $query_update = mysqli_query($con,$sql_cuenta);
 
            $sql_ncliente="UPDATE cuentaproveedor SET saldo_factura='".$diferencia."', estado_factura=1 WHERE numero_factura='".$numero_factura."'";
@@ -470,14 +471,14 @@ while ($row=mysqli_fetch_array($sql))
     $titulo_monto = numtoletras($totalfact);*/
 
 ?>    
-        <tr>
-            <td colspan="3" style="widtd: 85%; text-align: right;">TOTAL NC<?php echo $simbolo_moneda;?> </td>
-            <td style="widtd: 15%; text-align: right;"> <?php echo number_format($sumador_total,0);?></td>
-        </tr>
+      
     
       
     </table>
     
+
+     <div style="font-size:09pt;text-align:center;font-weight:bold">TOTAL NC:</div>
+        <div style="font-size:09pt;text-align:center;font-weight:bold"><?php echo number_format($totalnc,0);?></div>
      <?php if($verificador_factura==1){ ?>
         <div style="font-size:09pt;text-align:center;font-weight:bold"><?php echo 'ERROR DE CANTIDAD NEGATIVO
         CARGAR DE NUEVO EL PRODUCTO';?></div>

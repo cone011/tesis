@@ -520,7 +520,7 @@ while ($row=mysqli_fetch_array($sql))
 
        $insert_detail=mysqli_query($con, "INSERT INTO detalle_venta VALUES ('','$numero_factura','$id_producto','$cantidad','$precio_venta_r','$fech','$totalcantidad')");
        $insert_audidetail=mysqli_query($con, "INSERT INTO audidetalle_venta VALUES ('','$numero_factura','$id_producto','$cantidad','$precio_venta_r','$accion')");
-       $insert_detail=mysqli_query($con, "INSERT INTO venta VALUES ('','$numero_factura')");
+       //$insert_detail=mysqli_query($con, "INSERT INTO venta VALUES ('','$numero_factura')");
     }
     
     
