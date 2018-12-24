@@ -120,7 +120,7 @@ while ($r=$query->fetch_array()){
     	$factura="hide";
     }
 
-	
+	$ocultar=1;
 
 
 	$title="Nueva Factura | Estacion E.M.R.";
@@ -247,8 +247,8 @@ function mostrar_cuota(id) {
 							<label for="email" class="col-md-1 control-label" >Condicion</label>
 							<div class="col-md-2">
 								<select class='form-control input-sm' name="formapago" id="condiciones" onChange="mostrar_cuota(this.value);">
-									<option value="1">Contado</option>
-									<option value="2" selected>Credito</option>
+									<option value="1" selected>Contado</option>
+									<option value="2">Credito</option>
 								</select>
 							</div>
                        
@@ -289,14 +289,15 @@ function mostrar_cuota(id) {
 							
 							
 						</div>
-
+                    
+                    <?php if($ocultar!=1){ ?>
 						<div class="form-group row" id="cargacuota">
 							<label for="cuota" class="col-md-1 control-label"> Cuotas</label>
 							<div class="col-md-1">
 								<input type="number" class="form-control input-sm" id="cuota" value="1">
 							</div>
 						</div>
-				
+				 <?php }  ?>
 				
 				<div class="col-md-12">
 					<div class="pull-right">

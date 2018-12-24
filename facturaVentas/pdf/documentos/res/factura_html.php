@@ -178,32 +178,32 @@ table { vertical-align: top; }
 tr    { vertical-align: top; }
 td    { vertical-align: top; }
 .midnight-blue{
-	background:#2c3e50;
-	padding: 4px 4px 4px;
-	color:white;
-	font-weight:bold;
-	font-size:12px;
+    background:#2c3e50;
+    padding: 4px 4px 4px;
+    color:white;
+    font-weight:bold;
+    font-size:12px;
 }
 .silver{
-	background:white;
-	padding: 3px 4px 3px;
+    background:white;
+    padding: 3px 4px 3px;
 }
 .clouds{
-	background:#ecf0f1;
-	padding: 3px 4px 3px;
+    background:#ecf0f1;
+    padding: 3px 4px 3px;
 }
 .border-top{
-	border-top: solid 1px #bdc3c7;
-	
+    border-top: solid 1px #bdc3c7;
+    
 }
 .border-left{
-	border-left: solid 1px #bdc3c7;
+    border-left: solid 1px #bdc3c7;
 }
 .border-right{
-	border-right: solid 1px #bdc3c7;
+    border-right: solid 1px #bdc3c7;
 }
 .border-bottom{
-	border-bottom: solid 1px #bdc3c7;
+    border-bottom: solid 1px #bdc3c7;
 }
 table.page_footer {width: 100%; border: none; background-color: white; padding: 2mm;border-collapse:collapse; border: none;}
 }
@@ -227,60 +227,59 @@ table.page_footer {width: 100%; border: none; background-color: white; padding: 
     <br>
     
 
-	
+    
     <table cellspacing="0" style="width: 100%; text-align: left; font-size: 11pt;">
         <tr>
            <td style="width:50%;" class='midnight-blue'>FACTURAR A</td>
         </tr>
-		<tr>
+        <tr>
            <td style="width:50%;" >
-			<?php 
-				$sql_cliente=mysqli_query($con,"select * from cliente where id_cliente='$id_cliente'");
-				$rw_cliente=mysqli_fetch_array($sql_cliente);
-				echo $rw_cliente['telefono_cliente'];
-				echo "<br>";
-				echo $rw_cliente['direccion_cliente'];
-				echo "<br> Ruc: ";
-				echo $rw_cliente['nombre_cliente'];
-				echo "<br> Telefono: ";
-				echo $rw_cliente['email_cliente'];
-			?>
-			
-		   </td>
+            <?php 
+                $sql_cliente=mysqli_query($con,"select * from cliente where id_cliente='$id_cliente'");
+                $rw_cliente=mysqli_fetch_array($sql_cliente);
+                echo $rw_cliente['telefono_cliente'];
+                echo "<br>";
+                echo $rw_cliente['direccion_cliente'];
+                echo "<br> Ruc: ";
+                echo $rw_cliente['nombre_cliente'];
+                echo "<br> Telefono: ";
+                echo $rw_cliente['email_cliente'];
+            ?>
+            
+           </td>
         </tr>
         
    
     </table>
     
        <br>
-		<table cellspacing="0" style="width: 100%; text-align: left; font-size: 11pt;">
+        <table cellspacing="0" style="width: 100%; text-align: left; font-size: 11pt;">
         <tr>
            <td style="width:25%;" class='midnight-blue'>VENDEDOR</td>
-		  <td style="width:20%;" class='midnight-blue'>FECHA</td>
-		   <td style="width:20%;" class='midnight-blue'>FORMA DE PAGO</td>
+          <td style="width:20%;" class='midnight-blue'>FECHA</td>
+           <td style="width:20%;" class='midnight-blue'>FORMA DE PAGO</td>
             <td style="width:20%;" class='midnight-blue'>TIPO PAGO</td>
         </tr>
-		<tr>
+        <tr>
            <td style="width:35%;">
-			<?php 
-				$sql_user=mysqli_query($con,"select * from users where user_id='$id_vendedor'");
-				$rw_user=mysqli_fetch_array($sql_user);
-				echo $rw_user['firstname']." ".$rw_user['lastname'];
+            <?php 
+                $sql_user=mysqli_query($con,"select * from users where user_id='$id_vendedor'");
+                $rw_user=mysqli_fetch_array($sql_user);
+                echo $rw_user['firstname']." ".$rw_user['lastname'];
                 $quien=$rw_user['firstname']." ".$rw_user['lastname'];
-			?>
-		   </td>
-		  <td style="width:20%;"><?php echo date("d/m/Y");?></td>
-		   <td style="width:20%;" >
-				<?php 
-				if ($condiciones==1){echo "Contado";
+            ?>
+           </td>
+          <td style="width:20%;"><?php echo date("d/m/Y");?></td>
+           <td style="width:20%;" >
+                <?php 
+                if ($condiciones==1){echo "Contado";
                     $cuota=0;}
-				elseif ($condiciones==2){echo "Credito a 30 dias";}
-				?>      
-		   </td>
+                elseif ($condiciones==2){echo "Credito a 30 dias";}
+                ?>      
+           </td>
            <td style="width:20%;">
                 <?php 
-                //echo $monto;
-
+                $combinado=0;
                 if($pago==5){
                     if($monto==$total){
                       //echo "PASO LA VALIDACION";
@@ -295,7 +294,6 @@ table.page_footer {width: 100%; border: none; background-color: white; padding: 
                 elseif ($pago==3){echo "Cheque";}
                 elseif ($pago==4){echo "Transferencia bancaria";}
                 elseif ($pago==5){echo "Pago Combinado";
-              
                    // echo $efectivo;
                 }
                 ?>      
@@ -303,7 +301,7 @@ table.page_footer {width: 100%; border: none; background-color: white; padding: 
 
 
         </tr>
-		
+        
         
    
     </table>
@@ -317,12 +315,11 @@ table.page_footer {width: 100%; border: none; background-color: white; padding: 
             <td style="width:20%;" class='midnight-blue'>PAGO TRANSFERENCIA</td>
         </tr>
         <tr>
-           <td style="width:20%;"><?php echo $efectivo;?></td>
-          <td style="width:20%;"><?php echo $tarjeta;?></td>
-           <td style="width:20%;"><?php echo $cheque;?></td>
-           <td style="width:20%;"><?php echo $transferencia;?></td>
-           <?php $parcial=$efectivo+$tarjeta+$cheque+$transferencia;
-                 //echo $parcial;?>
+           <td style="width:20%;"><?php echo number_format($efectivo,0);?></td>
+          <td style="width:20%;"><?php echo number_format($tarjeta,0);?></td>
+           <td style="width:20%;"><?php echo number_format($cheque,0);?></td>
+           <td style="width:20%;"><?php echo number_format($transferencia,0);?></td>
+           <?php $parcial=$efectivo+$tarjeta+$cheque+$transferencia?>
 
         </tr>
         
@@ -331,7 +328,7 @@ table.page_footer {width: 100%; border: none; background-color: white; padding: 
     </table>
 <?php } ?>
 
-	<br>
+    <br>
   
     <table cellspacing="0" style="width: 100%; text-align: left; font-size: 10pt;">
         <tr>
@@ -369,16 +366,16 @@ while ($row=mysqli_fetch_array($sql)){
     $cantidadtmp=$row['cantidad_tmp'];
     //$cantidad=number_format($precio_venta/$precioUnitario,2);
 
-    $tipo=$row['tipo'];;
+    $tipo=$row['tipo'];
 
     $totalcantidad=0;
 
     
 
     if($tipo==1){
-      $cantidad=number_format($cantidadtmp/$precioUnitario,8); 
-      $cantidad_imprimir=number_format($cantidadtmp/$precioUnitario,2); 
-      $precio_venta_f=number_format($cantidadtmp,2);//Formateo variables
+      $cantidad=number_format($precio_venta/$precioUnitario,8); 
+      $cantidad_imprimir=number_format($precio_venta/$precioUnitario,2); 
+      $precio_venta_f=number_format($precio_venta,2);//Formateo variables
       $precio_venta_r=str_replace(",","",$precio_venta_f);//Reemplazo las comas
       $precio_total=$precio_venta_r;
       $precio_total_f=number_format($precio_total,0);//Precio total formateado
@@ -397,31 +394,31 @@ while ($row=mysqli_fetch_array($sql)){
 }
 $sql=mysqli_query($con, "select * from productos, tmp where productos.id_producto=tmp.id_producto and tmp.session_id='".$session_id."'");
 while ($row=mysqli_fetch_array($sql))
-	{
-	$precioUnitario=$row['precio_producto'];	
-	$precio_venta=$row['precio_tmp'];	
-	$id_tmp=$row["id_tmp"];
-	$id_producto=$row["id_producto"];
-	$codigo_producto=$row['codigo_producto'];
+    {
+    $precioUnitario=$row['precio_producto'];    
+    $precio_venta=$row['precio_tmp'];   
+    $id_tmp=$row["id_tmp"];
+    $id_producto=$row["id_producto"];
+    $codigo_producto=$row['codigo_producto'];
     $cantidadtmp=$row['cantidad_tmp'];
-	//$cantidad=number_format($precio_venta/$precioUnitario,2);
-	$nombre_producto=$row['nombre_producto'];
+    //$cantidad=number_format($precio_venta/$precioUnitario,2);
+    $nombre_producto=$row['nombre_producto'];
     $cantidadProducto=$row['cantidad_producto'];
     $tipo=$row['tipo'];
     $iva=$row['iva_producto'];
     $cantidad_producto=$row['cantidad_producto'];
     $precio_aux=$row['precio_producto'];
     $totalcantidad=0;
-	
-	/*$precio_venta_f=number_format($precio_venta,2);//Formateo variables
-	$precio_venta_r=str_replace(",","",$precio_venta_f);//Reemplazo las comas
-	$precio_total=$precio_venta_r;
-	$precio_total_f=number_format($precio_total,2);//Precio total formateado
-	$precio_total_r=str_replace(",","",$precio_total_f);//Reemplazo las comas
-	$sumador_total+=$precio_total_r;//Sumador*/
+    
+    /*$precio_venta_f=number_format($precio_venta,2);//Formateo variables
+    $precio_venta_r=str_replace(",","",$precio_venta_f);//Reemplazo las comas
+    $precio_total=$precio_venta_r;
+    $precio_total_f=number_format($precio_total,2);//Precio total formateado
+    $precio_total_r=str_replace(",","",$precio_total_f);//Reemplazo las comas
+    $sumador_total+=$precio_total_r;//Sumador*/
     if($tipo==1){
-      $cantidad=number_format($cantidadtmp/$precioUnitario,8); 
-      $cantidad_imprimir=number_format($cantidadtmp/$precioUnitario,2); 
+      $cantidad=number_format($precio_venta/$precioUnitario,8); 
+      $cantidad_imprimir=number_format($cantidadtmp/$precioUnitario,2);    
       $precio_venta_f=number_format($cantidadtmp,2);//Formateo variables
       $precio_venta_r=str_replace(",","",$precio_venta_f);//Reemplazo las comas
       //$precio_total=$precio_venta_r*$cantidad;
@@ -430,14 +427,13 @@ while ($row=mysqli_fetch_array($sql))
       $precio_total_f=number_format($precio_total,0);//Precio total formateado
       $precio_total_r=str_replace(",","",$precio_total_f);//Reemplazo las comas
       $sumador_total+=$precio_total_r;//Sumador
-      $monto0+=$precio_venta;
+      $monto0+=$cantidadtmp;
     }else{
       $cantidad=$row['cantidad_tmp'];
       $cantidad_imprimir=$row['cantidad_tmp'];
       $precio_venta_f=number_format($precio_venta,0);//Formateo variables
       $precio_venta_r=str_replace(",","",$precio_venta_f);//Reemplazo las comas
       $precio_total=$precio_venta_r*$cantidad;
-      //echo $precio_total;
       //$precio_total=$precio_venta_r;
       $totalcantidad=$cantidadProducto-$cantidad;
       $precio_total_f=number_format($precio_total,0);//Precio total formateado
@@ -445,11 +441,11 @@ while ($row=mysqli_fetch_array($sql))
       $sumador_total+=$precio_total_r;//Sumador
     }
     $accion='AGREGADO';
-	if ($nums%2==0){
-		$clase="clouds";
-	} else {
-		$clase="silver";
-	}
+    if ($nums%2==0){
+        $clase="clouds";
+    } else {
+        $clase="silver";
+    }
 
     if($iva==1){
       $ivaux=($precio_total_r / 1.1 )*0.1;
@@ -484,7 +480,7 @@ while ($row=mysqli_fetch_array($sql))
        $verificador_factura=1;
     }*/
 
-	?>
+    ?>
 
         <tr>
             <td class='<?php echo $clase;?>' style="width: 10%; text-align: center"><?php echo number_format($cantidad_imprimir,2); ?></td>
@@ -495,18 +491,19 @@ while ($row=mysqli_fetch_array($sql))
             <td class='<?php echo $clase;?>' style="width: 15%; text-align: right"><?php echo $precio_venta_f;?></td>
         <?php } ?>
             <td class='<?php echo $clase;?>' style="width: 15%; text-align: right"><?php echo $precio_total_f;?></td>
-        
             
         </tr>
 
-	<?php 
+    <?php 
     
-
-       if($combinado==1){
+    
+     //echo $parcial;
+     //echo $verificador_combinado;
+     if($combinado==1){
          $condiciones=89;
+         $verificador_factura=1;
        }
-
-
+   // $fech=date("Y-m-d");    
    if($verificador_factura==1 || $combinado==1){
        $messages[] = "Error de cantidad de en la factura porfavor intentelo de nuevo.";
     }else{   
@@ -514,17 +511,24 @@ while ($row=mysqli_fetch_array($sql))
         //Insert en la tabla detalle_cotizacion
         $sqlproducto="UPDATE productos SET cantidad_producto='".$totalcantidad."' WHERE id_producto='".$id_producto."'";
         $query_update = mysqli_query($con,$sqlproducto);
-        $insert_detail=mysqli_query($con, "INSERT INTO detalle_venta VALUES ('','$numero_factura','$id_producto','$cantidad','$precio_venta_r','$fech','$totalcantidad')");
+       
+
+       /*$insert_audidetail=mysqli_query($con, "INSERT INTO audidetalle_venta VALUES ('','$numero_factura','$id_producto','$cantidad','$precio_venta_r','$accion')");
+       $insert_detail=mysqli_query($con, "INSERT INTO venta VALUES ('','$numero_factura')");*/
+       /*$insert_detail=mysqli_query($con, "INSERT INTO detalle_test VALUES ('','$numero_factura','$id_producto','$cantidad','$precio_venta_r','$fech','$totalcantidad')");*/
+
+
+       $insert_detail=mysqli_query($con, "INSERT INTO detalle_venta VALUES ('','$numero_factura','$id_producto','$cantidad','$precio_venta_r','$fech','$totalcantidad')");
        $insert_audidetail=mysqli_query($con, "INSERT INTO audidetalle_venta VALUES ('','$numero_factura','$id_producto','$cantidad','$precio_venta_r','$accion')");
        $insert_detail=mysqli_query($con, "INSERT INTO venta VALUES ('','$numero_factura')");
     }
-	
-	
     
-	$nums++;
+    
+    
+    $nums++;
 
 
-	}
+    }
    /* $ivatotal=0;
     $iva10=0;
     $iva5=0;
@@ -540,8 +544,8 @@ while ($row=mysqli_fetch_array($sql))
     //echo $sumador_total;
     $total_aux=$sumador_total;
     //echo $total_aux;
-	$impuesto=get_row('perfil','impuesto', 'id_perfil', 1);
-	$subtotal=number_format($total_aux,2,'.','');
+    $impuesto=get_row('perfil','impuesto', 'id_perfil', 1);
+    $subtotal=number_format($total_aux,2,'.','');
     /*if($verificador_factura==1){
        $total_factura=0;
        $subtotal=0;
@@ -577,21 +581,14 @@ while ($row=mysqli_fetch_array($sql))
     $titulo_monto = numtoletras($total_factura);
 
 
-	
+    
 ?>
-    <?php if($verificador_factura==1 || $combinado==1){ ?>
-
-        <td style="width: 25%; color: #444444;">
-                <img style="width: 100%;" src="../../<?php echo get_row('perfil','marca_url', 'id_perfil', 1);?>" alt="Logo"><br>
-                
-            </td>
-    <?php } ?>        
 
         <tr>
             <td colspan="3" style="widtd: 85%; text-align: right;">SUBTOTAL <?php echo $simbolo_moneda;?> </td>
             <td style="widtd: 15%; text-align: right;"> <?php echo number_format($subtotal,0);?></td>
         </tr>
-		<tr>
+        <tr>
             <td colspan="3" style="widtd: 85%; text-align: right;">TOTAL GRAV. (<?php echo $print10; ?>)% <?php echo $simbolo_moneda;?> </td>
             <td style="widtd: 15%; text-align: right;"> <?php echo number_format($monto10,0);?></td>
         </tr>
@@ -626,18 +623,18 @@ while ($row=mysqli_fetch_array($sql))
             <td style="widtd: 15%; text-align: right;"> <?php echo number_format($sumador_total,0);?></td>
         </tr>
     </table>
-	
-	<div style="font-size:09pt;text-align:center;font-weight:bold"><?php echo $titulo_monto;?></div>
+    
+    <div style="font-size:09pt;text-align:center;font-weight:bold"><?php echo $titulo_monto;?></div>
 
-    <?php if($verificador_factura==1){ ?>
+    <?php if($verificador_factura==1  || $combinado==1){ ?>
         <div style="font-size:09pt;text-align:center;font-weight:bold"><?php echo 'ERROR DE CANTIDAD VERIFICAR CON LA ADMINISTRACION';?></div>
     <?php } ?>    
-	
-	<br>
-	<div style="font-size:11pt;text-align:center;font-weight:bold">Gracias por su compra!</div>
-	
-	
-	  
+    
+    <br>
+    <div style="font-size:11pt;text-align:center;font-weight:bold">Gracias por su compra!</div>
+    
+    
+      
 
 </page>
 
@@ -650,6 +647,8 @@ $acc='AGREGADO';
 
 
 //echo $sumador_total;
+
+
 
 if($condiciones==1){
     $saldo_cliente=0;

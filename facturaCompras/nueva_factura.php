@@ -103,6 +103,9 @@ while ($r=$query->fetch_array()){
 
     }
 	
+
+    $ocultar=1;
+
 	$active_bk="";
 	$title="Nueva Orden | Estacion E.M.R.";
 	
@@ -252,10 +255,12 @@ function mostrar_cuota(id) {
 							<label for="email" class="col-md-1 control-label">Condicion: </label>
 							<div class="col-md-2">
 								<select class='form-control input-sm' id="condiciones" onChange="mostrar_cuota(this.value);">
-									<option value="1">Contado</option>
-									<option value="2" selected>Credito</option>
+									<option value="1" selected>Contado</option>
+									<option value="2" >Credito</option>
 								</select>
 							</div>
+
+					<?php  if($ocultar!=1){ ?>		
 							<label for="pago" class="col-md-1 control-label">Tipo Pago: </label>
 							<div class="col-md-2">
 								<select class='form-control input-sm' id="pago" onChange="mostrar(this.value);">
@@ -267,7 +272,9 @@ function mostrar_cuota(id) {
 								</select>
 							</div>
 						</div>
-
+					<?php } ?>	
+              
+					<?php  if($ocultar!=1){ ?>
 						<div class="form-group row" id="pagocombinado">
 
 							
@@ -293,7 +300,9 @@ function mostrar_cuota(id) {
 							
 							
 						</div>
+                    <?php } ?>	
 
+                    <?php  if($ocultar!=1){ ?>
 						<div class="form-group row" id="cargacuota">
 							<label for="cuota" class="col-md-1 control-label"> Cuotas</label>
 							<div class="col-md-1">
@@ -301,7 +310,7 @@ function mostrar_cuota(id) {
 							</div>
 							
 						</div>
-
+                    <?php } ?>	
 				
 				<div class="col-md-12">
 					<div class="pull-right">

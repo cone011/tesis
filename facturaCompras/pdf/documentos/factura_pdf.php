@@ -45,13 +45,13 @@
 	$total=0;
 	$monto=0;
     $combinado=0;
-	if($condiciones==2){
+	/*if($condiciones==2){
 		if($cuota<=0){
             echo "<script>alert('Las cuota no pueden tener valor negativo o nulo')</script>";
 	       echo "<script>window.close();</script>";
 	       exit;
 		}
-	}
+	}*/
 
 	 if($pf1<0 || $pf2<0 || $nrodoc<0 || $timbrado<0){
            echo "<script>alert('Las cargas de Factura son incorrectas')</script>";
