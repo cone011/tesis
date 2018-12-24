@@ -212,6 +212,10 @@ while ($r=$query->fetch_array()){
 							<div class="col-md-2">
 								<input type="text" class="form-control input-sm" id="fecha" value="<?php echo date("d/m/Y");?>" readonly>
 							</div>
+							<label for="efectivo" class="col-md-1 control-label">Total O.P.</label>
+							<div class="col-md-2">
+								<input type="text" class="form-control input-sm" id="efectivo">
+							</div>
 					<?php if($activar!=1){ ?>		
 							<label for="email" class="col-md-1 control-label">Tipo</label>
 							<div class="col-md-2">
@@ -240,10 +244,7 @@ while ($r=$query->fetch_array()){
 						<div class="form-group row">
 
 							
-							<label for="efectivo" class="col-md-1 control-label">Pago Efectivo</label>
-							<div class="col-md-2">
-								<input type="number" class="form-control input-sm" id="efectivo">
-							</div>
+							
 
 							<label for="tarjeta" class="col-md-1 control-label">Pago Tarjeta</label>
 							<div class="col-md-2">
@@ -291,6 +292,7 @@ while ($r=$query->fetch_array()){
 	</div>
 	<hr>
 	<?php
+	//$id_cliente=intval($_GET['id_cliente']);
 	include("footer.php");
 	?>
 	<script type="text/javascript" src="js/VentanaCentrada.js"></script>

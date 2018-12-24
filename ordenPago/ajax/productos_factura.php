@@ -9,12 +9,22 @@
 	if($action == 'ajax'){
 		// escaping, additionally removing everything that could be (html/javascript-) code
          $q = mysqli_real_escape_string($con,(strip_tags($_REQUEST['q'], ENT_QUOTES)));
+         $id_cliente=intval($_GET['id_cliente']);
+         //echo $id_cliente;
 		 /*$aColumns = array('codigo_producto', 'nombre_producto', 'status_producto');//Columnas de busqueda
 		 $sTable = "productos";
 		 $sWhere = "";*/
-		  $sTable = "compra,proveedores";
-		 $sWhere = "";
-		 $sWhere.=" WHERE compra.id_cliente=proveedores.id_cliente and compra.saldo_factura>0";
+		 //echo $_GET['term'];
+		 if($id_cliente==0){
+           $sTable = "compra,proveedores";
+		    $sWhere = "";
+		    $sWhere.=" WHERE compra.id_cliente=proveedores.id_cliente and compra.saldo_factura>0";
+		 }else{
+		 	$sTable = "compra,proveedores";
+		    $sWhere = "";
+		    $sWhere.=" WHERE compra.id_cliente=proveedores.id_cliente and compra.saldo_factura>0 and proveedores.id_cliente=$id_cliente";
+		 }
+		  
 		if ( $_GET['q'] != "" )
 		{
 			/*$sWhere = "WHERE (";
@@ -23,13 +33,14 @@
 				$sWhere .= $aColumns[$i]." LIKE '%".$q."%' OR ";
 			}
 			$sWhere = substr_replace( $sWhere, "", -3 );
+			proveedores.nombre_cliente like '%$q%' or 
 			$sWhere .= ')';*/
-			$sWhere.= " and  (proveedores.nombre_cliente like '%$q%' or compra.numero_factura like '%$q%' or compra.fecha like '%$q%')";
+			$sWhere.= " and  (compra.numero_factura like '%$q%' or compra.fecha like '%$q%')";
 		}
 		include 'pagination.php'; //include pagination file
 		//pagination variables
 		$page = (isset($_REQUEST['page']) && !empty($_REQUEST['page']))?$_REQUEST['page']:1;
-		$per_page = 10; //how much records you want to show
+		$per_page = 5; //how much records you want to show
 		$adjacents  = 4; //gap between pages after number of adjacents
 		$offset = ($page - 1) * $per_page;
 		//Count the total number of row in your table*/
@@ -43,7 +54,6 @@
 		$query = mysqli_query($con, $sql);
 		//loop through fetched data
 		if ($numrows>0){
-			
 			?>
 			<div class="table-responsive">
 			  <table class="table">

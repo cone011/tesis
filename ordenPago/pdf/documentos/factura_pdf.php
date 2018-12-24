@@ -1,9 +1,5 @@
 <?php
-	/*-------------------------
-	Autor: Obed Alvarado
-	Web: obedalvarado.pw
-	Mail: info@obedalvarado.pw
-	---------------------------*/
+	
 	session_start();
 	$validar=0;
 	if (!isset($_SESSION['user_login_status']) AND $_SESSION['user_login_status'] != 1) {
@@ -48,21 +44,26 @@
 	$monto=0;
 	$validacion=0;
 	$cobranza=0;
-    if($pago==5){
        $sql_venta=mysqli_query($con, "select * from tmp where tmp.session_id='".$session_id."'");
        while($row_venta=mysqli_fetch_array($sql_venta)){
-       	    $monto+=$row_venta['cantidad_tmp']*$row_venta['precio_tmp'];
+       	    $monto+=$row_venta['cantidad_tmp'];
        	    //$monto=number_format($monto,0);
        }
-       $total=$efectivo+$tarjeta+$cheque+$transferencia;
+       //$total=$efectivo+$tarjeta+$cheque+$transferencia;
        //$total=number_format($total,2);
-       if($cheque<0 || $efectivo<0 || $transferencia<0 || $tarjeta<0){
+       if($efectivo<0){
            echo "<script>alert('Los montos de los pagos combinados no son correctos')</script>";
 	       echo "<script>window.close();</script>";
+	       $delete=mysqli_query($con,"DELETE FROM tmp WHERE session_id='".$session_id."'");
+	       exit;
+       }
+       if($efectivo!=$monto){
+           echo "<script>alert('Los montos de los pagos combinados no son correctos')</script>";
+	       echo "<script>window.close();</script>";
+	       $delete=mysqli_query($con,"DELETE FROM tmp WHERE session_id='".$session_id."'");
 	       exit;
        }
        
-    }
     $sql_cobranza=mysqli_query($con, "select max(numero_factura) as last from op");
        while($row_cobranza=mysqli_fetch_array($sql_cobranza)){
        	    $cobranza=$row_cobranza["last"]+1;

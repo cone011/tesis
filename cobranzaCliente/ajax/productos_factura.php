@@ -12,9 +12,18 @@
 		 /*$aColumns = array('codigo_producto', 'nombre_producto', 'status_producto');//Columnas de busqueda
 		 $sTable = "productos";
 		 $sWhere = "";*/
-		  $sTable = "venta,cliente";
-		 $sWhere = "";
-		 $sWhere.=" WHERE venta.id_cliente=cliente.id_cliente and venta.saldo_factura>0";
+		 $id_cliente=intval($_GET['id_cliente'])
+		 if($id_cliente==0){
+		 	$sTable = "venta,cliente";
+		    $sWhere = "";
+		     $sWhere.=" WHERE venta.id_cliente=cliente.id_cliente and venta.saldo_factura>0";
+
+		 }else{
+            $sTable = "venta,cliente";
+		    $sWhere = "";
+		     $sWhere.=" WHERE venta.id_cliente=cliente.id_cliente and venta.saldo_factura>0 and cliente.id_cliente=$id_cliente";
+		 }
+		  
 		if ( $_GET['q'] != "" )
 		{
 			/*$sWhere = "WHERE (";
@@ -24,7 +33,7 @@
 			}
 			$sWhere = substr_replace( $sWhere, "", -3 );
 			$sWhere .= ')';*/
-			$sWhere.= " and  (cliente.nombre_cliente like '%$q%' or venta.numero_factura like '%$q%' or venta.fecha like '%$q%')";
+			$sWhere.= " and  (venta.numero_factura like '%$q%' or venta.fecha like '%$q%')";
 		}
 		include 'pagination.php'; //include pagination file
 		//pagination variables

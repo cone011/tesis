@@ -245,6 +245,7 @@ table.page_footer {width: 100%; border: none; background-color: white; padding: 
                 echo $rw_cliente['telefono_cliente'];
                 echo "<br> Email: ";
                 echo $rw_cliente['email_cliente'];
+                //echo $efectivo;
             ?>
             
            </td>
@@ -478,6 +479,9 @@ while ($row=mysqli_fetch_array($sql))
 
       
     </table>
+    <br>
+    <br>
+    <br>
      <div style="font-size:09pt;text-align:center;font-weight:bold">TOTAL PAGO:</div>
         <div style="font-size:09pt;text-align:center;font-weight:bold"><?php echo number_format($total,0);?></div>
      <?php if($verificador_factura==1){ ?>

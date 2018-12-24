@@ -212,6 +212,10 @@ while ($r=$query->fetch_array()){
 							<div class="col-md-2">
 								<input type="text" class="form-control input-sm" id="fecha" value="<?php echo date("d/m/Y");?>" readonly>
 							</div>
+							<label for="efectivo" class="col-md-1 control-label">Total Cobranza</label>
+							<div class="col-md-2">
+								<input type="text" class="form-control input-sm" id="efectivo">
+							</div>
 					<?php if($activar!=1){ ?>		
 							<label for="email" class="col-md-1 control-label">Tipo</label>
 							<div class="col-md-2">

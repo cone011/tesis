@@ -8,13 +8,13 @@
 				<div class="modal-content">
 				  <div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title" id="myModalLabel">Buscar Factura Cliente</h4>
+					<h4 class="modal-title" id="myModalLabel">Buscar Factura Proveedores</h4>
 				  </div>
 				  <div class="modal-body">
 					<form class="form-horizontal">
 					  <div class="form-group">
 						<div class="col-sm-6">
-						  <input type="text" class="form-control" id="q" placeholder="Buscar Factura Cliente" onkeyup="load(1)">
+						  <input type="text" class="form-control" id="q" placeholder="Buscar Factura Proveedores" onkeyup="load(1)">
 						</div>
 						<button type="button" class="btn btn-default" onclick="load(1)"><span class='glyphicon glyphicon-search'></span> Buscar</button>
 					  </div>

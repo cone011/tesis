@@ -271,10 +271,11 @@ table.page_footer {width: 100%; border: none; background-color: white; padding: 
                 $rw_user=mysqli_fetch_array($sql_user);
                 echo $rw_user['firstname']." ".$rw_user['lastname'];
                 $quien=$rw_user['firstname']." ".$rw_user['lastname'];
+                //echo $efectivo;
             ?>
            </td>
            <td style="width:25%;"><?php echo date("d/m/Y");?></td>
-        <?php if($validacion==1){ ?>     
+        <?php if($validacion==1){  ?>     
            <td style="width:20%;" >
                 <?php 
                 if ($condiciones==1){echo "Contado";}
@@ -286,7 +287,7 @@ table.page_footer {width: 100%; border: none; background-color: white; padding: 
          <?php if($validacion==1){ ?>  
            <td style="width:20%;">
                 <?php 
-                //echo $efectivo;
+            echo $efectivo;
                 if ($pago==1){echo "Efectivo";}
                 elseif ($pago==2){echo "Tarjeta";}
                 elseif ($pago==3){echo "Cheque";}
@@ -477,6 +478,9 @@ while ($row=mysqli_fetch_array($sql))
 ?>   
       
     </table>
+    <br>
+    <br>
+    <br>
     <div style="font-size:09pt;text-align:center;font-weight:bold">TOTAL COBRANZA:</div>
         <div style="font-size:09pt;text-align:center;font-weight:bold"><?php echo number_format($total,0);?></div>
      <?php if($verificador_factura==1){ ?>
