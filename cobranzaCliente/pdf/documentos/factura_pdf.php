@@ -48,6 +48,7 @@
 	$monto=0;
 	$validacion=0;
 	$cobranza=0;
+
        $sql_venta=mysqli_query($con, "select * from tmp where tmp.session_id='".$session_id."'");
        while($row_venta=mysqli_fetch_array($sql_venta)){
        	    $monto+=$row_venta['cantidad_tmp'];
@@ -56,19 +57,18 @@
        $total=$efectivo+$tarjeta+$cheque+$transferencia;
        //$total=number_format($total,2);
        if($efectivo<0){
-           echo "<script>alert('No se ingreso el monto del Cobro')</script>";
+           echo "<script>alert('No coinciden los montos')</script>";
 	       echo "<script>window.close();</script>";
 	       $delete=mysqli_query($con,"DELETE FROM tmp WHERE session_id='".$session_id."'");
 	       exit;
        }
 
-       if($monto!=$efectivo){
-           echo "<script>alert('No se ingreso el monto del Cobro')</script>";
+       if($efectivo!=$monto){
+           echo "<script>alert('No coinciden los montos')</script>";
 	       echo "<script>window.close();</script>";
 	       $delete=mysqli_query($con,"DELETE FROM tmp WHERE session_id='".$session_id."'");
 	       exit;
        }
-       
 
     $sql_cobranza=mysqli_query($con, "select max(numero_factura) as last from cobranza");
        while($row_cobranza=mysqli_fetch_array($sql_cobranza)){

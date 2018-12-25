@@ -352,8 +352,9 @@ while ($row=mysqli_fetch_array($sql))
     if($verificador_factura==1){
        $messages[] = "Uno de los Productos Tiene existencia CERO VERIFCAR CON LA ADMINISTRACION.";
     }else{
+       $fecha_aux=date("Y-m-d");
 	   //Insert en la tabla detalle_cotizacion
-	   $insert_detail=mysqli_query($con, "INSERT INTO detalle_ajuste VALUES ('','$numero_factura','$id_producto','$cantidad','$precio_venta_r','$acciondetalle')");
+	   $insert_detail=mysqli_query($con, "INSERT INTO detalle_ajuste VALUES ('','$numero_factura','$id_producto','$cantidad','$precio_venta_r','$acciondetalle','$fecha_aux')");
        $insert_audidetail=mysqli_query($con, "INSERT INTO audidetalle_ajuste VALUES ('','$numero_factura','$id_producto','$cantidad','$precio_venta_r','$acciondetalle')");
 	}
 	$nums++;
@@ -384,7 +385,7 @@ $fechaudi=date("Y-m-d H:i:s");
 $fecha=date("Y-m-d");
 $pcname=gethostname();
 $accion='AGREGADO';
-echo $pago;
+//echo $pago;
 if($verificador_factura==1){
    $messages[] = "Uno de los Productos Tiene existencia CERO VERIFCAR CON LA ADMINISTRACION.";
 }else{

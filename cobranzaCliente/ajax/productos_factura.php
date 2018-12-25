@@ -5,23 +5,34 @@
 	/* Connect To Database*/
 	require_once ("../config/db.php");//Contiene las variables de configuracion para conectar a la base de datos
 	require_once ("../config/conexion.php");//Contiene funcion que conecta a la base de datos
+	//include 'cliente_filtrar.php';
+	$id_cliente=intval($_GET['id_cliente']);
+
+  
 	$action = (isset($_REQUEST['action'])&& $_REQUEST['action'] !=NULL)?$_REQUEST['action']:'';
 	if($action == 'ajax'){
 		// escaping, additionally removing everything that could be (html/javascript-) code
          $q = mysqli_real_escape_string($con,(strip_tags($_REQUEST['q'], ENT_QUOTES)));
+          $id_cliente=intval($_GET['id_cliente']);
+         //$id_cliente=$_POST['id_cliente'];
+         //echo $id_cliente;
+          /*$sql_venta=mysqli_query($con, "select * from cliente where id_cliente='".$id_cliente."'");
+       while($row_venta=mysqli_fetch_array($sql_venta)){
+       	    $nombre=$row_venta['nombre_cliente'];
+       	    //$monto=number_format($monto,0);
+       }*/
+
 		 /*$aColumns = array('codigo_producto', 'nombre_producto', 'status_producto');//Columnas de busqueda
 		 $sTable = "productos";
 		 $sWhere = "";*/
-		 $id_cliente=intval($_GET['id_cliente'])
 		 if($id_cliente==0){
 		 	$sTable = "venta,cliente";
-		    $sWhere = "";
-		     $sWhere.=" WHERE venta.id_cliente=cliente.id_cliente and venta.saldo_factura>0";
-
+		 $sWhere = "";
+		 $sWhere.=" WHERE venta.id_cliente=cliente.id_cliente and venta.saldo_factura>0";
 		 }else{
-            $sTable = "venta,cliente";
+		 	$sTable = "venta,cliente";
 		    $sWhere = "";
-		     $sWhere.=" WHERE venta.id_cliente=cliente.id_cliente and venta.saldo_factura>0 and cliente.id_cliente=$id_cliente";
+		    $sWhere.=" WHERE venta.id_cliente=cliente.id_cliente and venta.saldo_factura>0 and cliente.id_cliente=$id_cliente";
 		 }
 		  
 		if ( $_GET['q'] != "" )
@@ -33,6 +44,7 @@
 			}
 			$sWhere = substr_replace( $sWhere, "", -3 );
 			$sWhere .= ')';*/
+			//$nombre_cliente="FERNANDO MENDOZA";
 			$sWhere.= " and  (venta.numero_factura like '%$q%' or venta.fecha like '%$q%')";
 		}
 		include 'pagination.php'; //include pagination file
@@ -72,6 +84,7 @@
 					 $codigo_producto=$row['id_cliente'];
 					 $nombre_producto=$row['nombre_cliente'];					
 					 $tipo=$row['estado_factura'];
+
 					?>
 					<tr>
 					<?php if($tipo==2){ ?>

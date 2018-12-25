@@ -14,6 +14,7 @@
 					<form class="form-horizontal">
 					  <div class="form-group">
 						<div class="col-sm-6">
+						  <input id="id_cliente" type='hidden'>	
 						  <input type="text" class="form-control" id="q" placeholder="Buscar Factura Cliente" onkeyup="load(1)">
 						</div>
 						<button type="button" class="btn btn-default" onclick="load(1)"><span class='glyphicon glyphicon-search'></span> Buscar</button>

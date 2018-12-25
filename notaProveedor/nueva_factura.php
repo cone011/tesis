@@ -120,32 +120,32 @@ if ($factura==0) {
       
        <script>
 
-    	function mostrar(id) {
-   
-    if (id == "0") {
-		$("#pagocombinado").hide();
-    }
-	if (id == "5") {
-		$("#pagocombinado").show();
-    }
-	if (id == "4") {
-        $("#pagocombinado").hide();
-    }
-	if (id == "3") {
-        $("#pagocombinado").hide();
-    }
-    if (id == "2") {
-        $("#pagocombinado").hide();
-    }
-    if (id == "1") {
-        $("#pagocombinado").hide();
-    }
+    	document.onkeydown = function(e){
+ tecla = (document.all) ? e.keyCode : e.which;
+
+ if (tecla == 116){
+   if (confirm("Porfavor Elimine los elementos de la factura") == true) {
+   	   var miVariable = "1";
+       document.cookie ='variable='+miVariable+'; expires=Thu, 2 Aug 2021 20:47:11 UTC; path=/';
+   	   return true;
+    } else {
+      return false;
+   }
+ }
+}
+
+function NoBack(){
+history.go(1)
 }
 
 
-
 	</script>
-
+    <?php 
+      $miVariable =  $_COOKIE["variable"];
+    if($miVariable==1){
+       $delete=mysqli_query($con,"DELETE FROM tmp");
+    }
+   ?>
   </head>
   <body>
 	<?php

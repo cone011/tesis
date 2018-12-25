@@ -22,6 +22,7 @@
 	{
 	echo "<script>alert('No hay Factura Compras agregadas a la Orden')</script>";
 	echo "<script>window.close();</script>";
+	$delete=mysqli_query($con,"DELETE FROM tmp WHERE session_id='".$session_id."'");
 	exit;
 	}
 

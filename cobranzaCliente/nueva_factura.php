@@ -138,12 +138,32 @@ while ($r=$query->fetch_array()){
 
     <script>
 
-	
+document.onkeydown = function(e){
+ tecla = (document.all) ? e.keyCode : e.which;
 
+ if (tecla == 116){
+   if (confirm("Porfavor Elimine los elementos de la factura") == true) {
+   	   var miVariable = "1";
+       document.cookie ='variable='+miVariable+'; expires=Thu, 2 Aug 2021 20:47:11 UTC; path=/';
+   	   return true;
+    } else {
+      return false;
+   }
+ }
+}
+
+function NoBack(){
+history.go(1)
+}
 	</script>
-
+   <?php 
+      $miVariable =  $_COOKIE["variable"];
+    if($miVariable==1){
+       $delete=mysqli_query($con,"DELETE FROM tmp");
+    }
+   ?>
   </head>
-  <body>
+  <body OnLoad="NoBack();">
 	<?php
 	include("navbar.php");
 	?>  
@@ -214,7 +234,7 @@ while ($r=$query->fetch_array()){
 							</div>
 							<label for="efectivo" class="col-md-1 control-label">Total Cobranza</label>
 							<div class="col-md-2">
-								<input type="text" class="form-control input-sm" id="efectivo">
+								<input type="number" class="form-control input-sm" id="efectivo">
 							</div>
 					<?php if($activar!=1){ ?>		
 							<label for="email" class="col-md-1 control-label">Tipo</label>
@@ -271,7 +291,7 @@ while ($r=$query->fetch_array()){
 				
 				<div class="col-md-12">
 					<div class="pull-right">
-						<button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal">
+						<button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal" value="id_cliente">
 						 <span class="glyphicon glyphicon-search"></span> Agregar Factura
 						</button>
 						<button type="submit" class="btn btn-default">
@@ -295,6 +315,7 @@ while ($r=$query->fetch_array()){
 	</div>
 	<hr>
 	<?php
+
 	include("footer.php");
 	?>
 	<script type="text/javascript" src="js/VentanaCentrada.js"></script>
@@ -302,6 +323,7 @@ while ($r=$query->fetch_array()){
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 	<script>
+
 		$(function() {
 						$("#nombre_cliente").autocomplete({
 							source: "./ajax/autocomplete/clientes.php",

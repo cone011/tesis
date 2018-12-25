@@ -16,8 +16,7 @@
                 
             </td>
 			<td style="width: 25%;text-align:right">
-			NRO. COBRANZA: <?php echo $cobranza;?>
-			RUC: 80024518-5
+			NRO. RECIBO: <?php echo $cobranza;?>
 			
 			</td>
 			

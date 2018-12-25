@@ -1,9 +1,9 @@
 <?php
 
 	session_start();
-
+     
 	    $id=$_SESSION['user_id'];
-
+        //echo $id;
 $host="localhost";
 $user="root";
 $password="";
@@ -121,8 +121,8 @@ while ($r=$query->fetch_array()){
     }
 
 	$ocultar=1;
-
-
+    $borrar=0;
+    $variable='';
 	$title="Nueva Factura | Estacion E.M.R.";
 
 
@@ -171,13 +171,34 @@ function mostrar_cuota(id) {
 
 }
 
+ document.onkeydown = function(e){
+ tecla = (document.all) ? e.keyCode : e.which;
+
+ if (tecla == 116){
+   if (confirm("Si le da f5 se eliminaran los datos de la factura") == true) {
+       var miVariable = "1";
+       document.cookie ='variable='+miVariable+'; expires=Thu, 2 Aug 2021 20:47:11 UTC; path=/';
+   	   return true;
+    } else {
+      return false;
+   }
+ }
+}
+
+function NoBack(){
+history.go(1)
+}
 
 	</script>
 
   </head>
-  <body>
+  <body OnLoad="NoBack();">
 	<?php
 	include("navbar.php");
+    $miVariable =  $_COOKIE["variable"];
+    if($miVariable==1){
+       $delete=mysqli_query($con,"DELETE FROM tmp");
+    }
 	?>  
     <div class="container">
 	<div class="panel panel-info">

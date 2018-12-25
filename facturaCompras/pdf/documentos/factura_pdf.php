@@ -56,6 +56,7 @@
 	 if($pf1<0 || $pf2<0 || $nrodoc<0 || $timbrado<0){
            echo "<script>alert('Las cargas de Factura son incorrectas')</script>";
 	       echo "<script>window.close();</script>";
+	       $delete=mysqli_query($con,"DELETE FROM tmp WHERE session_id='".$session_id."'");
 	       exit;
        }
     if($pago==5){
@@ -71,6 +72,7 @@
        if($cheque<0 || $efectivo<0 || $transferencia<0 || $tarjeta<0){
            echo "<script>alert('Los montos de los pagos combinados no son correctos')</script>";
 	       echo "<script>window.close();</script>";
+	       $delete=mysqli_query($con,"DELETE FROM tmp WHERE session_id='".$session_id."'");
 	       exit;
        }
        

@@ -1,9 +1,5 @@
 <?php
-	/*-------------------------
-	Autor: Obed Alvarado
-	Web: obedalvarado.pw
-	Mail: info@obedalvarado.pw
-	---------------------------*/
+	
 	session_start();
 	$validar=0;
 	if (!isset($_SESSION['user_login_status']) AND $_SESSION['user_login_status'] != 1) {
@@ -68,14 +64,16 @@
        //$total=number_format($total,2);
        if($cheque<0 || $efectivo<0 || $transferencia<0 || $tarjeta<0){
            echo "<script>alert('Los montos de los pagos combinados no son correctos')</script>";
+           $delete=mysqli_query($con,"DELETE FROM tmp WHERE session_id='".$session_id."'");
 	       echo "<script>window.close();</script>";
 	       exit;
        }
-       /*if($total!=$monto){
+       if($total!=$monto){
            echo "<script>alert('Los montos de los pagos combinados no son correctos')</script>";
 	       echo "<script>window.close();</script>";
+	       $delete=mysqli_query($con,"DELETE FROM tmp WHERE session_id='".$session_id."'");
 	       exit;
-       }*/
+       }
        
     }
 	//Fin de variables por GET
