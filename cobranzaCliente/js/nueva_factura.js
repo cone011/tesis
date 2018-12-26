@@ -6,10 +6,9 @@
 
 		function load(page){
 			var q= $("#q").val();
-            var id_cliente = $("#id_cliente").val();
 			$("#loader").fadeIn('slow');
 			$.ajax({
-				url:'./ajax/productos_factura.php?action=ajax&page='+page+'&q='+q+'&id_cliente='+id_cliente,
+				url:'./ajax/productos_factura.php?action=ajax&page='+page+'&q='+q,
 				 beforeSend: function(objeto){
 				 $('#loader').html('<img src="./img/ajax-loader.gif"> Cargando...');
 			  },

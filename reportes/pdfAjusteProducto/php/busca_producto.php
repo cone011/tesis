@@ -4,7 +4,7 @@ include('conexion.php');
 $dato = $_POST['dato'];
 
 //EJECUTAMOS LA CONSULTA DE BUSQUEDA
-$res = "SELECT * FROM detalle_ajuste,productos WHERE nombre_producto LIKE '%$dato%' and detalle_ajuste.id_producto=productos.id_producto ORDER BY fecha_factura DESC";
+$res = "SELECT * FROM detalle_ajuste,productos WHERE nombre_producto LIKE '%$dato%' and detalle_ajuste.id_producto=productos.id_producto ORDER BY fecha DESC";
 $registro = $conexion->query($res);
 
 //CREAMOS NUESTRA VISTA Y LA DEVOLVEMOS AL AJAX

@@ -333,6 +333,18 @@ while ($row=mysqli_fetch_array($sql))
     $cantidadtmp=$row['cantidad_tmp'];
     $saldo=$row['saldo_factura'];
     $totalnc+=$cantidadtmp;
+    if(strlen($row["pf1"])==1){
+                       $wpf1='00';
+                    }else{
+                       $wpf1='0';
+                    }
+                    //CEROS PARA EL PREFIJO 2
+                    if(strlen($row["pf2"])==1){
+                       $wpf2='00';
+                    }else{
+                        $wpf2='0';
+                    }
+    $factura=$wpf1.$row['pf1'].'-'.$wpf2.$row['pf2'].'-'.$row['nrodoc'];
     $numero_factura=$row['numero_factura'];
     $diferencia=$saldo-$cantidadtmp;
     $format=number_format($precio_venta,0);
@@ -395,8 +407,8 @@ while ($row=mysqli_fetch_array($sql))
     ?>
 
         <tr>
-            <td class='<?php echo $clase;?>' style="width: 10%; text-align: center"><?php echo $codigo_producto; ?></td>
-            <td class='<?php echo $clase;?>' style="width: 60%; text-align: left"><?php echo $nombre;?></td>
+            <td class='<?php echo $clase;?>' style="width: 20%; text-align: center"><?php echo $factura; ?></td>
+            <td class='<?php echo $clase;?>' style="width: 50%; text-align: left"><?php echo $nombre;?></td>
             <td class='<?php echo $clase;?>' style="width: 15%; text-align: right"><?php echo number_format($cantidadtmp,0);?></td>
             <td class='<?php echo $clase;?>' style="width: 15%; text-align: right"><?php echo number_format($diferencia,0);?></td>
             

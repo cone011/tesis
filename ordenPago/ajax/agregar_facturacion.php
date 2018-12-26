@@ -55,8 +55,19 @@ $simbolo_moneda=get_row('perfil','moneda', 'id_perfil', 1);
 	$precioUnitario=$row['total_venta'];	
 	$precio_venta=$row['precio_tmp'];
 	$id_tmp=$row["id_tmp"];
+	if(strlen($row["pf1"])==1){
+                       $wpf1='00';
+                    }else{
+                       $wpf1='0';
+                    }
+                    //CEROS PARA EL PREFIJO 2
+                    if(strlen($row["pf2"])==1){
+                       $wpf2='00';
+                    }else{
+                        $wpf2='0';
+                    }
 	//$codigo_producto='001'.'-'.'001'.'-'.$row['numero_factura'];
-	$codigo_producto=$row['pf1'].'-'.$row['pf2'].'-'.$row['nrodoc'];
+	$codigo_producto=$wpf1.$row['pf1'].'-'.$wpf2.$row['pf2'].'-'.$row['nrodoc'];
 	$cantidadtmp=$row['cantidad_tmp'];
 	$sql_producto=mysqli_query($con, "select * from proveedores, compra where compra.id_cliente=proveedores.id_cliente");
 	while ($rw=mysqli_fetch_array($sql_producto))

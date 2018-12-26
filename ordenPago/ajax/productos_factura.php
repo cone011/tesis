@@ -9,21 +9,16 @@
 	if($action == 'ajax'){
 		// escaping, additionally removing everything that could be (html/javascript-) code
          $q = mysqli_real_escape_string($con,(strip_tags($_REQUEST['q'], ENT_QUOTES)));
-         $id_cliente=intval($_GET['id_cliente']);
+        // $id_cliente=intval($_GET['id_cliente']);
          //echo $id_cliente;
 		 /*$aColumns = array('codigo_producto', 'nombre_producto', 'status_producto');//Columnas de busqueda
 		 $sTable = "productos";
 		 $sWhere = "";*/
 		 //echo $_GET['term'];
-		 if($id_cliente==0){
            $sTable = "compra,proveedores";
 		    $sWhere = "";
-		    $sWhere.=" WHERE compra.id_cliente=proveedores.id_cliente and compra.saldo_factura>0";
-		 }else{
-		 	$sTable = "compra,proveedores";
-		    $sWhere = "";
-		    $sWhere.=" WHERE compra.id_cliente=proveedores.id_cliente and compra.saldo_factura>0 and proveedores.id_cliente=$id_cliente";
-		 }
+		    $sWhere.=" WHERE compra.id_cliente=proveedores.id_cliente and compra.saldo_factura>0 and estado_factura=2";
+
 		  
 		if ( $_GET['q'] != "" )
 		{
@@ -35,7 +30,7 @@
 			$sWhere = substr_replace( $sWhere, "", -3 );
 			proveedores.nombre_cliente like '%$q%' or 
 			$sWhere .= ')';*/
-			$sWhere.= " and  (compra.numero_factura like '%$q%' or compra.fecha like '%$q%')";
+			$sWhere.= " and  (compra.numero_factura like '%$q%' or compra.fecha like '%$q%' or proveedores.nombre_cliente like '%$q%' or compra.fecha_factura like '%$q%')";
 		}
 		include 'pagination.php'; //include pagination file
 		//pagination variables
@@ -58,7 +53,7 @@
 			<div class="table-responsive">
 			  <table class="table">
 				<tr  class="warning">
-					<th>Nombre Cliente.</th>
+					<th>Fecha Cargada.</th>
 					<th>Nro Factura.</th>
 					<th><span class="pull-right">Saldo a Cobrar</span></th>
 					<th><span class="pull-right">Total Saldo</span></th>
@@ -67,17 +62,29 @@
 				<?php
 				while ($row=mysqli_fetch_array($query)){
 					$precio_venta=$row["saldo_factura"];
-                      
+                    if(strlen($row["pf1"])==1){
+                       $wpf1='00';
+                    }else{
+                       $wpf1='0';
+                    }
+                    //CEROS PARA EL PREFIJO 2
+                    if(strlen($row["pf2"])==1){
+                       $wpf2='00';
+                    }else{
+                        $wpf2='0';
+                    }
 					 $id_producto=$row['numero_factura'];
-					 $factura=$row['pf1'].'-'.$row['pf2'].'-'.$row['nrodoc'];
+					 $factura= $wpf1.$row['pf1'].'-'.$wpf2.$row['pf2'].'-'.$row['nrodoc'];
 					 $codigo_producto=$row['id_cliente'];
 					 $nombre_producto=$row['nombre_cliente'];					
 					 $tipo=$row['estado_factura'];
+					 $fecha=$row['fecha_factura'];
+					 $ruc=$row['ruc_cliente'];
 					?>
 					<tr>
 					<?php if($tipo==2){ ?>
-						<td><?php echo $nombre_producto; ?></td>
-						<td><?php echo $factura; ?></td>
+						<td><?php echo $fecha; ?></td>
+						<td><a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $nombre_producto;?> - <?php echo $ruc;?>" ><?php echo $factura;?></a></td>
 						<td class='col-xs-2'>
 						<div class="pull-right">
 						<input type="text" class="form-control" style="text-align:right" id="cantidad_<?php echo $id_producto; ?>"  value="<?php echo $precio_venta; ?>" >

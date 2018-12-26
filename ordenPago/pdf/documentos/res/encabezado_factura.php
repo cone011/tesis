@@ -17,7 +17,6 @@
             </td>
 			<td style="width: 25%;text-align:right">
 			NRO. O.P.: <?php echo $cobranza;?>
-			RUC: 80024518-5
 			
 			</td>
 			

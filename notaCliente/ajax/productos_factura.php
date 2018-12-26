@@ -25,7 +25,7 @@
 			}
 			$sWhere = substr_replace( $sWhere, "", -3 );
 			$sWhere .= ')';*/
-			$sWhere.= " and  (cliente.nombre_cliente like '%$q%' or cuentacliente.numero_factura like '%$q%' or cuentacliente.fecha_vencimiento like '%$q%')";
+			$sWhere.= " and  (cliente.nombre_cliente like '%$q%' or cuentacliente.numero_factura like '%$q%' or cuentacliente.fecha_vencimiento like '%$q%' or venta.fecha_factura like '%$q%')";
 		}
 		include 'pagination.php'; //include pagination file
 		//pagination variables
@@ -49,7 +49,7 @@
 			<div class="table-responsive">
 			  <table class="table">
 				<tr  class="warning">
-					<th>Nombre Cliente.</th>
+					<th>Fecha Factura.</th>
 					<th>Nro Factura.</th>
 					<th><span class="pull-right">Saldo a Cobrar</span></th>
 					<th><span class="pull-right">Total Saldo</span></th>
@@ -62,13 +62,16 @@
 					 $id_producto=$row['numero_factura'];
 					 $factura='001'.'-'.'001'.'-'.$id_producto;
 					 $codigo_producto=$row['id_cliente'];
-					 $nombre_producto=$row['nombre_cliente'];					
+					 $nombre_producto=$row['nombre_cliente'];
+					 $telefono_cliente=$row['telefono_cliente'];
+					 $email_cliente=$row['email_cliente'];				
 					 $tipo=$row['estado_factura'];
+					 $fecha_factura=$row['fecha_factura'];
 					?>
 					<tr>
 					<?php if($tipo==2){ ?>
-						<td><?php echo $nombre_producto; ?></td>
-						<td><?php echo $factura; ?></td>
+						<td><?php echo $fecha_factura; ?></td>
+						<td><a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $nombre_producto;?> - <?php echo $telefono_cliente;?> - <?php echo $email_cliente;?>"><?php echo $factura;?></a></td>
 						<td class='col-xs-2'>
 						<div class="pull-right">
 						<input type="text" class="form-control" style="text-align:right" id="cantidad_<?php echo $id_producto; ?>"  value="<?php echo $precio_venta; ?>" >

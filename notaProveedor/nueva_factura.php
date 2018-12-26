@@ -230,7 +230,7 @@ history.go(1)
 				<div class="col-md-12">
 					<div class="pull-right">
 						<button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal">
-						 <span class="glyphicon glyphicon-search"></span> Agregar O.C.
+						 <span class="glyphicon glyphicon-search"></span> Agregar Factura
 						</button>
 						<button type="submit" class="btn btn-default">
 						  <span class="glyphicon glyphicon-print"></span> Imprimir

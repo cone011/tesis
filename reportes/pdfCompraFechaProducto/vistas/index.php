@@ -16,7 +16,7 @@
 </head>
 <body>
     <?php include "navbar.php"; ?>
-    <header>Reporte de Compras x Fecha PDF</header>
+    <header>Reporte de Compras Cantidad x Fecha PDF</header>
     <section>
   <div class="table-responsive">      
     <table border="0" align="center">

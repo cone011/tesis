@@ -6,14 +6,14 @@
 	require_once ("../config/db.php");//Contiene las variables de configuracion para conectar a la base de datos
 	require_once ("../config/conexion.php");//Contiene funcion que conecta a la base de datos
 	//include 'cliente_filtrar.php';
-	$id_cliente=intval($_GET['id_cliente']);
+	//$id_cliente=intval($_GET['id_cliente']);
 
   
 	$action = (isset($_REQUEST['action'])&& $_REQUEST['action'] !=NULL)?$_REQUEST['action']:'';
 	if($action == 'ajax'){
 		// escaping, additionally removing everything that could be (html/javascript-) code
          $q = mysqli_real_escape_string($con,(strip_tags($_REQUEST['q'], ENT_QUOTES)));
-          $id_cliente=intval($_GET['id_cliente']);
+         // $id_cliente=intval($_GET['id_cliente']);
          //$id_cliente=$_POST['id_cliente'];
          //echo $id_cliente;
           /*$sql_venta=mysqli_query($con, "select * from cliente where id_cliente='".$id_cliente."'");
@@ -25,15 +25,15 @@
 		 /*$aColumns = array('codigo_producto', 'nombre_producto', 'status_producto');//Columnas de busqueda
 		 $sTable = "productos";
 		 $sWhere = "";*/
-		 if($id_cliente==0){
+		 /*if($id_cliente==0){*/
 		 	$sTable = "venta,cliente";
 		 $sWhere = "";
 		 $sWhere.=" WHERE venta.id_cliente=cliente.id_cliente and venta.saldo_factura>0";
-		 }else{
+		/* }else{
 		 	$sTable = "venta,cliente";
 		    $sWhere = "";
 		    $sWhere.=" WHERE venta.id_cliente=cliente.id_cliente and venta.saldo_factura>0 and cliente.id_cliente=$id_cliente";
-		 }
+		 }*/
 		  
 		if ( $_GET['q'] != "" )
 		{
@@ -45,7 +45,7 @@
 			$sWhere = substr_replace( $sWhere, "", -3 );
 			$sWhere .= ')';*/
 			//$nombre_cliente="FERNANDO MENDOZA";
-			$sWhere.= " and  (venta.numero_factura like '%$q%' or venta.fecha like '%$q%')";
+			$sWhere.= " and  (venta.numero_factura like '%$q%' or venta.fecha like '%$q%' or cliente.nombre_cliente like '%$q%' or venta.fecha_factura like '%$q%')";
 		}
 		include 'pagination.php'; //include pagination file
 		//pagination variables
@@ -78,18 +78,20 @@
 				<?php
 				while ($row=mysqli_fetch_array($query)){
 					$precio_venta=$row["saldo_factura"];
-                      
+                     $fecha=$row["fecha_factura"];
 					 $id_producto=$row['numero_factura'];
 					 $factura='001'.'-'.'001'.'-'.$id_producto;
 					 $codigo_producto=$row['id_cliente'];
 					 $nombre_producto=$row['nombre_cliente'];					
 					 $tipo=$row['estado_factura'];
+					 $telefono_cliente=$row['telefono_cliente'];
+					 $email_cliente=$row['email_cliente'];
 
 					?>
 					<tr>
 					<?php if($tipo==2){ ?>
-						<td><?php echo $nombre_producto; ?></td>
-						<td><?php echo $factura; ?></td>
+						<td><?php echo $fecha; ?></td>
+						<td><a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $nombre_producto;?> - <?php echo $telefono_cliente;?> - <?php echo $email_cliente;?>" ><?php echo $factura;?></a></td>
 						<td class='col-xs-2'>
 						<div class="pull-right">
 						<input type="text" class="form-control" style="text-align:right" id="cantidad_<?php echo $id_producto; ?>"  value="<?php echo $precio_venta; ?>" >

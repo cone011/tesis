@@ -367,7 +367,18 @@ while ($row=mysqli_fetch_array($sql))
     $precioUnitario=$row['total_venta'];    
     $precio_venta=$row['precio_tmp'];
     $id_tmp=$row["id_tmp"];
-    $codigo_producto=$row['pf1'].'-'.$row['pf2'].'-'.$row['nrodoc'];
+    if(strlen($row["pf1"])==1){
+                       $wpf1='00';
+                    }else{
+                       $wpf1='0';
+                    }
+                    //CEROS PARA EL PREFIJO 2
+                    if(strlen($row["pf2"])==1){
+                       $wpf2='00';
+                    }else{
+                        $wpf2='0';
+                    }
+    $codigo_producto=$wpf1.$row['pf1'].'-'.$wpf2.$row['pf2'].'-'.$row['nrodoc'];
     $cantidadtmp=$row['cantidad_tmp'];
     $numero_factura=$row['numero_factura'];
     $diferencia=$precio_venta-$cantidadtmp;
