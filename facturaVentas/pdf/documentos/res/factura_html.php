@@ -401,6 +401,7 @@ while ($row=mysqli_fetch_array($sql))
     $id_producto=$row["id_producto"];
     $codigo_producto=$row['codigo_producto'];
     $cantidadtmp=$row['cantidad_tmp'];
+
     //$cantidad=number_format($precio_venta/$precioUnitario,2);
     $nombre_producto=$row['nombre_producto'];
     $cantidadProducto=$row['cantidad_producto'];
@@ -417,7 +418,7 @@ while ($row=mysqli_fetch_array($sql))
     $precio_total_r=str_replace(",","",$precio_total_f);//Reemplazo las comas
     $sumador_total+=$precio_total_r;//Sumador*/
     if($tipo==1){
-      $cantidad=number_format($precio_venta/$precioUnitario,8); 
+      $cantidad=number_format($cantidadtmp/$precioUnitario,8); 
       $cantidad_imprimir=number_format($cantidadtmp/$precioUnitario,2);    
       $precio_venta_f=number_format($cantidadtmp,2);//Formateo variables
       $precio_venta_r=str_replace(",","",$precio_venta_f);//Reemplazo las comas
@@ -518,8 +519,8 @@ while ($row=mysqli_fetch_array($sql))
        /*$insert_detail=mysqli_query($con, "INSERT INTO detalle_test VALUES ('','$numero_factura','$id_producto','$cantidad','$precio_venta_r','$fech','$totalcantidad')");*/
 
 
-       $insert_detail=mysqli_query($con, "INSERT INTO detalle_venta VALUES ('','$numero_factura','$id_producto','$cantidad','$precio_venta_r','$fech','$totalcantidad')");
-       $insert_audidetail=mysqli_query($con, "INSERT INTO audidetalle_venta VALUES ('','$numero_factura','$id_producto','$cantidad','$precio_venta_r','$accion')");
+       $insert_detail=mysqli_query($con, "INSERT INTO detalle_venta VALUES ('','$numero_factura','$id_producto','$cantidad','$precioUnitario','$fech','$totalcantidad')");
+       $insert_audidetail=mysqli_query($con, "INSERT INTO audidetalle_venta VALUES ('','$numero_factura','$id_producto','$cantidad','$precioUnitario','$accion')");
        //$insert_detail=mysqli_query($con, "INSERT INTO venta VALUES ('','$numero_factura')");
     }
     

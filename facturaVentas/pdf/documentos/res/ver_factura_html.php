@@ -365,7 +365,7 @@ while ($row=mysqli_fetch_array($sql))
     $precio_venta_f=number_format($precio_venta,0);//Formateo variables
     $precio_venta_r=str_replace(",","",$precio_venta_f);//Reemplazo las comas
     if($tipo==1){
-       $precio_total=$precio_venta_r;
+       $precio_total=$cantidad*$precio_venta_r;
        $monto0+=$precio_total;
     }else{
       $precio_total=$precio_venta_r*$cantidad;
