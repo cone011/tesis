@@ -288,9 +288,9 @@ table.page_footer {width: 100%; border: none; background-color: white; padding: 
     <table cellspacing="0" style="width: 100%; text-align: left; font-size: 10pt;">
         <tr>
             <th style="width: 10%;text-align:center" class='midnight-blue'>NRO N.C.</th>
-            <th style="width: 60%" class='midnight-blue'>DESCRIPCION</th>
-            <th style="width: 15%;text-align: right" class='midnight-blue'>MONTO N.C.</th>
-            <th style="width: 15%;text-align: right" class='midnight-blue'>SAL. SOBRA</th>
+            <th style="width: 45%" class='midnight-blue'>DESCRIPCION</th>
+            <th style="width: 10%;text-align: right" class='midnight-blue'>MONTO N.C.</th>
+            <th style="width: 10%;text-align: right" class='midnight-blue'>SAL. SOBRA</th>
             
         </tr>
 

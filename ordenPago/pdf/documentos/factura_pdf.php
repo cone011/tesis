@@ -1,7 +1,7 @@
 <?php
 	
 	session_start();
-	$validar=0;
+
 	if (!isset($_SESSION['user_login_status']) AND $_SESSION['user_login_status'] != 1) {
         header("location: ../../login.php");
 		exit;
@@ -18,7 +18,7 @@
 
 	$sql_count=mysqli_query($con,"select * from tmp where session_id='".$session_id."'");
 	$count=mysqli_num_rows($sql_count);
-	if ($count==0 or $validar==1)
+	if ($count==0)
 	{
 	echo "<script>alert('No hay Factura Compras agregadas a la Orden')</script>";
 	echo "<script>window.close();</script>";

@@ -133,7 +133,7 @@
 					<td class="text-right"> 
 						<a href="#" class='btn btn-default' title='Descargar O.C.' onclick="imprimir_factura('<?php echo $id_factura;?>');"><i class="glyphicon glyphicon-download"></i></a> 
 						<?php if($estado_factura==2){ ?>
-						<a href="#" class='btn btn-default' title='Anular O.C.' onclick="eliminar('<?php echo $numero_factura; ?>')"><i class="glyphicon glyphicon-trash"></i> </a>
+						
 					    <?php } ?>
 						
 					</td>

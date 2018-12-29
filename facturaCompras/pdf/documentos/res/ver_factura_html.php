@@ -249,6 +249,7 @@ table.page_footer {width: 100%; border: none; background-color: white; padding: 
 		<tr>
            <td style="width:50%;" >
 			<?php 
+                $validar=1;
 				$sql_cliente=mysqli_query($con,"select * from proveedores where id_cliente='$id_cliente'");
 				$rw_cliente=mysqli_fetch_array($sql_cliente);
 				echo $rw_cliente['nombre_cliente'];
@@ -292,7 +293,9 @@ table.page_footer {width: 100%; border: none; background-color: white; padding: 
            <td style="width:20%;" class='midnight-blue'>ENCARGADO</td>
 		  <td style="width:20%;" class='midnight-blue'>FECHA</td>
 		   <td style="width:20%;" class='midnight-blue'>FORMA DE PAGO</td>
+        <?php if($validar!=1){ ?>
             <td style="width:20%;" class='midnight-blue'>TIPO DE PAGO</td>
+        <?php }?>
         </tr>
 		<tr>
            <td style="width:20%;">
@@ -361,7 +364,7 @@ table.page_footer {width: 100%; border: none; background-color: white; padding: 
             <th style="width: 10%;text-align:center" class='midnight-blue'>CANT./LITROS</th>
             <th style="width: 60%" class='midnight-blue'>DESCRIPCION</th>
             <th style="width: 15%;text-align: right" class='midnight-blue'>PRECIO COMPRA</th>
-            <th style="width: 15%;text-align: right" class='midnight-blue'> TOTAL O.C.</th>
+            <th style="width: 15%;text-align: right" class='midnight-blue'>IMPORTE TOTAL</th>
             
         </tr>
 
