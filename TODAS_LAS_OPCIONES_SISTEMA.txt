@@ -1,0 +1,30 @@
+---MODULO FACTURACION 
+NUEVA FACTURA: http://localhost/tesis/facturaVentas/nueva_factura.php
+CONSULTAR POR FACTURA : http://localhost/tesis/facturaVentas/facturas.php
+CONSULTA X FECHA VENTA: http://localhost/tesis/reportes/pdfVentaFecha/vistas/index.php
+CONSULTA X VENTA CLIENTE : http://localhost/tesis/reportes/pdfVentaCliente/vistas/index.php
+REPORTE X VENTA MES ACTUAL : http://localhost/tesis/reportes/pdfVentaMes/vistas/index.php
+CONSULTA DE CANTIDAD VENDIDA X FECHA: http://localhost/tesis/reportes/pdfVentaProducto/vistas/index.php
+
+
+-----MODULO CLIENTE
+REGISTRACION DE COBRANZA/RECIBO : http://localhost/tesis/cobranzaCliente/nueva_factura.php
+CONSULTA FACTURA A COBRAR :http://localhost/tesis/reportes/pdfSaldoFechaCliente/vistas/index.php
+LISTADO DE COBRANZA : http://localhost/tesis/reportes/pdfCobranza/vistas/index.php
+REGISTRACION NC CLIENTE: http://localhost/tesis/notaCliente/nueva_factura.php
+SALDO CLIENTE : http://localhost/tesis/reportes/pdfSaldoCliente/vistas/index.php
+
+--MODULO PROVEEDORES
+REGISTRACION DE COMPRA: http://localhost/tesis/facturaCompras/nueva_factura.php
+CONSULTA COMPRA : http://localhost/tesis/facturaCompras/facturas.php
+CONSULTA X COMPRA VENTA: http://localhost/tesis/reportes/pdfCompraFecha/vistas/index.php
+CONSULTA X COMPRA PROVEEDOR : http://localhost/tesis/reportes/pdfCompraProveed/vistas/index.php
+REPORTE X COMPRA MES ACTUAL : http://localhost/tesis/reportes/pdfCompraMes/vistas/index.php
+CONSULTA DE CANTIDAD COMPRADA X FECHA: http://localhost/tesis/reportes/pdfCompraFechaProducto/vistas/index.php
+SALDO PROVEEDOR : http://localhost/tesis/reportes/pdfSaldoProveedores/vistas/index.php
+
+---MODULO AJUSTE
+REGISTRACION AJUSTE: http://localhost/tesis/ajusteProducto/nueva_factura.php
+CONSULTA AJUSTE: http://localhost/tesis/ajusteProducto/facturas.php
+AJUSTE X FECHA : http://localhost/tesis/reportes/pdfAjusteFecha/vistas/index.php
+AJUSTE X PRODUCTO :http://localhost/tesis/reportes/pdfAjusteProducto/vistas/index.php

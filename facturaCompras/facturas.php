@@ -1,9 +1,5 @@
 <?php
-	/*-------------------------
-	Autor: INNOVAWEBSV
-	Web: www.innovawebsv.com
-	Mail: info@innovawebsv.com
-	---------------------------*/
+
 	session_start();
 	$id=$_SESSION['user_id'];
 
@@ -125,9 +121,7 @@ while ($r=$query->fetch_array()){
     <div class="container">
 		<div class="panel panel-info">
 		<div class="panel-heading">
-		    <div class="btn-group pull-right">
-				<a  href="nueva_factura.php" class="btn btn-info"><span class="glyphicon glyphicon-plus" ></span> Nueva Compra</a>
-			</div>
+
 			<h4><i class='glyphicon glyphicon-search'></i> Buscar Compra</h4>
 		</div>
 			<div class="panel-body">

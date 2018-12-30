@@ -136,7 +136,7 @@
 					<?php }elseif($estado_factura==1 || $saldo==0){ ?>
 					   
 					<?php }else{ ?>
-					     <a href="#" class='btn btn-default' title='Anular factura' onclick="eliminar('<?php echo $numero_factura; ?>')"><i class="glyphicon glyphicon-ban-circle"></i> </a> 
+					     
 					<?php } ?>    
 
 					</td>
