@@ -182,7 +182,7 @@ history.go(1)
 				<div class="form-group row">
 				  <label for="nombre_cliente" class="col-md-1 control-label">Proveedor</label>
 				  <div class="col-md-2">
-					  <input type="text" class="form-control input-sm" id="nombre_cliente" placeholder="Selecciona un cliente" required>
+					  <input type="text" class="form-control input-sm" id="nombre_cliente" placeholder="Selecciona un Proveedor" required>
 					  <input id="id_cliente" type='hidden'>
 
 				  </div>
@@ -285,7 +285,14 @@ history.go(1)
 						</div>
                     <?php } ?> 
 				
-				
+				<div class="form-group row">
+						<label for="tarjeta" class="col-md-1 control-label">Forma Pago</label>
+							<div class="col-md-2">
+								
+								<textarea class="form-control" id="tarjeta" name="tarjeta" placeholder="Comentario Pago" required maxlength="255" ></textarea>
+							</div>
+					</div>
+					
 				<div class="col-md-12">
 					<div class="pull-right">
 						<button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal">

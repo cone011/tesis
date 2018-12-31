@@ -23,7 +23,27 @@ include('is_logged.php');//Archivo verifica que el usario que intenta acceder a 
 		$precio_venta=floatval($_POST['precio']);
 		//$iva=intval($_POST['iva']);
 		$date_added=date("Y-m-d H:i:s");
-		$sql="INSERT INTO cierre (factura_incial, factura_final, fecha_add) VALUES ('$nombre','$estado','$date_added')";
+		//COBRANZA
+		$sql_factura=mysqli_query($con,"SELECT * FROM cierre order by id_cierre desc limit 1");
+		while ($rw=mysqli_fetch_array($sql_factura)){
+			$cobranza_inicial=$rw["cobranza_final"]+1;
+		}
+		$sql_factura_venta=mysqli_query($con,"select * from cobranza order by numero_factura desc limit 1");
+		while ($raw=mysqli_fetch_array($sql_factura_venta)){
+				$cobranza_final=$raw["numero_factura"];
+		}
+
+        //COMPRAS
+        $sql_compra=mysqli_query($con,"SELECT * FROM cierre order by id_cierre desc limit 1");
+		while ($rw=mysqli_fetch_array($sql_compra)){
+			$compra_inicial=$rw["compra_final"]+1;
+		}
+		$sql_factura_venta=mysqli_query($con,"select * from compra order by numero_factura desc limit 1");
+		while ($raw=mysqli_fetch_array($sql_factura_venta)){
+				$compra_final=$raw["numero_factura"];
+		}
+
+		$sql="INSERT INTO cierre (factura_incial, factura_final, fecha_add, cobranza_inicial, cobranza_final,compra_inicial,compra_final) VALUES ('$nombre','$estado','$date_added','$cobranza_inicial','$cobranza_final','$compra_inicial','$compra_final')";
 		$query_new_insert = mysqli_query($con,$sql);
 			if ($query_new_insert){
 				$messages[] = "Cierre se ha sido concretado satisfactoriamente.";

@@ -259,8 +259,9 @@ table.page_footer {width: 100%; border: none; background-color: white; padding: 
         <tr>
            <td style="width:25%;" class='midnight-blue'>ENCARGADO</td>
           <td style="width:20%;" class='midnight-blue'>FECHA DE O.P.</td>
-         <?php if($validacion==1){ ?> 
-           <td style="width:20%;" class='midnight-blue'>FORMA DE PAGO</td>
+         
+           <td style="width:35%;" class='midnight-blue'>COMENTARIO DE PAGO</td>
+        <?php if($validacion==1){ ?> 
             <td style="width:20%;" class='midnight-blue'>TIPO PAGO</td>
          <?php } ?>
 
@@ -274,15 +275,13 @@ table.page_footer {width: 100%; border: none; background-color: white; padding: 
                 $quien=$rw_user['firstname']." ".$rw_user['lastname'];
             ?>
            </td>
-           <td style="width:25%;"><?php echo date("d/m/Y");?></td>
-        <?php if($validacion==1){ ?>     
-           <td style="width:20%;" >
+           <td style="width:25%;"><?php echo date("d/m/Y");?></td>  
+           <td style="width:35%;" >
                 <?php 
-                if ($condiciones==1){echo "Contado";}
-                elseif ($condiciones==2){echo "Credito a 30 dias";}
+                echo $tarjeta;
                 ?>
            </td>
-         <?php } ?>
+
 
          <?php if($validacion==1){ ?>  
            <td style="width:20%;">
@@ -468,7 +467,7 @@ while ($row=mysqli_fetch_array($sql))
         
           //$insert_nc=mysqli_query($con,"INSERT INTO nota_cliente VALUES (NULL,'$numero_nc','$date','$id_cliente','$id_vendedor','$condiciones','$precioUnitario','$condiciones','$accion','$fecha','$diferencia','$pago','$numero_factura','$pago','$efectivo','$tarjeta','$cheque','$transferencia')");
 
-          $insert_nc=mysqli_query($con,"INSERT INTO op VALUES (NULL,'$cobranza','$date','$id_cliente','$id_vendedor','$condiciones','$precioUnitario','$condiciones','$accion','$fecha','$diferencia','$pago','$numero_factura','$efectivo','$tarjeta','$cheque','$transferencia','$cantidadtmp')");
+          $insert_nc=mysqli_query($con,"INSERT INTO op VALUES (NULL,'$cobranza','$date','$id_cliente','$id_vendedor','$condiciones','$precioUnitario','$condiciones','$accion','$fecha','$diferencia','$tarjeta','$numero_factura','$efectivo','0','$cheque','$transferencia','$cantidadtmp')");
 
           $insert_audi=mysqli_query($con,"INSERT INTO audiop VALUES (NULL,'$cobranza','$date','$id_cliente','$id_vendedor','$condiciones','$diferencia','$condiciones','$fechaudi','$quien','$pcname','$accion')");
  

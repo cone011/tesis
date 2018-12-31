@@ -35,7 +35,8 @@
 	$pago=mysqli_real_escape_string($con,(strip_tags($_REQUEST['pago'], ENT_QUOTES)));
 	//$parcial=intval($_GET['parcial']);
 	$efectivo=intval($_GET['efectivo']);
-	$tarjeta=intval($_GET['tarjeta']);
+	//$tarjeta=intval($_GET['tarjeta']);
+	$tarjeta=$_GET['tarjeta'];
 	$cheque=intval($_GET['cheque']);
 	$transferencia=intval($_GET['transferencia']);
 	//$factura=intval($_GET['factura']);
