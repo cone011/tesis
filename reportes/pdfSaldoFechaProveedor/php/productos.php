@@ -62,12 +62,23 @@ while($productos2 = mysqli_fetch_array($productos)){
 	$saldo=$productos2['saldo_factura'];
 	$item = $item+1;
 	$totaluni = $totaluni + $productos2['total_venta'];
+	if(strlen($productos2["pf1"])==1){
+        $wpf1='00';
+    }else{
+         $wpf1='0';
+   }
+    //CEROS PARA EL PREFIJO 2
+   if(strlen($productos2["pf2"])==1){
+        $wpf2='00';
+    }else{
+         $wpf2='0';
+    }
 	
 	$pdf->Cell(15, 8, $item, 0);	
 	$pdf->Cell(50, 8, $productos2['nombre_cliente'], 0);
 	$pdf->Cell(20, 8, $productos2['ruc_cliente'], 0);
-	$pdf->Cell(30, 8, '001'.'-'.'001'.'-'.$productos2['numero_factura'], 0);
-	$pdf->Cell(20, 8, $saldo.'.Gs', 0);
+	$pdf->Cell(30, 8, $wpf1.$productos2['pf1'].'-'.'001'.'-'.$productos2['numero_factura'], 0);
+	$pdf->Cell(20, 8, number_format($saldo,0).'.Gs', 0);
 	$pdf->Cell(30, 8, date('d/m/Y', strtotime($productos2['fecha_factura'])), 0);
 	$pdf->Ln(8);
 }

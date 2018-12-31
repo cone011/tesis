@@ -53,15 +53,28 @@ $item = 0;
 $totaluni = 0;
 $totaldis = 0;
 $condiciones=0;
+$total_pago=0;
 while($productos2 = mysqli_fetch_array($productos)){
 	
 	//$condiciones=$productos2['condiciones'];
 	$id_cliente=$productos2['id_cliente'];
 	$nro=$productos2['numero_venta'];
+	$total_pago+=$productos2['cantidad_op'];
 	$res_factura = "SELECT * FROM compra where numero_factura='$nro'";
     $productos_factura = $conexion->query($res_factura);
     while($productos_factura2 = mysqli_fetch_array($productos_factura)){
-       $fact=$productos_factura2['pf1'].'-'.$productos_factura2['pf2'].'-'.$productos_factura2['nrodoc'];
+    	if(strlen($productos_factura2["pf1"])==1){
+                $wpf1='00';
+            }else{
+                $wpf1='0';
+            }
+            //CEROS PARA EL PREFIJO 2
+            if(strlen($productos_factura2["pf2"])==1){
+               $wpf2='00';
+            }else{
+               $wpf2='0';
+            }
+       $fact=$wpf1.$productos_factura2['pf1'].'-'.$wpf2.$productos_factura2['pf2'].'-'.$productos_factura2['nrodoc'];
     } 
 	$item = $item+1;
 	//$totaluni = 0;
@@ -72,16 +85,16 @@ while($productos2 = mysqli_fetch_array($productos)){
 	$pdf->Cell(20, 8,$productos2['id_cliente'], 0);
 	$pdf->Cell(40, 8, $productos2['nombre_cliente'], 0);
 	$pdf->Cell(30, 8, $productos2['ruc_cliente'], 0);
-	$pdf->Cell(20, 8, $productos2['cantidad_op'].'.Gs', 0);
+	$pdf->Cell(20, 8, number_format($productos2['cantidad_op'],0).'.Gs', 0);
 	$pdf->Ln(8);
 }
-$pdf->SetFont('Arial', 'B', 8);
-$pdf->Cell(104,8,'',0);
-//$pdf->Cell(25,14,'Total Unitario: '.$totaluni '.GS',0);
-//$pdf->Ln(8);
+$pdf->SetFont('Arial', 'B', 16);
+$pdf->Cell(50,8,'',0);
+$pdf->Cell(25,14,'Total Pagado: '.number_format($total_pago,0).'.GS',0);
+$pdf->Ln(8);
 //$pdf->Cell(25,14,'Total Dist: S/. '.$totaldis,0);
 
-$pdf->Output('reporteVentas.pdf','D');
+$pdf->Output('reportePago.pdf','D');
 
 
 ?>

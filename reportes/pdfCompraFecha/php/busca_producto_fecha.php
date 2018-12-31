@@ -41,8 +41,19 @@ if(mysqli_num_rows($registro)>0){
         }else{
             $leyenda='ANULADO';
         }
+         if(strlen($registro2["pf1"])==1){
+           $wpf1='00';
+        }else{
+           $wpf1='0';
+        }
+        //CEROS PARA EL PREFIJO 2
+        if(strlen($registro2["pf2"])==1){
+            $wpf2='00';
+        }else{
+            $wpf2='0';
+        }
 		echo '<tr>
-				<td>'.$registro2['pf1'].'-'.$registro2['pf2'].'-'.$registro2['nrodoc'].'</td>
+				<td>'.$wpf1.$registro2['pf1'].'-'.$wpf2.$registro2['pf2'].'-'.$registro2['nrodoc'].'</td>
                 <td>'.$registro2['id_cliente'].'</td>
                 <td>'.$registro2['nombre_cliente'].'</td>
                 <td>'.$registro2['ruc_cliente'].'</td>

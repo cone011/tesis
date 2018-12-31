@@ -29,7 +29,7 @@ echo '<table class="table table-striped table-condensed table-hover">
                 <th width="100">Ruc</th>
                 <th width="70">Total Importe</th>
                 <th width="70">Estado</th>
-                <th width="150">Fecha Registro</th>
+                <th width="150">Fecha Factura</th>
             </tr>';
 if(mysqli_num_rows($registro)>0){
 	while($registro2 = mysqli_fetch_array($registro)){
@@ -43,8 +43,19 @@ if(mysqli_num_rows($registro)>0){
         }else{
             $leyenda='ANULADO';
         }
+        if(strlen($registro2["pf1"])==1){
+        $wpf1='00';
+    }else{
+         $wpf1='0';
+   }
+    //CEROS PARA EL PREFIJO 2
+   if(strlen($registro2["pf2"])==1){
+        $wpf2='00';
+    }else{
+        $wpf2='0';
+    }
 		echo '<tr>
-				<td>'.'001'.'-'.'001'.'-'.$registro2['numero_factura'].'</td>
+				<td>'.$wpf1.$registro2['pf1'].'-'.$wpf1.$registro2['pf2'].'-'.$registro2['nrodoc'].'</td>
                 <td>'.$registro2['id_cliente'].'</td>
                 <td>'.$registro2['nombre_cliente'].'</td>
                 <td>'.$registro2['ruc_cliente'].'</td>

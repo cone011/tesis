@@ -21,7 +21,7 @@ $registro = $conexion->query($res);
 
 echo '<table class="table table-striped table-condensed table-hover">
         	<tr>
-            	<th width="100">Nro Documento</th>
+            	<th width="100">Nro Compra</th>
                 <th width="50">Codigo</th>
                 <th width="220">Nombre</th>
                 <th width="100">Ruc</th>
@@ -41,8 +41,19 @@ if(mysqli_num_rows($registro)>0){
         }else{
             $leyenda='ANULADO';
         }
+        if(strlen($registro2["pf1"])==1){
+        $wpf1='00';
+    }else{
+         $wpf1='0';
+   }
+    //CEROS PARA EL PREFIJO 2
+   if(strlen($registro2["pf2"])==1){
+        $wpf2='00';
+    }else{
+         $wpf2='0';
+    }
 		echo '<tr>
-				<td>'.'001'.'-'.'001'.'-'.$registro2['numero_factura'].'</td>
+				<td>'.$wpf1.$registro2['pf1'].'-'.$wpf2.$registro2['pf2'].'-'.$registro2['nrodoc'].'</td>
                 <td>'.$registro2['id_cliente'].'</td>
                 <td>'.$registro2['nombre_cliente'].'</td>
                 <td>'.$registro2['ruc_cliente'].'</td>

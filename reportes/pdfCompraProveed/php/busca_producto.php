@@ -4,7 +4,7 @@ include('conexion.php');
 $dato = $_POST['dato'];
 
 //EJECUTAMOS LA CONSULTA DE BUSQUEDA
-$res = "SELECT * FROM cliente,venta WHERE nombre_cliente LIKE '%$dato%' and cliente.id_cliente=venta.id_cliente ORDER BY fecha_factura DESC";
+$res = "SELECT * FROM compra,proveedores WHERE nombre_cliente LIKE '%$dato%' and compra.id_cliente=proveedores.id_cliente ORDER BY fecha_factura DESC";
 $registro = $conexion->query($res);
 
 //CREAMOS NUESTRA VISTA Y LA DEVOLVEMOS AL AJAX
@@ -32,15 +32,26 @@ if(mysqli_num_rows($registro)>0){
         }elseif($condicion==3) {
             $leyenda='TARJ. POS';
         }
+         if(strlen($registro2["pf1"])==1){
+        $wpf1='00';
+    }else{
+         $wpf1='0';
+   }
+    //CEROS PARA EL PREFIJO 2
+   if(strlen($registro2["pf2"])==1){
+        $wpf2='00';
+    }else{
+        $wpf2='0';
+    }
 		echo '<tr>
-				<td>'.'001'.'-'.'001'.'-'.$registro2['numero_factura'].'</td>
-				<td>'.$registro2['id_cliente'].'</td>
-				<td>'.$registro2['nombre_cliente'].'</td>
-				<td>'.$registro2['ruc_cliente'].'</td>
-				<td>'.$nroFormat.'.Gs</td>
-				<td>'.$leyenda.'</td>
-				<td>'.fechaNormal($registro2['fecha_factura']).'</td>
-				</tr>';
+				<td>'.$wpf1.$registro2['pf1'].'-'.$wpf1.$registro2['pf2'].'-'.$registro2['nrodoc'].'</td>
+                <td>'.$registro2['id_cliente'].'</td>
+                <td>'.$registro2['nombre_cliente'].'</td>
+                <td>'.$registro2['ruc_cliente'].'</td>
+                <td>'.$nroFormat.'.Gs</td>
+                <td>'.$leyenda.'</td>
+                <td>'.fechaNormal($registro2['fecha_factura']).'</td>
+                </tr>';
 	}
 }else{
 	echo '<tr>

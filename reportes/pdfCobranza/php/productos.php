@@ -35,7 +35,7 @@ $pdf->SetFont('Arial', 'B', 8);
 $pdf->Cell(20, 8, 'Nro Recibo', 0);
 $pdf->Cell(25, 8, 'Fecha Recibo', 0);
 $pdf->Cell(20, 8, 'Nro Fact.', 0);
-$pdf->Cell(20, 8, 'Cod. Prov.', 0);
+$pdf->Cell(20, 8, 'Cod. Cliente.', 0);
 $pdf->Cell(40, 8, 'Nombre', 0);
 $pdf->Cell(30, 8, 'Ruc', 0);
 $pdf->Cell(20, 8, 'Total Recibido', 0);
@@ -68,7 +68,7 @@ while($productos2 = mysqli_fetch_array($productos)){
 	$pdf->Cell(20, 8,$productos2['id_cliente'], 0);
 	$pdf->Cell(40, 8, $productos2['nombre_cliente'], 0);
 	$pdf->Cell(30, 8, $productos2['ruc_cliente'], 0);
-	$pdf->Cell(20, 8, $productos2['cantidad_cobranza'].'.Gs', 0);
+	$pdf->Cell(20, 8, number_format($productos2['cantidad_cobranza'],0).'.Gs', 0);
 	$pdf->Ln(8);
 }
 $pdf->SetFont('Arial', 'B', 8);
@@ -77,7 +77,7 @@ $pdf->Cell(104,8,'',0);
 //$pdf->Ln(8);
 //$pdf->Cell(25,14,'Total Dist: S/. '.$totaldis,0);
 
-$pdf->Output('reporteVentas.pdf','D');
+$pdf->Output('reporteRecibosCobrados.pdf','D');
 
 
 ?>

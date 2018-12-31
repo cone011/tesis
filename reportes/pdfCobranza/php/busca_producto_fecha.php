@@ -14,20 +14,20 @@ if(isset($hasta)==false){
 }
 
 //EJECUTAMOS LA CONSULTA DE BUSQUEDA
-$res = "SELECT * FROM venta,cliente WHERE fecha_factura BETWEEN '$desde' AND '$hasta' and cliente.id_cliente=venta.id_cliente ORDER BY fecha_factura DESC";
+$res = "SELECT * FROM cobranza,cliente WHERE fecha BETWEEN '$desde' AND '$hasta' and cobranza.id_cliente=cliente.id_cliente ORDER BY fecha DESC";
 $registro = $conexion->query($res);
 
 //CREAMOS NUESTRA VISTA Y LA DEVOLVEMOS AL AJAX
 
 echo '<table class="table table-striped table-condensed table-hover">
         	<tr>
-            	<th width="100">Nro Documento</th>
-                <th width="50">Codigo</th>
-                <th width="220">Nombre</th>
-                <th width="100">Ruc</th>
-                <th width="70">Total Importe</th>
-                <th width="70">Estado</th>
-                <th width="150">Fecha Registro</th>
+            	<th width="50">Nro Recibo</th>
+                <th width="100">Fecha Recibo</th>
+                <th width="80">Nro Fact</th>
+                <th width="50">Cod Cliente</th>
+                <th width="220">Nombre Cliente</th>
+                <th width="70">Ruc Cliente</th>
+                <th width="150">Importe Recibo</th>
             </tr>';
 if(mysqli_num_rows($registro)>0){
 	while($registro2 = mysqli_fetch_array($registro)){
@@ -42,13 +42,13 @@ if(mysqli_num_rows($registro)>0){
             $leyenda='ANULADO';
         }
 		echo '<tr>
-				<td>'.'001'.'-'.'001'.'-'.$registro2['numero_factura'].'</td>
+                <td>'.$registro2['numero_factura'].'</td>
+                <td>'.fechaNormal($registro2['fecha_factura']).'</td>
+                <td>'.'001'.'-'.'001'.'-'.$registro2['numero_venta'].'</td>
                 <td>'.$registro2['id_cliente'].'</td>
                 <td>'.$registro2['nombre_cliente'].'</td>
                 <td>'.$registro2['ruc_cliente'].'</td>
                 <td>'.$nroFormat.'.Gs</td>
-                <td>'.$leyenda.'</td>
-                <td>'.fechaNormal($registro2['fecha_factura']).'</td>
 				</tr>';
 	}
 }else{

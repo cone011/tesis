@@ -70,7 +70,7 @@ while($productos2 = mysqli_fetch_array($productos)){
 	$pdf->Cell(20, 8,$productos2['id_cliente'], 0);
 	$pdf->Cell(40, 8, $productos2['nombre_cliente'], 0);
 	$pdf->Cell(30, 8, $productos2['ruc_cliente'], 0);
-	$pdf->Cell(20, 8, $totaluni.'.Gs', 0);
+	$pdf->Cell(20, 8, number_format($totaluni,0).'.Gs', 0);
 	$pdf->Ln(8);
 }
 $pdf->SetFont('Arial', 'B', 8);
