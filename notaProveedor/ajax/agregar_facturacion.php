@@ -68,7 +68,7 @@ $simbolo_moneda=get_row('perfil','moneda', 'id_perfil', 1);
                     }
 	$codigo_producto=$wpf1.$row['pf1'].'-'.$wpf2.$row['pf2'].'-'.$row['nrodoc'];
 	$cantidadtmp=$row['cantidad_tmp'];
-	$sql_producto=mysqli_query($con, "select * from cliente, cuentacliente where cuentacliente.id_cliente=cliente.id_cliente");
+	$sql_producto=mysqli_query($con, "select * from proveedores, cuentaproveedor where cuentaproveedor.id_cliente=proveedores.id_cliente");
 	while ($rw=mysqli_fetch_array($sql_producto))
 	{
         $nombre=$rw['nombre_cliente'];

@@ -308,7 +308,7 @@ table.page_footer {width: 100%; border: none; background-color: white; padding: 
 		  <td style="width:20%;"><?php echo date("d/m/Y", strtotime($fecha_factura));?></td>
 		   <td style="width:20%;" >
 				<?php 
-				if ($condiciones==1){echo "Efectivo";}
+				if ($condiciones==1){echo "Contado";}
 				elseif ($condiciones==2){echo "Crédito";}
 				?>
 		   </td>
