@@ -44,7 +44,7 @@ $pdf->Ln(8);
 $pdf->SetFont('Arial', '', 8);
 //CONSULTA
 
-$res = "SELECT * FROM cobranza,cliente where cobranza.id_cliente=cliente.id_cliente and fecha BETWEEN '$desde' AND '$hasta'";
+$res = "SELECT * FROM cobranza,cliente where cobranza.id_cliente=cliente.id_cliente and fecha BETWEEN '$desde' AND '$hasta' ORDER BY fecha DESC";
 $productos = $conexion->query($res);
 
 $item = 0;
@@ -66,8 +66,8 @@ while($productos2 = mysqli_fetch_array($productos)){
 	$pdf->Cell(20, 8,$productos2['fecha'], 0);
 	$pdf->Cell(25, 8,'001'.'-'.'001'.'-'.$productos2['numero_venta'], 0);
 	$pdf->Cell(20, 8,$productos2['id_cliente'], 0);
-	$pdf->Cell(40, 8, $productos2['nombre_cliente'], 0);
-	$pdf->Cell(30, 8, $productos2['ruc_cliente'], 0);
+	$pdf->Cell(40, 8, $productos2['telefono_cliente'], 0);
+	$pdf->Cell(30, 8, $productos2['nombre_cliente'], 0);
 	$pdf->Cell(20, 8, number_format($productos2['cantidad_cobranza'],0).'.Gs', 0);
 	$pdf->Ln(8);
 }

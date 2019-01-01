@@ -64,8 +64,8 @@ while($productos2 = mysqli_fetch_array($productos)){
 	$totaluni = $totaluni + $productos2['total_venta'];
 	$pdf->Cell(15, 8, $item, 0);
 	$pdf->Cell(20, 8,$productos2['id_cliente'], 0);
-	$pdf->Cell(50, 8, $productos2['nombre_cliente'], 0);
-	$pdf->Cell(20, 8, $productos2['ruc_cliente'], 0);
+	$pdf->Cell(50, 8, $productos2['telefono_cliente'], 0);
+	$pdf->Cell(20, 8, $productos2['nombre_cliente'], 0);
 	$pdf->Cell(30, 8, '001'.'-'.'001'.'-'.$productos2['numero_factura'], 0);
 	$pdf->Cell(20, 8, $nroFormat.'.Gs', 0);
 	$pdf->Cell(20, 8, date('d/m/Y', strtotime($productos2['fecha_factura'])), 0);

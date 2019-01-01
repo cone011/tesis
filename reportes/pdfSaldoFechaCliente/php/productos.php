@@ -47,7 +47,7 @@ $pdf->Ln(8);
 $pdf->SetFont('Arial', '', 8);
 //CONSULTA
 
-$res = "SELECT * FROM venta,cliente WHERE fecha_factura BETWEEN '$desde' AND '$hasta' and nombre_cliente LIKE '%$dato%' and estado_factura=2 and venta.id_cliente=cliente.id_cliente order by numero_factura desc";
+$res = "SELECT * FROM venta,cliente WHERE fecha_factura BETWEEN '$desde' AND '$hasta' and (nombre_cliente LIKE '%$dato%' or telefono_cliente LIKE '%$dato%') and estado_factura=2 and venta.id_cliente=cliente.id_cliente order by numero_factura desc";
 $productos = $conexion->query($res);
 
 $item = 0;
@@ -66,8 +66,8 @@ while($productos2 = mysqli_fetch_array($productos)){
 	
 	$pdf->Cell(15, 8, $item, 0);	
 	$pdf->Cell(30, 8, date('d/m/Y', strtotime($productos2['fecha_factura'])), 0);
-	$pdf->Cell(50, 8, $productos2['nombre_cliente'], 0);
-	$pdf->Cell(20, 8, $productos2['ruc_cliente'], 0);
+	$pdf->Cell(50, 8, $productos2['telefono_cliente'], 0);
+	$pdf->Cell(20, 8, $productos2['nombre_cliente'], 0);
 	$pdf->Cell(30, 8, '001'.'-'.'001'.'-'.$productos2['numero_factura'], 0);
 	$pdf->Cell(20, 8, number_format($saldo,0).'.Gs', 0);	
 	$pdf->Ln(8);

@@ -46,8 +46,8 @@ if(mysqli_num_rows($registro)>0){
                 <td>'.fechaNormal($registro2['fecha_factura']).'</td>
                 <td>'.'001'.'-'.'001'.'-'.$registro2['numero_venta'].'</td>
                 <td>'.$registro2['id_cliente'].'</td>
+                <td>'.$registro2['telefono_cliente'].'</td>
                 <td>'.$registro2['nombre_cliente'].'</td>
-                <td>'.$registro2['ruc_cliente'].'</td>
                 <td>'.$nroFormat.'.Gs</td>
 				</tr>';
 	}

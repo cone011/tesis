@@ -4,7 +4,7 @@ include('conexion.php');
 $dato = $_POST['dato'];
 
 //EJECUTAMOS LA CONSULTA DE BUSQUEDA
-$res = "SELECT * FROM cliente,venta WHERE nombre_cliente LIKE '%$dato%' and cliente.id_cliente=venta.id_cliente ORDER BY fecha_factura DESC";
+$res = "SELECT * FROM cliente,venta WHERE (nombre_cliente LIKE '%$dato%' OR telefono_cliente LIKE '%$dato%') and cliente.id_cliente=venta.id_cliente ORDER BY fecha_factura DESC";
 $registro = $conexion->query($res);
 
 //CREAMOS NUESTRA VISTA Y LA DEVOLVEMOS AL AJAX
@@ -35,7 +35,7 @@ if(mysqli_num_rows($registro)>0){
 		echo '<tr>
 				<td>'.'001'.'-'.'001'.'-'.$registro2['numero_factura'].'</td>
 				<td>'.$registro2['id_cliente'].'</td>
-				<td>'.$registro2['nombre_cliente'].'</td>
+				<td>'.$registro2['telefono_cliente'].'</td>
 				<td>'.$registro2['ruc_cliente'].'</td>
 				<td>'.$nroFormat.'.Gs</td>
 				<td>'.$leyenda.'</td>

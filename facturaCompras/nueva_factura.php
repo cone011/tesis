@@ -107,7 +107,7 @@ while ($r=$query->fetch_array()){
     $ocultar=1;
 
 	$active_bk="";
-	$title="Nueva Orden | Estacion E.M.R.";
+	$title="Nueva Compra | Estacion E.M.R.";
 	
 	/* Connect To Database*/
 	require_once ("config/db.php");//Contiene las variables de configuracion para conectar a la base de datos
