@@ -488,7 +488,9 @@ while ($row=mysqli_fetch_array($sql))
       
     </table>
     
-
+     <br>
+     <br>
+     <br>
      <div style="font-size:09pt;text-align:center;font-weight:bold">TOTAL NC:</div>
         <div style="font-size:09pt;text-align:center;font-weight:bold"><?php echo number_format($totalnc,0);?></div>
      <?php if($verificador_factura==1){ ?>

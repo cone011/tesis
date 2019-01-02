@@ -24,7 +24,7 @@
 		$direccion=mysqli_real_escape_string($con,(strip_tags($_POST["mod_direccion"],ENT_QUOTES)));
 		$ruc=mysqli_real_escape_string($con,(strip_tags($_POST["mod_ruc"],ENT_QUOTES)));
 		$estado=intval($_POST['mod_estado']);
-		
+		//echo $nombre;
 		$id_cliente=intval($_POST['mod_id']);
 		$sql="UPDATE users SET gestion='".$nombre."', factura='".$telefono."', compra='".$email."', inventario='".$direccion."', estado='".$estado."', reporte='".$ruc."' WHERE user_id='".$id_cliente."'";
 		$query_update = mysqli_query($con,$sql);

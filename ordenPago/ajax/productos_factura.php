@@ -30,7 +30,7 @@
 			$sWhere = substr_replace( $sWhere, "", -3 );
 			proveedores.nombre_cliente like '%$q%' or 
 			$sWhere .= ')';*/
-			$sWhere.= " and  (compra.numero_factura like '%$q%' or compra.fecha like '%$q%' or proveedores.nombre_cliente like '%$q%' or compra.fecha_factura like '%$q%')";
+			$sWhere.= " and  (compra.numero_factura like '%$q%' or compra.fecha like '%$q%' or proveedores.nombre_cliente like '%$q%' or compra.fecha_factura like '%$q%' or compra.pf1 like '%$q%' or compra.pf2 like '%$q%' or compra.nrodoc like '%$q%')";
 		}
 		include 'pagination.php'; //include pagination file
 		//pagination variables

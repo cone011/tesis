@@ -155,7 +155,7 @@ document.onkeydown = function(e){
  tecla = (document.all) ? e.keyCode : e.which;
 
  if (tecla == 116){
-   if (confirm("Porfavor Elimine los elementos de la factura") == true) {
+   if (confirm("Desea Refrescar la Pantalla") == true) {
    	   var miVariable = "1";
        document.cookie ='variable='+miVariable+'; expires=Thu, 2 Aug 2021 20:47:11 UTC; path=/';
    	   return true;
@@ -197,7 +197,7 @@ history.go(1)
 				<div class="form-group row">
 				  <label for="nombre_cliente" class="col-md-1 control-label">Proveedor: </label>
 				  <div class="col-md-2">
-					  <input type="text" class="form-control input-sm" id="nombre_cliente" placeholder="Selecciona un cliente" required>
+					  <input type="text" class="form-control input-sm" id="nombre_cliente" placeholder="Selecciona un Proveedor" required>
 					  <input id="id_cliente" type='hidden'>	
 				  </div>
 				  <label for="tel1" class="col-md-1 control-label">Teléfono: </label>

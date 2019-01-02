@@ -142,7 +142,7 @@ document.onkeydown = function(e){
  tecla = (document.all) ? e.keyCode : e.which;
 
  if (tecla == 116){
-   if (confirm("Porfavor Elimine los elementos de la factura") == true) {
+   if (confirm("Desea limpiar la Pantalla") == true) {
    	   var miVariable = "1";
        document.cookie ='variable='+miVariable+'; expires=Thu, 2 Aug 2021 20:47:11 UTC; path=/';
    	   return true;

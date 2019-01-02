@@ -175,7 +175,7 @@ function mostrar_cuota(id) {
  tecla = (document.all) ? e.keyCode : e.which;
 
  if (tecla == 116){
-   if (confirm("Si le da f5 se eliminaran los datos de la factura") == true) {
+   if (confirm("Desea Actualizar la Pantalla") == true) {
        var miVariable = "1";
        document.cookie ='variable='+miVariable+'; expires=Thu, 2 Aug 2021 20:47:11 UTC; path=/';
    	   return true;

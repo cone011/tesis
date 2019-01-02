@@ -218,7 +218,7 @@ table.page_footer {width: 100%; border: none; background-color: white; padding: 
                     P&aacute;gina [[page_cu]]/[[page_nb]]
                 </td>
                 <td style="width: 50%; text-align: right">
-                    &copy; <?php echo "obedalvarado.pw "; echo  $anio=date('Y'); ?>
+                    &copy; <?php echo " "; echo  $anio=date('Y'); ?>
                 </td>
             </tr>
         </table>
@@ -245,6 +245,11 @@ table.page_footer {width: 100%; border: none; background-color: white; padding: 
                 echo $rw_cliente['telefono_cliente'];
                 echo "<br> Email: ";
                 echo $rw_cliente['email_cliente'];
+                 $sql_nc=mysqli_query($con, "select max(numero_factura) as last from ncliente");
+    while ($rw=mysqli_fetch_array($sql_nc))
+    {
+        $numero_nc=$rw['last']+1;
+    }
             ?>
             
            </td>
@@ -285,8 +290,8 @@ table.page_footer {width: 100%; border: none; background-color: white; padding: 
   
     <table cellspacing="0" style="width: 100%; text-align: left; font-size: 10pt;">
         <tr>
-            <th style="width: 10%;text-align:center" class='midnight-blue'>NRO FACTURA.</th>
-            <th style="width: 60%" class='midnight-blue'>DESCRIPCION</th>
+            <th style="width: 20%;text-align:center" class='midnight-blue'>NRO FACTURA.</th>
+            <th style="width: 50%" class='midnight-blue'>DESCRIPCION</th>
             <th style="width: 15%;text-align: right" class='midnight-blue'>MONTO N.C.</th>
             <th style="width: 15%;text-align: right" class='midnight-blue'>SAL. SOBRA</th>
             
@@ -335,14 +340,10 @@ while ($row=mysqli_fetch_array($sql))
     $sql_producto=mysqli_query($con, "select * from cliente, cuentacliente where cuentacliente.id_cliente=cliente.id_cliente");
     while ($rw=mysqli_fetch_array($sql_producto))
     {
-        $nombre=$rw['nombre_cliente'];
+        $nombre=$rw['nombre_cliente'].'-'.$rw['telefono_cliente'];
         
     }
-    $sql_nc=mysqli_query($con, "select max(numero_factura) as last from ncliente");
-    while ($rw=mysqli_fetch_array($sql_nc))
-    {
-        $numero_nc=$rw['last']+1;
-    }
+   
     $sql_venta=mysqli_query($con, "select * from venta where venta.numero_factura='".$numero_factura."'");
     while ($rw2=mysqli_fetch_array($sql_producto))
     {
@@ -423,8 +424,8 @@ while ($row=mysqli_fetch_array($sql))
     ?>
 
         <tr>
-            <td class='<?php echo $clase;?>' style="width: 10%; text-align: center"><?php echo $codigo_producto; ?></td>
-            <td class='<?php echo $clase;?>' style="width: 60%; text-align: left"><?php echo $nombre;?></td>
+            <td class='<?php echo $clase;?>' style="width: 20%; text-align: center"><?php echo $codigo_producto; ?></td>
+            <td class='<?php echo $clase;?>' style="width: 50%; text-align: left"><?php echo $nombre;?></td>
             <td class='<?php echo $clase;?>' style="width: 15%; text-align: right"><?php echo number_format($cantidadtmp,0);?></td>
             <td class='<?php echo $clase;?>' style="width: 15%; text-align: right"><?php echo number_format($diferencia,0);?></td>
             
@@ -486,7 +487,7 @@ while ($row=mysqli_fetch_array($sql))
 
     <br>
     <br>
-
+    <br>
         <div style="font-size:11pt;text-align:center;font-weight:bold">TOTAL NC:</div>
         <div style="font-size:09pt;text-align:center;font-weight:bold"><?php echo number_format($totalnc,0);?></div>
     
