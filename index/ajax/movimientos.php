@@ -14,7 +14,7 @@
 		 $sWhere = "";
 		 $sWhere.=" WHERE cierre_detalle.nro_factura > (select max(factura_final)from cierre)" ;
 		 $sWhere.=" or cierre_detalle.nro_compra > (select max(compra_final)from cierre)" ;	
-		 $sWhere.=" or cierre_detalle.NRO_PAGO > (select max(op_final)from cierre)" ;			 
+		 $sWhere.=" or cierre_detalle.NRO_PAGO > (select max(cobranza_final)from cierre)" ;			 
 		if ( $_GET['q'] != "" )
 		{
 		//$sWhere.= " and  (cliente.nombre_cliente like '%$q%' or ncliente.numero_factura like '%$q%' or ncliente.fecha like '%$q%')";
@@ -74,7 +74,7 @@
 						<td><?php echo $NRO_PAGO; ?></td>
 						<td><?php echo $NRO_NC; ?></td>
 						<td><?php echo $SALDO_FACTURA; ?></td>
-						<td><?php echo $MONTO_TOTAL; ?></td>
+						<td><?php echo number_format($MONTO_TOTAL,0); ?></td>
 						
 					</tr>
 					<?php
