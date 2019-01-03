@@ -161,6 +161,6 @@ while ($r=$query->fetch_array()){
 	include("footer.php");
 	?>
 	<script type="text/javascript" src="js/VentanaCentrada.js"></script>
-	<script type="text/javascript" src="js/facturas.js"></script>
+	<script type="text/javascript" src="js/movimientos.js"></script>
   </body>
 </html>
