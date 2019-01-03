@@ -110,7 +110,7 @@ while ($r=$query->fetch_array()){
 		
 	
 	$active_bk="";
-	$title="Facturas | E.M.R.";
+	$title="Inicio | E.M.R.";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -124,14 +124,14 @@ while ($r=$query->fetch_array()){
 	?>  
     <div class="container">
 		<div class="panel panel-info">
-		<div class="panel-heading">
+		<div class="panel-heading" align="center">
 		    
-			<h4><i class='glyphicon glyphicon-search'></i> Buscar Facturas</h4>
+			<h4>Movimientos del turno</h4>
 		</div>
 			<div class="panel-body">
 				<form class="form-horizontal" role="form" id="datos_cotizacion">
 				
-						<div class="form-group row">
+						<!--<div class="form-group row">
 							<label for="q" class="col-md-2 control-label">Cliente o # de factura</label>
 							<div class="col-md-5">
 								<input type="text" class="form-control" id="q" placeholder="Nombre del cliente o # de factura o YYYY-MM-DD" onkeyup='load(1);'>
@@ -145,7 +145,7 @@ while ($r=$query->fetch_array()){
 								<span id="loader"></span>
 							</div>
 							
-						</div>
+						</div>-->
 				
 				
 				
