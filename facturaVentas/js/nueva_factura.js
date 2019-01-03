@@ -19,6 +19,7 @@
 			})
 		}
 
+	    
 	function agregar (id)
 		{
 			var precio_venta=document.getElementById('precio_venta_'+id).value;
