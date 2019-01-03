@@ -30,7 +30,7 @@ UNION /*op*/
        END AS FORMA_DE_PAGO,
        0				    AS NRO_COMPRA,
        numero_factura AS NRO_OP,
-       efectivo       AS MONTO_TOTAL,
+       total_venta    AS MONTO_TOTAL,
        0              AS SALDO_FACTURA,
        id_cliente     AS ID_PROVEEDOR
   FROM op
