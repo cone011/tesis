@@ -13,9 +13,10 @@ CREATE OR REPLACE VIEW detalle_cuenta_proveedor AS
       	 0				    AS NRO_OP,
       	 total_venta	 AS MONTO_TOTAL,
        	 0              AS SALDO_FACTURA,
-       	 id_cliente     AS ID_PROVEEDOR
+       	 id_cliente     AS ID_PROVEEDOR,
+         fecha_factura     AS FECHA
 	FROM compra
-	WHERE condiciones != 999
+	WHERE estado_factura != 10
 	 AND tipo_pago NOT IN (0,5)
 	GROUP BY tipo_pago
 UNION /*op*/
@@ -32,7 +33,8 @@ UNION /*op*/
        numero_factura AS NRO_OP,
        total_venta    AS MONTO_TOTAL,
        0              AS SALDO_FACTURA,
-       id_cliente     AS ID_PROVEEDOR
+       id_cliente     AS ID_PROVEEDOR,
+       fecha_factura     AS FECHA
   FROM op
  WHERE condiciones != 999
 ;COMMIT;
