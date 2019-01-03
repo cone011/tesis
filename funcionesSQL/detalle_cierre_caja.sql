@@ -57,11 +57,11 @@ UNION /*cobranza*/
 UNION /*compra*/
    SELECT 'COMPRA' AS TIPO,
           CASE 
-		    WHEN tipo_pago = 1 THEN 'EFECTIVO'
-			WHEN tipo_pago = 2 THEN 'TARJETA'
-    	    WHEN tipo_pago = 3 THEN 'CHEQUE'
-			WHEN tipo_pago = 4 THEN 'TRANSFERENCIA'
-			WHEN tipo_pago = 5 THEN 'COMBINADO'
+		    WHEN tipo_pago = 0 THEN 'EFECTIVO'
+			WHEN tipo_pago = 0 THEN 'TARJETA'
+    	    WHEN tipo_pago = 0 THEN 'CHEQUE'
+			WHEN tipo_pago = 0 THEN 'TRANSFERENCIA'
+			WHEN tipo_pago = 0 THEN 'COMBINADO'
 			ELSE 'N/A'
 			END AS FORMA_DE_PAGO,
         	0 AS NRO_FACTURA,
@@ -81,8 +81,8 @@ UNION /*compra*/
 			FROM cierre
 			ORDER BY id_cierre DESC
 			LIMIT 1) */
-	 AND tipo_pago  IN (0,5)
-	GROUP BY tipo_pago
+	/* AND tipo_pago IN (0,5)*/
+	/*GROUP BY tipo_pago*/
 ;COMMIT;
  GRANT SELECT ON cierre_detalle TO USERS;
  COMMIT;  
