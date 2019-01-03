@@ -236,6 +236,7 @@ history.go(1)
 							<div class="col-md-2">
 								<input type="text" class="form-control input-sm" id="efectivo">
 							</div>
+				    </div>
 					<?php if($activar!=1){ ?>		
 							<label for="email" class="col-md-1 control-label">Tipo</label>
 							<div class="col-md-2">
@@ -287,12 +288,13 @@ history.go(1)
 				
 				<div class="form-group row">
 						<label for="tarjeta" class="col-md-1 control-label">Forma Pago</label>
-							<div class="col-md-2">
+							<div class="col-md-8">
 								
 								<textarea class="form-control" id="tarjeta" name="tarjeta" placeholder="Comentario Pago" required maxlength="255" ></textarea>
 							</div>
 					</div>
-					
+
+			
 				<div class="col-md-12">
 					<div class="pull-right">
 						<button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal">

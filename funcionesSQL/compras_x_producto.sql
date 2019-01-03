@@ -4,6 +4,7 @@ SELECT a.fecha       				  AS FECHA,
 		 b.nombre_producto 			  AS PRODUCTO,
 		 a.cantidad     			     AS CANTIDAD,
 		 a.precio_venta   			  AS PRECIO_UNITARIO,
+		 a.numero_factura   		  AS NUMERO_COMPRA,
 		 CASE
 		 WHEN tipo != 1 THEN
 		 a.cantidad * a.precio_venta

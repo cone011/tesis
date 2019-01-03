@@ -16,11 +16,13 @@
 </head>
 <body>
     <?php include "navbar.php"; ?>
-    <header>Reporte de Venta x Fecha Cantidad PDF</header>
+    <header>Reporte de Compra PDF</header>
     <section>
   <div class="table-responsive">      
     <table border="0" align="center">
     	<tr>
+            <td>Cliente&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td width="335"><input type="text" placeholder="Busca un producto por: Nombre o Tipo" id="bs-prod"/></td>
             <td>Desde&nbsp;&nbsp;&nbsp;&nbsp;</td>
             <td><input type="date" id="bd-desde"/></td>
             <td>Hasta&nbsp;&nbsp;&nbsp;&nbsp;</td>
