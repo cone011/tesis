@@ -62,7 +62,7 @@
 			$sWhere = substr_replace( $sWhere, "", -3 );
 			$sWhere .= ')';
 		}
-		$sWhere.=" order by id_cierre desc";
+		$sWhere.=" order by id_cierre";
 		include 'pagination.php'; //include pagination file
 		//pagination variables
 		$page = (isset($_REQUEST['page']) && !empty($_REQUEST['page']))?$_REQUEST['page']:1;
@@ -130,23 +130,31 @@
 						<td><?php echo $id_producto; ?></td>
 						<td ><?php echo $codigo_producto; ?></td>
 						<td><?php echo $nombre_producto;?></td>
-						<td><?php echo $monto_contado;?></td>
-						<td><?php echo $monto_credito;?></td>
-						<td><?php echo $monto_anulado;?></td>
-                        <td><?php echo $total;?></td>
+						<td><?php echo number_format($monto_contado,0);?></td>
+						<td><?php echo number_format($monto_credito,0);?></td>
+						<td><?php echo number_format($monto_anulado,0);?></td>
+                        <td><?php echo number_format($total,0);?></td>
                         <td><?php echo $status_producto;?></td>
 	
 					</tr>
 					<?php
 				}
 				?>
-				<tr>
-					<td colspan=6><span class="pull-right">
-					<?php
-					 echo paginate($reload, $page, $total_pages, $adjacents);
-					?></span></td>
-				</tr>
+				<!--<tr>
+					<td colspan=6>
+						<span class="pull-right">-->
+							<?php
+							//	echo paginate($reload, $page, $total_pages, $adjacents);
+							?> 
+						<!--</span>
+					</td>
+				</tr>-->
 			  </table>
+			  <div align="center">
+				<?php
+					echo paginate($reload, $page, $total_pages, $adjacents);
+				?>
+			  </div>
 			</div>
 			<?php
 		}

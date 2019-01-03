@@ -2,10 +2,10 @@ CREATE OR REPLACE VIEW cierre_totales_2 AS (
 SELECT SUM(a.total_venta) AS total,
        tipo_pago,
        CASE 
-		 WHEN tipo_pago = 1 THEN 'EFECTIVO'
-       WHEN tipo_pago = 2 THEN 'TARJETA'
-       WHEN tipo_pago = 3 THEN 'CHEQUE'
-       WHEN tipo_pago = 4 THEN 'TRANSFERENCIA'
+		WHEN tipo_pago = 1 THEN 'EFECTIVO'
+		WHEN tipo_pago = 2 THEN 'TARJETA'
+		WHEN tipo_pago = 3 THEN 'CHEQUE'
+		WHEN tipo_pago = 4 THEN 'TRANSFERENCIA'
        END
   FROM compra a
   WHERE numero_factura BETWEEN 
