@@ -28,7 +28,7 @@ UNION /*op*/
        WHEN tipo_pago = 5 THEN 'COMBINADO'
        ELSE 'N/A'
        END AS FORMA_DE_PAGO,
-       0				    AS NRO_COMPRA,
+       numero_venta	 AS NRO_COMPRA,
        numero_factura AS NRO_OP,
        total_venta    AS MONTO_TOTAL,
        0              AS SALDO_FACTURA,
