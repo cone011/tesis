@@ -128,8 +128,8 @@ function editarProducto(id){
 function reportePDF(){
 	var desde = $('#bd-desde').val();
 	var hasta = $('#bd-hasta').val();
-	
-	window.open('../php/productos.php?desde='+desde+'&hasta='+hasta);
+	var dato = $('#bs-prod').val();
+	window.open('../php/productos.php?desde='+desde+'&hasta='+hasta+'&dato='+dato);
 }
 
 function pagination(partida){
