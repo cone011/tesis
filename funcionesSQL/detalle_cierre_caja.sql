@@ -2,7 +2,7 @@
 CREATE OR REPLACE VIEW cierre_detalle AS 
 SELECT 'FACTURA' AS TIPO,
        CASE 
-		 WHEN tipo_pago = 1 THEN 'EFECTIVO'
+	   WHEN tipo_pago = 1 THEN 'EFECTIVO'
        WHEN tipo_pago = 2 THEN 'TARJETA'
        WHEN tipo_pago = 3 THEN 'CHEQUE'
        WHEN tipo_pago = 4 THEN 'TRANSFERENCIA'
@@ -13,7 +13,7 @@ SELECT 'FACTURA' AS TIPO,
        0				    AS NRO_COMPRA,
        0				    AS NRO_PAGO,
        0				    AS NRO_NC,
-       CONVERT(total_venta,INTEGER)    AS MONTO_TOTAL,
+       CAST(total_venta as UNSIGNED )AS MONTO_TOTAL,
        saldo_factura  AS SALDO_FACTURA
   FROM venta
  WHERE numero_factura BETWEEN 

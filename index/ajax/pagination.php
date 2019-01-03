@@ -2,7 +2,7 @@
 function paginate($reload, $page, $tpages, $adjacents) {
 	$prevlabel = "&lsaquo; Prev";
 	$nextlabel = "Next &rsaquo;";
-	$out = '<div align="center"><ul class="pagination pagination-large">';
+	$out = '<ul class="pagination pagination-large">';
 	
 	// previous label
 
@@ -58,7 +58,7 @@ function paginate($reload, $page, $tpages, $adjacents) {
 		$out.= "<li class='disabled'><span><a>$nextlabel</a></span></li>";
 	}
 	
-	$out.= "</ul></div>";
+	$out.= "</ul>";
 	return $out;
 }
 ?>
