@@ -16,7 +16,7 @@ SELECT 'FACTURA' AS TIPO,
        CAST(total_venta as UNSIGNED )AS MONTO_TOTAL,
        saldo_factura  AS SALDO_FACTURA
   FROM venta
- WHERE numero_factura BETWEEN 
+ WHERE /* numero_factura BETWEEN 
     	 (SELECT factura_incial
 	  	    FROM cierre
 			ORDER BY id_cierre DESC
@@ -25,7 +25,7 @@ SELECT 'FACTURA' AS TIPO,
 			FROM cierre
 	     ORDER BY id_cierre DESC
 		  LIMIT 1)
-	AND total_venta > 0
+	AND */ total_venta > 0
 	AND condiciones != '999'
 UNION /*cobranza*/
    SELECT 'PAGO' AS TIPO,
@@ -44,7 +44,7 @@ UNION /*cobranza*/
        efectivo       AS MONTO_TOTAL,
        0              AS SALDO_FACTURA
   FROM cobranza
- WHERE numero_factura BETWEEN 
+ WHERE /* numero_factura BETWEEN 
     	 (SELECT cobranza_inicial
 	  	    FROM cierre
 			ORDER BY id_cierre DESC
@@ -53,7 +53,7 @@ UNION /*cobranza*/
 			FROM cierre
 	     ORDER BY id_cierre DESC
 		  LIMIT 1)
-	AND condiciones != 999
+	AND */ condiciones != 999
 UNION /*compra*/
    SELECT 'COMPRA' AS TIPO,
           CASE 
@@ -72,7 +72,7 @@ UNION /*compra*/
        	 0              AS SALDO_FACTURA
 	FROM compra
 	WHERE condiciones != 999
-	  AND numero_factura BETWEEN 
+	  /* AND numero_factura BETWEEN 
          (SELECT compra_inicial
 			   FROM cierre
 		  	ORDER BY id_cierre DESC
@@ -80,7 +80,7 @@ UNION /*compra*/
 	 AND (SELECT compra_final
 			FROM cierre
 			ORDER BY id_cierre DESC
-			LIMIT 1)
+			LIMIT 1) */
 	 AND tipo_pago NOT IN (0,5)
 	GROUP BY tipo_pago
 ;COMMIT;
