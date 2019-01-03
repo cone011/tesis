@@ -10,9 +10,7 @@ SELECT 'FACTURA' AS TIPO,
        ELSE 'N/A'
        END AS FORMA_DE_PAGO,
        numero_factura AS NRO_FACTURA,
-       0				    AS NRO_COMPRA,
        0				    AS NRO_PAGO,
-       0				    AS NRO_NC,
        CONVERT(total_venta,INTEGER)    AS MONTO_TOTAL,
        saldo_factura  AS SALDO_FACTURA,
        id_cliente     AS ID_CLIENTE
@@ -30,9 +28,7 @@ UNION /*cobranza*/
        ELSE 'N/A'
        END AS FORMA_DE_PAGO,
        numero_venta   AS NRO_FACTURA,
-       0				    AS NRO_COMPRA,
        numero_factura AS NRO_PAGO,
-       0				    AS NRO_NC,
        efectivo       AS MONTO_TOTAL,
        0              AS SALDO_FACTURA,
        id_cliente     AS ID_CLIENTE
