@@ -45,7 +45,7 @@ $simbolo_moneda=get_row('perfil','moneda', 'id_perfil', 1);
     $monto5=0;
     $monto0=0;
     $total=0;
-	$sql=mysqli_query($con, "select * from venta, tmp where venta.numero_factura=tmp.id_producto and tmp.session_id='".$session_id."'");
+	$sql=mysqli_query($con, "select * from venta,cliente, tmp where venta.numero_factura=tmp.id_producto and venta.id_cliente=cliente.id_cliente and tmp.session_id='".$session_id."'");
 	while ($row=mysqli_fetch_array($sql))
 	{
 	$precioUnitario=$row['total_venta'];	
@@ -53,13 +53,16 @@ $simbolo_moneda=get_row('perfil','moneda', 'id_perfil', 1);
 	$id_tmp=$row["id_tmp"];
 	$codigo_producto='001'.'-'.'001'.'-'.$row['numero_factura'];
 	$cantidadtmp=$row['cantidad_tmp'];
-	$sql_producto=mysqli_query($con, "select * from cliente, venta where venta.id_cliente=cliente.id_cliente");
+	$nombre=$row['nombre_cliente'];
+        $ruc_cliente=$row['telefono_cliente'];
+        $dato=$nombre.'-'.$ruc_cliente;
+	/*$sql_producto=mysqli_query($con, "select * from cliente, venta where venta.id_cliente=cliente.id_cliente");
 	while ($rw=mysqli_fetch_array($sql_producto))
 	{
         $nombre=$rw['nombre_cliente'];
         $ruc_cliente=$rw['telefono_cliente'];
         $dato=$nombre.'-'.$ruc_cliente;
-	}
+	}*/
 	$format=number_format($precio_venta,0);
 	$diferencia=$precio_venta-$cantidadtmp;
 	$monto_saldo=number_format($cantidadtmp,0);

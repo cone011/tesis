@@ -89,7 +89,7 @@
 			  return false;
 		  }
 		 VentanaCentrada('./pdf/documentos/factura_pdf.php?id_cliente='+id_cliente+'&id_vendedor='+id_vendedor+'&condiciones='+condiciones+"&pago="+pago+"&efectivo="+efectivo+"&tarjeta="+tarjeta+"&cheque="+cheque+"&transferencia="+transferencia+"&cuota="+cuota+"&pf1="+pf1+"&pf2="+pf2+"&nrodoc="+nrodoc+"&timbrado="+timbrado,'Factura','','1024','768','true');
-	 	 setTimeout("location.reload(true);",150);
+	 	 setTimeout("location.reload(true);",50);
 		});
 		
 		$( "#guardar_cliente" ).submit(function( event ) {

@@ -55,8 +55,8 @@
 				<tr  class="warning">
 					<th>Fecha Cargada.</th>
 					<th>Nro Factura.</th>
-					<th><span class="pull-right">Saldo a Cobrar</span></th>
-					<th><span class="pull-right">Total Saldo</span></th>
+					<th><span class="pull-right">Saldo a Pagar</span></th>
+					<th><span class="pull-right">Saldo Sobrante</span></th>
 					<th class='text-center' style="width: 36px;">Agregar</th>
 				</tr>
 				<?php
@@ -80,6 +80,7 @@
 					 $tipo=$row['estado_factura'];
 					 $fecha=$row['fecha_factura'];
 					 $ruc=$row['ruc_cliente'];
+					 $total=$row['total_venta'];
 					?>
 					<tr>
 					<?php if($tipo==2){ ?>

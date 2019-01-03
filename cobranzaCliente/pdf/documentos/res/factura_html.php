@@ -235,9 +235,11 @@ table.page_footer {width: 100%; border: none; background-color: white; padding: 
         <tr>
            <td style="width:50%;" >
             <?php 
+                $nombre_pago='';
                 $sql_cliente=mysqli_query($con,"select * from cliente where id_cliente='$id_cliente'");
                 $rw_cliente=mysqli_fetch_array($sql_cliente);
                 echo $rw_cliente['nombre_cliente'];
+                $nombre_pago=$rw_cliente['telefono_cliente'];
                 echo "<br>";
                 echo "<br> Ruc: ";
                 echo $rw_cliente['ruc_cliente'];
@@ -347,7 +349,7 @@ $monto5=0;
 $monto0=0;
 $total=0;
 $verificador_factura=0;
-$sql=mysqli_query($con, "select * from venta, tmp where venta.numero_factura=tmp.id_producto and tmp.session_id='".$session_id."'");
+$sql=mysqli_query($con, "select * from venta,tmp where venta.numero_factura=tmp.id_producto and tmp.session_id='".$session_id."'");
 while ($row=mysqli_fetch_array($sql))
     {
     /*$precioUnitario=$row['precio_producto'];    
@@ -418,7 +420,7 @@ while ($row=mysqli_fetch_array($sql))
 
         <tr>
             <td class='<?php echo $clase;?>' style="width: 20%; text-align: center"><?php echo $codigo_producto; ?></td>
-            <td class='<?php echo $clase;?>' style="width: 50%; text-align: left"><?php echo $nombre;?></td>
+            <td class='<?php echo $clase;?>' style="width: 50%; text-align: left"><?php echo $nombre_pago;?></td>
             <td class='<?php echo $clase;?>' style="width: 15%; text-align: right"><?php echo number_format($cantidadtmp,0);?></td>
             <td class='<?php echo $clase;?>' style="width: 15%; text-align: right"><?php echo number_format($diferencia);?></td>
             

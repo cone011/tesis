@@ -51,8 +51,8 @@
 				<tr  class="warning">
 					<th>Fecha Factura.</th>
 					<th>Nro Factura.</th>
-					<th><span class="pull-right">Saldo a Cobrar</span></th>
-					<th><span class="pull-right">Total Saldo</span></th>
+					<th><span class="pull-right">Saldo a Amortizar</span></th>
+					<th><span class="pull-right">Saldo Sobrante</span></th>
 					<th class='text-center' style="width: 36px;">Agregar</th>
 				</tr>
 				<?php
@@ -67,6 +67,7 @@
 					 $email_cliente=$row['email_cliente'];				
 					 $tipo=$row['estado_factura'];
 					 $fecha_factura=$row['fecha_factura'];
+					 $total=$row['total_venta'];
 					?>
 					<tr>
 					<?php if($tipo==2){ ?>

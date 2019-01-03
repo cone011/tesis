@@ -30,7 +30,7 @@
 	$condiciones=mysqli_real_escape_string($con,(strip_tags($_REQUEST['condiciones'], ENT_QUOTES)));
 	$pago=mysqli_real_escape_string($con,(strip_tags($_REQUEST['pago'], ENT_QUOTES)));
     $efectivo=intval($_GET['efectivo']);
-    $tarjeta=intval($_GET['tarjeta']);
+    $tarjeta=$_GET['tarjeta'];
     $cheque=intval($_GET['cheque']);
     $transferencia=intval($_GET['transferencia']);
 	//Fin de variables por GET

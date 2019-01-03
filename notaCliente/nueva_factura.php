@@ -239,6 +239,13 @@ history.go(1)
 								</select>
 							</div>
                        
+                       <div class="form-group row">
+						<label for="tarjeta" class="col-md-1 control-label">Comentario NC</label>
+							<div class="col-md-2">
+								
+								<textarea class="form-control" id="tarjeta" name="tarjeta" placeholder="Comentario NC" required maxlength="255" ></textarea>
+							</div>
+					</div>
 										
 				
 				<div class="col-md-12">

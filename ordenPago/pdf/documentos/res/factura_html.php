@@ -260,7 +260,6 @@ table.page_footer {width: 100%; border: none; background-color: white; padding: 
            <td style="width:25%;" class='midnight-blue'>ENCARGADO</td>
           <td style="width:20%;" class='midnight-blue'>FECHA DE O.P.</td>
          
-           <td style="width:35%;" class='midnight-blue'>COMENTARIO DE PAGO</td>
         <?php if($validacion==1){ ?> 
             <td style="width:20%;" class='midnight-blue'>TIPO PAGO</td>
          <?php } ?>
@@ -276,11 +275,6 @@ table.page_footer {width: 100%; border: none; background-color: white; padding: 
             ?>
            </td>
            <td style="width:25%;"><?php echo date("d/m/Y");?></td>  
-           <td style="width:35%;" >
-                <?php 
-                echo $tarjeta;
-                ?>
-           </td>
 
 
          <?php if($validacion==1){ ?>  
@@ -326,7 +320,7 @@ table.page_footer {width: 100%; border: none; background-color: white; padding: 
     <table cellspacing="0" style="width: 100%; text-align: left; font-size: 10pt;">
         <tr>
             <th style="width: 20%;text-align:center" class='midnight-blue'>NRO FACTURA.</th>
-            <th style="width: 50%" class='midnight-blue'>DESCRIPCION</th>
+            <th style="width: 50%" class='midnight-blue'>DESCRIPCION DEL O.P.</th>
             <th style="width: 15%;text-align: right" class='midnight-blue'>MONTO O.P.</th>
             <th style="width: 15%;text-align: right" class='midnight-blue'>SALDO SOBRANTE</th>
             
@@ -429,7 +423,7 @@ while ($row=mysqli_fetch_array($sql))
 
         <tr>
             <td class='<?php echo $clase;?>' style="width: 20%; text-align: center"><?php echo $codigo_producto; ?></td>
-            <td class='<?php echo $clase;?>' style="width: 50%; text-align: left"><?php echo $nombre;?></td>
+            <td class='<?php echo $clase;?>' style="width: 50%; text-align: left"><?php echo $tarjeta;?></td>
             <td class='<?php echo $clase;?>' style="width: 15%; text-align: right"><?php echo number_format($cantidadtmp,0);?></td>
             <td class='<?php echo $clase;?>' style="width: 15%; text-align: right"><?php echo number_format($diferencia,0);?></td>
             

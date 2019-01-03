@@ -45,7 +45,7 @@
 			$sWhere = substr_replace( $sWhere, "", -3 );
 			$sWhere .= ')';*/
 			//$nombre_cliente="FERNANDO MENDOZA";
-			$sWhere.= " and  (venta.numero_factura like '%$q%' or venta.fecha like '%$q%' or cliente.nombre_cliente like '%$q%' or venta.fecha_factura like '%$q%')";
+			$sWhere.= " and  (venta.numero_factura like '%$q%' or venta.fecha like '%$q%' or cliente.nombre_cliente like '%$q%' or venta.fecha_factura like '%$q%' or cliente.telefono_cliente like '%$q%')";
 		}
 		include 'pagination.php'; //include pagination file
 		//pagination variables
@@ -72,7 +72,7 @@
 					<th>Nombre Cliente.</th>
 					<th>Nro Factura.</th>
 					<th><span class="pull-right">Saldo a Cobrar</span></th>
-					<th><span class="pull-right">Total Saldo</span></th>
+					<th><span class="pull-right">Saldo Sobrante</span></th>
 					<th class='text-center' style="width: 36px;">Agregar</th>
 				</tr>
 				<?php
@@ -86,6 +86,7 @@
 					 $tipo=$row['estado_factura'];
 					 $telefono_cliente=$row['telefono_cliente'];
 					 $email_cliente=$row['email_cliente'];
+					 $total=$row['total_venta']
 
 					?>
 					<tr>

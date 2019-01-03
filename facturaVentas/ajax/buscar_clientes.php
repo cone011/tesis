@@ -111,7 +111,6 @@
 						$date_added= date('d/m/Y', strtotime($row['date_added']));
 						$sql_factura=mysqli_query($con,"select * from venta where id_cliente='".$id_cliente."' and estado_factura=2");
 						while ($rw=mysqli_fetch_array($sql_factura)){
-							    $monto=0;
 							    $estado_factura=$rw['estado_factura'];
 							    $monto+=$rw['total_venta'];
 					    }
@@ -133,7 +132,7 @@
 						<td><?php echo $email_cliente;?></td>
 						<td><?php echo $direccion_cliente;?></td>
 						<td><?php echo $ruc_cliente;?></td>
-						<td><?php echo $monto;?></td>
+						<td><?php echo number_format($monto,0);?></td>
 						<td><?php echo $estado;?></td>
 						<td><?php echo $date_added;?></td>
 						

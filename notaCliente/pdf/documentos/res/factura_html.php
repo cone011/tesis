@@ -235,14 +235,16 @@ table.page_footer {width: 100%; border: none; background-color: white; padding: 
         <tr>
            <td style="width:50%;" >
             <?php 
+                //echo $tarjeta;
                 $sql_cliente=mysqli_query($con,"select * from cliente where id_cliente='$id_cliente'");
                 $rw_cliente=mysqli_fetch_array($sql_cliente);
+                 echo "<br> Ruc: ";
                 echo $rw_cliente['nombre_cliente'];
                 echo "<br>";
-                echo "<br> Ruc: ";
-                echo $rw_cliente['ruc_cliente'];
-                echo "<br> Teléfono: ";
+                echo "<br> Nombre: ";
                 echo $rw_cliente['telefono_cliente'];
+                echo "<br> Telefono: ";
+                echo $rw_cliente['ruc_cliente'];
                 echo "<br> Email: ";
                 echo $rw_cliente['email_cliente'];
                  $sql_nc=mysqli_query($con, "select max(numero_factura) as last from ncliente");
@@ -266,7 +268,7 @@ table.page_footer {width: 100%; border: none; background-color: white; padding: 
            <td style="width:20%;" class='midnight-blue'>TIPO DE NC</td>
         </tr>
         <tr>
-           <td style="width:35%;">
+           <td style="width:25%;">
             <?php 
                 $sql_user=mysqli_query($con,"select * from users where user_id='$id_vendedor'");
                 $rw_user=mysqli_fetch_array($sql_user);
@@ -274,7 +276,7 @@ table.page_footer {width: 100%; border: none; background-color: white; padding: 
                 $quien=$rw_user['firstname']." ".$rw_user['lastname'];
             ?>
            </td>
-          <td style="width:25%;"><?php echo date("d/m/Y");?></td>
+          <td style="width:20%;"><?php echo date("d/m/Y");?></td>
            <td style="width:20%;" >
                 <?php 
                 if ($condiciones==1){echo "EMITIDA";}
@@ -291,7 +293,7 @@ table.page_footer {width: 100%; border: none; background-color: white; padding: 
     <table cellspacing="0" style="width: 100%; text-align: left; font-size: 10pt;">
         <tr>
             <th style="width: 20%;text-align:center" class='midnight-blue'>NRO FACTURA.</th>
-            <th style="width: 50%" class='midnight-blue'>DESCRIPCION</th>
+            <th style="width: 50%" class='midnight-blue'>DESCRIPCION DE LA NC</th>
             <th style="width: 15%;text-align: right" class='midnight-blue'>MONTO N.C.</th>
             <th style="width: 15%;text-align: right" class='midnight-blue'>SAL. SOBRA</th>
             
@@ -425,7 +427,7 @@ while ($row=mysqli_fetch_array($sql))
 
         <tr>
             <td class='<?php echo $clase;?>' style="width: 20%; text-align: center"><?php echo $codigo_producto; ?></td>
-            <td class='<?php echo $clase;?>' style="width: 50%; text-align: left"><?php echo $nombre;?></td>
+            <td class='<?php echo $clase;?>' style="width: 50%; text-align: left"><?php echo $tarjeta;?></td>
             <td class='<?php echo $clase;?>' style="width: 15%; text-align: right"><?php echo number_format($cantidadtmp,0);?></td>
             <td class='<?php echo $clase;?>' style="width: 15%; text-align: right"><?php echo number_format($diferencia,0);?></td>
             
@@ -459,7 +461,7 @@ while ($row=mysqli_fetch_array($sql))
            $insert_detail=mysqli_query($con, "INSERT INTO detalle_nc VALUES ('','$numero_nc','$numero_factura','$cantidadtmp','$diferencia','$fecha')");
           $insert_audidetail=mysqli_query($con, "INSERT INTO audidetalle_nc VALUES ('','$numero_nc','$numero_factura','$cantidadtmp','$diferencia','$accion')");  
           
-            $insert_nc=mysqli_query($con,"INSERT INTO ncliente VALUES (NULL,'$numero_nc','$date','$id_cliente','$id_vendedor','$condiciones','$precioUnitario','$condiciones','$accion','$fecha','$diferencia','$pago','$numero_factura')");
+            $insert_nc=mysqli_query($con,"INSERT INTO ncliente VALUES (NULL,'$numero_nc','$date','$id_cliente','$id_vendedor','$condiciones','$precioUnitario','$condiciones','$accion','$fecha','$diferencia','$tarjeta','$numero_factura')");
         
          /*$insert_nc=mysqli_query($con,"INSERT INTO ncliente VALUES (NULL,'$numero_nc','$date','$id_cliente','$id_vendedor','$condiciones','$precioUnitario','$condiciones','$accion','$fecha','$diferencia','$pago','$numero_factura')");*/
 

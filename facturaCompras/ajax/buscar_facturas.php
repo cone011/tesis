@@ -67,7 +67,7 @@
 		 $sWhere.=" WHERE compra.id_cliente=proveedores.id_cliente and compra.id_vendedor=users.user_id";
 		if ( $_GET['q'] != "" )
 		{
-		$sWhere.= " and  (proveedores.nombre_cliente like '%$q%' or compra.numero_factura like '%$q%' or compra.fecha like '%$q%')";
+		$sWhere.= " and  (proveedores.nombre_cliente like '%$q%' or compra.numero_factura like '%$q%' or compra.fecha like '%$q%' or compra.nrodoc like '%$q%')";
 			
 		}
 		
@@ -95,6 +95,7 @@
 			  <table class="table">
 				<tr  class="info">
 					<th>#</th>
+					<th>Nro Factura</th>
 					<th>Fecha</th>
 					<th>Proveedor</th>
 					<th>Encargado</th>
@@ -106,6 +107,18 @@
 				</tr>
 				<?php
 				while ($row=mysqli_fetch_array($query)){
+					if(strlen($row["pf1"])==1){
+                       $wpf1='00';
+                    }else{
+                       $wpf1='0';
+                    }
+                    //CEROS PARA EL PREFIJO 2
+                    if(strlen($row["pf2"])==1){
+                       $wpf2='00';
+                    }else{
+                        $wpf2='0';
+                    }
+                    $factura=$wpf1.$row['pf1'].'-'.$wpf2.$row['pf2'].'-'.$row['nrodoc'];
 						$id_factura=$row['id_factura'];
 						$numero_factura=$row['numero_factura'];
 						$fecha=date("d/m/Y", strtotime($row['fecha_factura']));
@@ -124,6 +137,7 @@
 					?>
 					<tr>
 						<td><?php echo $numero_factura; ?></td>
+						<td><?php echo $factura; ?></td>
 						<td><?php echo $fecha; ?></td>
 						<td><a href="#" data-toggle="tooltip" data-placement="top" title="<i class='glyphicon glyphicon-phone'></i> <?php echo $telefono_cliente;?><br><i class='glyphicon glyphicon-envelope'></i>  <?php echo $email_cliente;?>" ><?php echo $nombre_cliente;?></a></td>
 						<td><?php echo $nombre_vendedor; ?></td>

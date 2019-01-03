@@ -55,8 +55,8 @@
 				<tr  class="warning">
 					<th>Fecha Compra.</th>
 					<th>Nro Factura.</th>
-					<th><span class="pull-right">Saldo a Cobrar</span></th>
-					<th><span class="pull-right">Total Saldo</span></th>
+					<th><span class="pull-right">Saldo a Amortizar</span></th>
+					<th><span class="pull-right">Saldo Sobrante</span></th>
 					<th class='text-center' style="width: 36px;">Agregar</th>
 				</tr>
 				<?php
@@ -86,7 +86,8 @@
 					$saldo=$row["saldo_factura"];
 					$tipo=$row['estado_factura'];
 					$fecha=$row['fecha_factura'];
-					$precio_venta=number_format($precio_venta,0,',','');
+					$total=$row['total_venta'];
+					$total=number_format($total,0,',','');
 					?>
 					<tr>
 					<?php if($tipo==2){ ?>
@@ -97,7 +98,7 @@
 						<input type="text" class="form-control" style="text-align:right" id="cantidad_<?php echo $id_producto; ?>"  value="<?php echo $saldo ?>" >
 						</div></td>
 						<td class='col-xs-2'><div class="pull-right">
-						<input type="text" class="form-control" style="text-align:right" id="precio_venta_<?php echo $id_producto; ?>"  value="<?php echo $precio_venta;?>" readonly>
+						<input type="text" class="form-control" style="text-align:right" id="precio_venta_<?php echo $id_producto; ?>"  value="<?php echo $saldo;?>" readonly>
 						</div></td>
 						<td class='text-center'><a class='btn btn-info'href="#" onclick="agregar('<?php echo $id_producto ?>')"><i class="glyphicon glyphicon-plus"></i></a></td>
 					<?php } ?>
